@@ -54,7 +54,7 @@ jobs:
           ORG_GRADLE_PROJECT_SILVAE_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ORG_GRADLE_PROJECT_SILVAE_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
           ORG_GRADLE_PROJECT_SILVAE_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
-        run: ./gradlew :app:bundleRelease --no-daemon
+        run: bash ./gradlew :app:bundleRelease --no-daemon
       - name: Publish to Google Play
         uses: r0adkll/upload-google-play@v1
         with:

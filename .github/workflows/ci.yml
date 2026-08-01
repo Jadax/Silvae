@@ -22,6 +22,10 @@ jobs:
           node-version: 20
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      # @silvae/web and @silvae/server import the generated declaration files
+      # from @silvae/core, so build those once before parallel workspace checks.
+      - name: Build shared core declarations
+        run: pnpm --filter @silvae/core build
       - name: Typecheck
         run: pnpm typecheck
       - name: Unit tests
@@ -41,7 +45,7 @@ jobs:
           java-version: 17
       - name: Build debug APK
         working-directory: apps/android
-        run: ./gradlew :app:assembleDebug --no-daemon
+        run: bash ./gradlew :app:assembleDebug --no-daemon
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
