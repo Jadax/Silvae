@@ -1,0 +1,18 @@
+{
+  "slug": "trachycarpus-fortunei",
+  "commonNames": ["Windmill palm", "Chusan palm", "Chinese fan palm"],
+  "scientificName": "Trachycarpus fortunei",
+  "family": "Arecaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 3000, "luxIdeal": 8000, "luxMax": 25000,
+    "tempMinC": -10, "tempMaxC": 28, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 200,
+    "fertIntervalDays": 21, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 250 }
+}

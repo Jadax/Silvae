@@ -1,0 +1,18 @@
+{
+  "slug": "clivia-miniata",
+  "commonNames": ["Kaffir lily", "Clivia", "Bush lily"],
+  "scientificName": "Clivia miniata",
+  "family": "Amaryllidaceae",
+  "toxicity": { "pets": true, "note": "Lycorine; bulbs are most toxic" },
+  "ideal": {
+    "luxMin": 700, "luxIdeal": 2000, "luxMax": 12000,
+    "tempMinC": 13, "tempMaxC": 27, "humidityMin": 30, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 9, "waterAmountMl": 200,
+    "fertIntervalDays": 21, "mistIntervalDays": 0,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "HIGH", "cold": "MED" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 60 }
+}

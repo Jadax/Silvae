@@ -1,0 +1,18 @@
+{
+  "slug": "oncidium-altissimum",
+  "commonNames": ["Dancing lady orchid", "Golden shower orchid", "Witch orchid"],
+  "scientificName": "Oncidium altissimum",
+  "family": "Orchidaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 15000, "luxMax": 40000,
+    "tempMinC": 13, "tempMaxC": 28, "humidityMin": 50, "humidityMax": 75,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 100,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 100 }
+}

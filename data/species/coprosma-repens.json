@@ -1,0 +1,18 @@
+{
+  "slug": "coprosma-repens",
+  "commonNames": ["Mirror plant", "Looking glass plant", "New Zealand mirrorbush"],
+  "scientificName": "Coprosma repens",
+  "family": "Rubiaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 12000, "luxMax": 40000,
+    "tempMinC": 5, "tempMaxC": 28, "humidityMin": 40, "humidityMax": 65,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 150,
+    "fertIntervalDays": 21, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "MED" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 150 }
+}

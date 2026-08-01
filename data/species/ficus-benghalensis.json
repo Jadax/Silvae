@@ -1,0 +1,18 @@
+{
+  "slug": "ficus-benghalensis",
+  "commonNames": ["Ficus Audrey", "Banyan fig", "Indian banyan"],
+  "scientificName": "Ficus benghalensis",
+  "family": "Moraceae",
+  "toxicity": { "pets": true, "note": "Sap contains ficin, an irritant; mildly toxic to pets if ingested." },
+  "ideal": {
+    "luxMin": 3000, "luxIdeal": 8000, "luxMax": 25000,
+    "tempMinC": 16, "tempMaxC": 29, "humidityMin": 40, "humidityMax": 65,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 300 }
+}

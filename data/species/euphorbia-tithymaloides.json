@@ -1,0 +1,18 @@
+{
+  "slug": "euphorbia-tithymaloides",
+  "commonNames": ["Devil's backbone", "Redbird flower", "Zigzag plant"],
+  "scientificName": "Euphorbia tithymaloides",
+  "family": "Euphorbiaceae",
+  "toxicity": { "pets": true, "note": "Milky sap is a skin irritant and toxic to pets if ingested." },
+  "ideal": {
+    "luxMin": 3000, "luxIdeal": 8000, "luxMax": 25000,
+    "tempMinC": 15, "tempMaxC": 30, "humidityMin": 40, "humidityMax": 65,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 5, "waterAmountMl": 100,
+    "fertIntervalDays": 30, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 90 }
+}

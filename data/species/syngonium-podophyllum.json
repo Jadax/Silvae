@@ -1,0 +1,18 @@
+{
+  "slug": "syngonium-podophyllum",
+  "commonNames": ["Arrowhead plant", "Syngonium"],
+  "scientificName": "Syngonium podophyllum",
+  "family": "Araceae",
+  "toxicity": { "pets": true, "note": "Calcium oxalate crystals" },
+  "ideal": {
+    "luxMin": 500, "luxIdeal": 1500, "luxMax": 12000,
+    "tempMinC": 16, "tempMaxC": 29, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 250,
+    "fertIntervalDays": 21, "mistIntervalDays": 5,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 180 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "spathiphyllum-wallisii",
+  "commonNames": ["Peace lily"],
+  "scientificName": "Spathiphyllum wallisii",
+  "family": "Araceae",
+  "toxicity": { "pets": true, "note": "Calcium oxalate crystals" },
+  "ideal": {
+    "luxMin": 500, "luxIdeal": 1500, "luxMax": 10000,
+    "tempMinC": 16, "tempMaxC": 30, "humidityMin": 50, "humidityMax": 80,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 5, "waterAmountMl": 300,
+    "fertIntervalDays": 14, "mistIntervalDays": 3,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 90 }
+}

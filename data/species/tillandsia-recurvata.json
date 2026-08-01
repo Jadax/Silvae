@@ -1,0 +1,18 @@
+{
+  "slug": "tillandsia-recurvata",
+  "commonNames": ["Ball moss", "Small ballmoss", "Air plant"],
+  "scientificName": "Tillandsia recurvata",
+  "family": "Bromeliaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 10000, "luxMax": 30000,
+    "tempMinC": 13, "tempMaxC": 30, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 5.5, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 50,
+    "fertIntervalDays": 30, "mistIntervalDays": 2,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "MED" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 20 }
+}

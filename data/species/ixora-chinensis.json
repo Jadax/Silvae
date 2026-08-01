@@ -1,0 +1,18 @@
+{
+  "slug": "ixora-chinensis",
+  "commonNames": ["Chinese ixora", "Jungle geranium", "Flame of the woods"],
+  "scientificName": "Ixora chinensis",
+  "family": "Rubiaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 15000, "luxMax": 50000,
+    "tempMinC": 15, "tempMaxC": 32, "humidityMin": 55, "humidityMax": 75,
+    "phMin": 5.0, "phMax": 6.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 2, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 200 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "pilea-peperomioides",
+  "commonNames": ["Chinese money plant", "Pancake plant"],
+  "scientificName": "Pilea peperomioides",
+  "family": "Urticaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 700, "luxIdeal": 2000, "luxMax": 15000,
+    "tempMinC": 13, "tempMaxC": 27, "humidityMin": 40, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 5,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 14
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 45 }
+}

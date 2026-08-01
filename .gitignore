@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+build/
+out/
+*.tsbuildinfo
+coverage/
+.playwright-mcp/
+
+# Env & secrets (all free-tier, still secret — never commit)
+.env
+.env.*
+!.env.example
+firebase-service-account*.json
+
+# Firebase
+.firebase/
+firebase-debug.log
+
+# Android
+apps/android/.gradle/
+apps/android/local.properties
+apps/android/app/build/
+apps/android/**/build/
+*.apk
+*.aab
+.idea/
+*.iml
+
+# IDE / OS
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+
+# ML artifacts (large, regenerable)
+ml/models/*.tflite
+ml/models/*.gguf

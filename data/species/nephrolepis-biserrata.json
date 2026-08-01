@@ -1,0 +1,18 @@
+{
+  "slug": "nephrolepis-biserrata",
+  "commonNames": ["Macho fern", "Giant sword fern"],
+  "scientificName": "Nephrolepis biserrata",
+  "family": "Davalliaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 4000, "luxMax": 15000,
+    "tempMinC": 15, "tempMaxC": 28, "humidityMin": 50, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 250,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 120 }
+}

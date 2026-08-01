@@ -1,0 +1,18 @@
+{
+  "slug": "cissus-antarctica",
+  "commonNames": ["Kangaroo vine"],
+  "scientificName": "Cissus antarctica",
+  "family": "Vitaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 500, "luxIdeal": 1500, "luxMax": 12000,
+    "tempMinC": 10, "tempMaxC": 27, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 200,
+    "fertIntervalDays": 21, "mistIntervalDays": 5,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "HIGH", "cold": "MED" },
+  "growth": { "rate": "FAST", "maxHeightCm": 300 }
+}

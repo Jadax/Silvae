@@ -1,0 +1,18 @@
+{
+  "slug": "gardenia-jasminoides",
+  "commonNames": ["Gardenia", "Cape jasmine"],
+  "scientificName": "Gardenia jasminoides",
+  "family": "Rubiaceae",
+  "toxicity": { "pets": true, "note": "Mildly toxic (genipin in berries)" },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 5000, "luxMax": 20000,
+    "tempMinC": 15, "tempMaxC": 29, "humidityMin": 60, "humidityMax": 80,
+    "phMin": 5.0, "phMax": 6.0,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 5, "waterAmountMl": 250,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 120 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "pachira-aquatica",
+  "commonNames": ["Money tree", "Guiana chestnut"],
+  "scientificName": "Pachira aquatica",
+  "family": "Malvaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 3000, "luxMax": 20000,
+    "tempMinC": 15, "tempMaxC": 29, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 8, "waterAmountMl": 400,
+    "fertIntervalDays": 21, "mistIntervalDays": 5,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 250 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "epiphyllum-oxypetalum",
+  "commonNames": ["Queen of the night", "Dutchman's pipe cactus", "Night-blooming cereus"],
+  "scientificName": "Epiphyllum oxypetalum",
+  "family": "Cactaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 15000, "luxMax": 40000,
+    "tempMinC": 10, "tempMaxC": 30, "humidityMin": 50, "humidityMax": 75,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 150,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "MED" },
+  "growth": { "rate": "FAST", "maxHeightCm": 200 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "piper-ornatum",
+  "commonNames": ["Celebes pepper", "Ornamental pepper vine"],
+  "scientificName": "Piper ornatum",
+  "family": "Piperaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 5000, "luxMax": 15000,
+    "tempMinC": 16, "tempMaxC": 28, "humidityMin": 60, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 150,
+    "fertIntervalDays": 21, "mistIntervalDays": 1,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 200 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "ginkgo-biloba",
+  "commonNames": ["Ginkgo", "Maidenhair tree", "Duck foot tree"],
+  "scientificName": "Ginkgo biloba",
+  "family": "Ginkgoaceae",
+  "toxicity": { "pets": true, "note": "Seeds contain ginkgotoxin; toxic if ingested in quantity." },
+  "ideal": {
+    "luxMin": 10000, "luxIdeal": 25000, "luxMax": 60000,
+    "tempMinC": 0, "tempMaxC": 32, "humidityMin": 35, "humidityMax": 60,
+    "phMin": 5.5, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 300,
+    "fertIntervalDays": 30, "mistIntervalDays": 3,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 2500 }
+}

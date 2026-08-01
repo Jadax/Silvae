@@ -1,0 +1,18 @@
+{
+  "slug": "camellia-sinensis",
+  "commonNames": ["Tea plant", "Tea tree", "Assam tea"],
+  "scientificName": "Camellia sinensis",
+  "family": "Theaceae",
+  "toxicity": { "pets": true, "note": "Leaves contain caffeine; toxic to pets if ingested in quantity." },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 15000, "luxMax": 40000,
+    "tempMinC": 5, "tempMaxC": 28, "humidityMin": 55, "humidityMax": 80,
+    "phMin": 4.5, "phMax": 5.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 250,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 200 }
+}

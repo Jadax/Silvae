@@ -1,0 +1,120 @@
+openapi: 3.0.3
+info:
+  title: Silvae API
+  version: 0.1.0
+  description: Serverless proxies (Vercel). Hot endpoints sit behind Firestore caches — hit only on cache miss.
+servers:
+  - url: /api
+paths:
+  /identify:
+    post:
+      summary: Plant.id proxy with fingerprint cache (blueprint §8.2, §9.1)
+      operationId: identifyPlant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IdentifyRequest'
+      responses:
+        '200':
+          description: Identification result (from cache or fresh Plant.id call)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentifyResponse'
+        '400':
+          description: Invalid body, or no image sent on a cache miss
+        '429':
+          description: Daily Plant.id budget exhausted — client should fall back to TFLite/PlantNet/manual
+        '503':
+          description: No PLANT_ID_API_KEY configured on the server
+  /weather:
+    get:
+      summary: Open-Meteo proxy with per-location 3h cache
+      operationId: getWeather
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          schema: { type: number }
+        - name: lon
+          in: query
+          required: true
+          schema: { type: number }
+      responses:
+        '200':
+          description: Cached weather payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherPayload'
+  /share/invite:
+    post:
+      summary: Create a care-share invite (S-5/S-6, FCM notify on accept)
+      operationId: createInvite
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InviteRequest'
+      responses:
+        '201': { description: Invite created }
+components:
+  schemas:
+    IdentifyRequest:
+      type: object
+      required: [imageFingerprint]
+      properties:
+        imageFingerprint: { type: string, description: sha256 of downscaled image bytes }
+        base64: { type: string, description: downscaled WebP/AVIF ≤150KB, base64-encoded }
+        latitude: { type: number }
+        longitude: { type: number }
+    IdentifyResponse:
+      type: object
+      properties:
+        cached: { type: boolean, description: true when served from the Firestore fingerprint cache }
+        species:
+          type: array
+          description: Top Plant.id classification suggestions, highest confidence first
+          items:
+            type: object
+            required: [scientificName]
+            properties:
+              scientificName: { type: string }
+              confidence: { type: number, description: 0..1 Plant.id probability }
+        isPlant:
+          type: object
+          description: Plant.id's confidence that the photo actually shows a plant
+          properties:
+            probability: { type: number }
+        isHealthy:
+          type: object
+          properties:
+            probability: { type: number }
+            binary: { type: boolean }
+        disease:
+          type: object
+          description: Top disease suggestion when Plant.id ran health analysis
+          properties:
+            name: { type: string }
+            probability: { type: number }
+    WeatherPayload:
+      type: object
+      required: [tempC, rh, uvIndex, cloudCover, daylightHours, precipitationMm]
+      properties:
+        tempC: { type: number }
+        rh: { type: number }
+        uvIndex: { type: number }
+        cloudCover: { type: number }
+        daylightHours: { type: number }
+        precipitationMm: { type: number }
+        fetchedAt: { type: string, format: date-time }
+    InviteRequest:
+      type: object
+      required: [plantId, inviteeEmail, role]
+      properties:
+        plantId: { type: string }
+        inviteeEmail: { type: string, format: email }
+        role: { type: string, enum: [owner, caregiver, viewer] }

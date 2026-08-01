@@ -1,0 +1,18 @@
+{
+  "slug": "philodendron-micans",
+  "commonNames": ["Velvet leaf philodendron"],
+  "scientificName": "Philodendron hederaceum 'Micans'",
+  "family": "Araceae",
+  "toxicity": { "pets": true, "note": "Calcium oxalate crystals" },
+  "ideal": {
+    "luxMin": 800, "luxIdeal": 2000, "luxMax": 10000,
+    "tempMinC": 18, "tempMaxC": 28, "humidityMin": 60, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 6, "waterAmountMl": 150,
+    "fertIntervalDays": 21, "mistIntervalDays": 3,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 200 }
+}

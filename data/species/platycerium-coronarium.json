@@ -1,0 +1,18 @@
+{
+  "slug": "platycerium-coronarium",
+  "commonNames": ["Crown staghorn fern", "Antler fern", "Elkhorn fern"],
+  "scientificName": "Platycerium coronarium",
+  "family": "Polypodiaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 6000, "luxMax": 20000,
+    "tempMinC": 16, "tempMaxC": 28, "humidityMin": 55, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 150,
+    "fertIntervalDays": 30, "mistIntervalDays": 1,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 90 }
+}

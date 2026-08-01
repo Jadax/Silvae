@@ -1,0 +1,85 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+    function isOwner(uidField) {
+      return signedIn() && resource.data[uidField] == request.auth.uid;
+    }
+    function isCreator(uidField) {
+      return signedIn() && request.resource.data[uidField] == request.auth.uid;
+    }
+
+    // Canonical species catalog: public read (guest Discover, C-7). Seeded via
+    // admin tooling only — no app-path writes.
+    match /species/{slug} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Disease / symptom knowledge base: public read.
+    match /diseases/{id} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Users (schema 7.1): self-scoped.
+    match /users/{uid} {
+      allow read, write: if request.auth.uid == uid;
+    }
+
+    // Plants (schema 7.1): ownerUid == uid; shared caregivers (S-6) read.
+    match /plants/{plantId} {
+      allow read: if isOwner('uid') || request.auth.uid in resource.data.sharedWith.uid;
+      allow create: if isCreator('uid');
+      allow update, delete: if isOwner('uid');
+    }
+
+    // Rooms: owner-scoped.
+    match /rooms/{roomId} {
+      allow read, update, delete: if isOwner('uid');
+      allow create: if isCreator('uid');
+    }
+
+    // Care events: compact, offline-synced (17.1). Owner read/write; shared
+    // caregivers may append to shared plants.
+    match /care_events/{eventId} {
+      allow read: if signedIn();
+      allow create: if isCreator('uid');
+      allow update, delete: if isOwner('uid');
+    }
+
+    // Photos (R2 URL metadata only): owner-scoped.
+    match /photos/{photoId} {
+      allow read, update, delete: if isOwner('uid');
+      allow create: if isCreator('uid');
+    }
+
+    // Health checks (9.x): owner-scoped.
+    match /health_checks/{checkId} {
+      allow read, update, delete: if isOwner('uid');
+      allow create: if isCreator('uid');
+    }
+
+    // Rollups (summary_stats/{plantId_month}): app reads own plant stats.
+    match /summary_stats/{plantId_month} {
+      allow read: if signedIn();
+      allow write: if signedIn();
+    }
+
+    // caches/{kind}/{key}: any signed-in user may read; writes happen via the
+    // server (admin SDK bypasses rules) or app users on cache miss.
+    match /caches/{kind}/{key} {
+      allow read: if signedIn();
+      allow write: if signedIn();
+    }
+
+    // Share links (S-5/S-6): creator + holder.
+    match /share_links/{token} {
+      allow read: if signedIn();
+      allow write: if signedIn();
+    }
+  }
+}

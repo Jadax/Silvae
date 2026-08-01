@@ -1,0 +1,18 @@
+{
+  "slug": "washingtonia-robusta",
+  "commonNames": ["Mexican fan palm", "Mexican washingtonia", "Skyduster palm"],
+  "scientificName": "Washingtonia robusta",
+  "family": "Arecaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 10000, "luxIdeal": 25000, "luxMax": 60000,
+    "tempMinC": 5, "tempMaxC": 35, "humidityMin": 30, "humidityMax": 55,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 5, "waterAmountMl": 300,
+    "fertIntervalDays": 30, "mistIntervalDays": 3,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "LOW", "cold": "MED" },
+  "growth": { "rate": "FAST", "maxHeightCm": 1500 }
+}

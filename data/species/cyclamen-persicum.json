@@ -1,0 +1,18 @@
+{
+  "slug": "cyclamen-persicum",
+  "commonNames": ["Cyclamen", "Florist's cyclamen"],
+  "scientificName": "Cyclamen persicum",
+  "family": "Primulaceae",
+  "toxicity": { "pets": true, "note": "Tuber contains cyclamine" },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 3000, "luxMax": 10000,
+    "tempMinC": 10, "tempMaxC": 20, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 5, "waterAmountMl": 100,
+    "fertIntervalDays": 14, "mistIntervalDays": 0,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 14
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 30 }
+}

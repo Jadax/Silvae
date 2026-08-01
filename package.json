@@ -1,0 +1,26 @@
+{
+  "name": "silvae",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Silvae — free-forever plant care platform (web PWA + Android).",
+  "license": "MIT",
+  "packageManager": "pnpm@10.30.2",
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "server/*"
+  ],
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm --filter @silvae/web dev",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "data:validate": "pnpm --filter @silvae/core build && node packages/core/scripts/validate-data.mjs",
+    "data:seed": "pnpm data:validate && node server/functions/scripts/seed-species.mjs",
+    "db:rules": "firebase emulators:exec --only firestore \"firebase deploy --only firestore:rules\""
+  }
+}

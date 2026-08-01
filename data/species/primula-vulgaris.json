@@ -1,0 +1,18 @@
+{
+  "slug": "primula-vulgaris",
+  "commonNames": ["English primrose", "Primrose", "Common primrose"],
+  "scientificName": "Primula vulgaris",
+  "family": "Primulaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 3000, "luxIdeal": 8000, "luxMax": 25000,
+    "tempMinC": 5, "tempMaxC": 24, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 2, "waterAmountMl": 100,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 12, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 25 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "solanum-pseudocapsicum",
+  "commonNames": ["Jerusalem cherry", "Christmas cherry"],
+  "scientificName": "Solanum pseudocapsicum",
+  "family": "Solanaceae",
+  "toxicity": { "pets": true, "note": "Berries and foliage toxic" },
+  "ideal": {
+    "luxMin": 3000, "luxIdeal": 6000, "luxMax": 25000,
+    "tempMinC": 15, "tempMaxC": 24, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 5, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 60 }
+}

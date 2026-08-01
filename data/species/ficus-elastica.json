@@ -1,0 +1,18 @@
+{
+  "slug": "ficus-elastica",
+  "commonNames": ["Rubber plant", "Rubber tree"],
+  "scientificName": "Ficus elastica",
+  "family": "Moraceae",
+  "toxicity": { "pets": true, "note": "Milky sap is an irritant" },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 4000, "luxMax": 25000,
+    "tempMinC": 13, "tempMaxC": 29, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 500,
+    "fertIntervalDays": 14, "mistIntervalDays": 10,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 300 }
+}

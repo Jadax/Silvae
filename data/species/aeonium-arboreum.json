@@ -1,0 +1,18 @@
+{
+  "slug": "aeonium-arboreum",
+  "commonNames": ["Tree aeonium", "Houseleek tree"],
+  "scientificName": "Aeonium arboreum",
+  "family": "Crassulaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 6000, "luxMax": 25000,
+    "tempMinC": 7, "tempMaxC": 27, "humidityMin": 20, "humidityMax": 50,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 1 },
+    "waterIntervalDays": 12, "waterAmountMl": 100,
+    "fertIntervalDays": 30, "mistIntervalDays": 0,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "MED" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 150 }
+}

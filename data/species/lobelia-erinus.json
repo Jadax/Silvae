@@ -1,0 +1,18 @@
+{
+  "slug": "lobelia-erinus",
+  "commonNames": ["Trailing lobelia", "Edging lobelia", "Garden lobelia"],
+  "scientificName": "Lobelia erinus",
+  "family": "Campanulaceae",
+  "toxicity": { "pets": true, "note": "Contains lobeline; mildly toxic to pets if ingested in quantity." },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 50000,
+    "tempMinC": 5, "tempMaxC": 26, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 2, "waterAmountMl": 100,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 12, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "FAST", "maxHeightCm": 30 }
+}

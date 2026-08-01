@@ -1,0 +1,18 @@
+{
+  "slug": "ruta-graveolens",
+  "commonNames": ["Rue", "Common rue", "Herb of grace"],
+  "scientificName": "Ruta graveolens",
+  "family": "Rutaceae",
+  "toxicity": { "pets": true, "note": "Toxic to pets; causes gastrointestinal upset and skin photosensitivity." },
+  "ideal": {
+    "luxMin": 10000, "luxIdeal": 25000, "luxMax": 50000,
+    "tempMinC": 10, "tempMaxC": 28, "humidityMin": 30, "humidityMax": 55,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 150,
+    "fertIntervalDays": 30, "mistIntervalDays": 7,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "LOW", "cold": "MED" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 60 }
+}

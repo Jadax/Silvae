@@ -1,0 +1,18 @@
+{
+  "slug": "sempervivum-arachnoideum",
+  "commonNames": ["Cobweb houseleek", "Cobweb sempervivum"],
+  "scientificName": "Sempervivum arachnoideum",
+  "family": "Crassulaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 50000,
+    "tempMinC": -20, "tempMaxC": 30, "humidityMin": 25, "humidityMax": 45,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 10, "waterAmountMl": 50,
+    "fertIntervalDays": 30, "mistIntervalDays": 7,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "LOW", "cold": "HIGH" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 10 }
+}

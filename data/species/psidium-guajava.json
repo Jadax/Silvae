@@ -1,0 +1,18 @@
+{
+  "slug": "psidium-guajava",
+  "commonNames": ["Guava", "Apple guava", "Yellow guava"],
+  "scientificName": "Psidium guajava",
+  "family": "Myrtaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 10000, "luxIdeal": 25000, "luxMax": 60000,
+    "tempMinC": 12, "tempMaxC": 32, "humidityMin": 50, "humidityMax": 75,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 300,
+    "fertIntervalDays": 14, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 600 }
+}

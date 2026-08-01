@@ -1,0 +1,18 @@
+{
+  "slug": "hyacinthus-orientalis",
+  "commonNames": ["Hyacinth", "Common hyacinth", "Garden hyacinth"],
+  "scientificName": "Hyacinthus orientalis",
+  "family": "Asparagaceae",
+  "toxicity": { "pets": true, "note": "Bulbs contain toxic alkaloids and oxalates; toxic to pets if ingested." },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 10000, "luxMax": 30000,
+    "tempMinC": 5, "tempMaxC": 24, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 2, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 100,
+    "fertIntervalDays": 21, "mistIntervalDays": 3,
+    "repotIntervalMonths": 12, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "LOW", "cold": "HIGH" },
+  "growth": { "rate": "FAST", "maxHeightCm": 40 }
+}

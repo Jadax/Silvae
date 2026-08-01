@@ -1,0 +1,18 @@
+{
+  "slug": "beaucarnea-recurvata",
+  "commonNames": ["Ponytail palm", "Elephant foot"],
+  "scientificName": "Beaucarnea recurvata",
+  "family": "Asparagaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 4000, "luxMax": 25000,
+    "tempMinC": 10, "tempMaxC": 29, "humidityMin": 20, "humidityMax": 50,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 1 },
+    "waterIntervalDays": 14, "waterAmountMl": 200,
+    "fertIntervalDays": 30, "mistIntervalDays": 0,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "MED" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 150 }
+}

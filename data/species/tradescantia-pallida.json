@@ -1,0 +1,18 @@
+{
+  "slug": "tradescantia-pallida",
+  "commonNames": ["Purple heart", "Purple secretia"],
+  "scientificName": "Tradescantia pallida",
+  "family": "Commelinaceae",
+  "toxicity": { "pets": true, "note": "Sap may irritate skin" },
+  "ideal": {
+    "luxMin": 3000, "luxIdeal": 6000, "luxMax": 30000,
+    "tempMinC": 15, "tempMaxC": 27, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 150,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 60 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "citrus-aurantiifolia",
+  "commonNames": ["Key lime", "Mexican lime", "West Indian lime"],
+  "scientificName": "Citrus aurantiifolia",
+  "family": "Rutaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 50000,
+    "tempMinC": 13, "tempMaxC": 30, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 2 },
+    "waterIntervalDays": 4, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "LOW", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 300 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "pandanus-veitchii",
+  "commonNames": ["Screw pine", "Veitch screwpine"],
+  "scientificName": "Pandanus veitchii",
+  "family": "Pandanaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 3000, "luxIdeal": 6000, "luxMax": 25000,
+    "tempMinC": 18, "tempMaxC": 28, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 300,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 150 }
+}

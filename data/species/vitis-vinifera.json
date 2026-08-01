@@ -1,0 +1,18 @@
+{
+  "slug": "vitis-vinifera",
+  "commonNames": ["Common grape vine", "Wine grape", "Table grape"],
+  "scientificName": "Vitis vinifera",
+  "family": "Vitaceae",
+  "toxicity": { "pets": true, "note": "Grapes and raisins are toxic to dogs; foliage can cause GI upset." },
+  "ideal": {
+    "luxMin": 10000, "luxIdeal": 25000, "luxMax": 60000,
+    "tempMinC": 5, "tempMaxC": 32, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 300,
+    "fertIntervalDays": 21, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "FAST", "maxHeightCm": 800 }
+}

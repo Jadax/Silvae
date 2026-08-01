@@ -1,0 +1,18 @@
+{
+  "slug": "calathea-warscewiczii",
+  "commonNames": ["Jungle velvet calathea"],
+  "scientificName": "Goeppertia warscewiczii",
+  "family": "Marantaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 600, "luxIdeal": 1500, "luxMax": 8000,
+    "tempMinC": 18, "tempMaxC": 26, "humidityMin": 65, "humidityMax": 85,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 2, "p": 1, "k": 1 },
+    "waterIntervalDays": 5, "waterAmountMl": 200,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 90 }
+}

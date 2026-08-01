@@ -1,0 +1,18 @@
+{
+  "slug": "aspidistra-elatior",
+  "commonNames": ["Cast iron plant"],
+  "scientificName": "Aspidistra elatior",
+  "family": "Asparagaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 200, "luxIdeal": 700, "luxMax": 8000,
+    "tempMinC": 7, "tempMaxC": 24, "humidityMin": 30, "humidityMax": 60,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 9, "waterAmountMl": 250,
+    "fertIntervalDays": 30, "mistIntervalDays": 10,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "HIGH", "cold": "HIGH" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 90 }
+}

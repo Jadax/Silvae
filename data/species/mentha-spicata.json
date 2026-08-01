@@ -1,0 +1,18 @@
+{
+  "slug": "mentha-spicata",
+  "commonNames": ["Spearmint", "Mint"],
+  "scientificName": "Mentha spicata",
+  "family": "Lamiaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 4000, "luxMax": 25000,
+    "tempMinC": 10, "tempMaxC": 27, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 3, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 0,
+    "repotIntervalMonths": 12, "rotateIntervalDays": 14
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "FAST", "maxHeightCm": 60 }
+}

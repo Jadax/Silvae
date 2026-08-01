@@ -1,0 +1,18 @@
+{
+  "slug": "epipremnum-aureum",
+  "commonNames": ["Golden pothos", "Devil's ivy"],
+  "scientificName": "Epipremnum aureum",
+  "family": "Araceae",
+  "toxicity": { "pets": true, "note": "Calcium oxalate crystals" },
+  "ideal": {
+    "luxMin": 500, "luxIdeal": 1200, "luxMax": 12000,
+    "tempMinC": 15, "tempMaxC": 30, "humidityMin": 40, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 9, "waterAmountMl": 300,
+    "fertIntervalDays": 21, "mistIntervalDays": 10,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 400 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "portulaca-oleracea",
+  "commonNames": ["Common purslane", "Purslane", "Little hogweed"],
+  "scientificName": "Portulaca oleracea",
+  "family": "Portulacaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 10000, "luxIdeal": 25000, "luxMax": 60000,
+    "tempMinC": 10, "tempMaxC": 32, "humidityMin": 30, "humidityMax": 55,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 100,
+    "fertIntervalDays": 30, "mistIntervalDays": 5,
+    "repotIntervalMonths": 12, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 30 }
+}

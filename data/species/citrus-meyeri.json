@@ -1,0 +1,18 @@
+{
+  "slug": "citrus-meyeri",
+  "commonNames": ["Meyer lemon"],
+  "scientificName": "Citrus × meyeri",
+  "family": "Rutaceae",
+  "toxicity": { "pets": true, "note": "Leaves and peel contain essential oils" },
+  "ideal": {
+    "luxMin": 3000, "luxIdeal": 10000, "luxMax": 50000,
+    "tempMinC": 13, "tempMaxC": 29, "humidityMin": 40, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 3, "p": 1, "k": 3 },
+    "waterIntervalDays": 5, "waterAmountMl": 500,
+    "fertIntervalDays": 14, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 14
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 200 }
+}

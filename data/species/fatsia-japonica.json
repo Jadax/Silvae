@@ -1,0 +1,18 @@
+{
+  "slug": "fatsia-japonica",
+  "commonNames": ["Japanese aralia", "Fatsi"],
+  "scientificName": "Fatsia japonica",
+  "family": "Araliaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 700, "luxIdeal": 2500, "luxMax": 15000,
+    "tempMinC": 5, "tempMaxC": 24, "humidityMin": 40, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 6, "waterAmountMl": 300,
+    "fertIntervalDays": 21, "mistIntervalDays": 5,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "HIGH", "cold": "HIGH" },
+  "growth": { "rate": "FAST", "maxHeightCm": 300 }
+}

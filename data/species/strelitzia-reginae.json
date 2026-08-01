@@ -1,0 +1,18 @@
+{
+  "slug": "strelitzia-reginae",
+  "commonNames": ["Bird of paradise", "Crane flower"],
+  "scientificName": "Strelitzia reginae",
+  "family": "Strelitziaceae",
+  "toxicity": { "pets": true, "note": "Mildly toxic; sap may irritate" },
+  "ideal": {
+    "luxMin": 3000, "luxIdeal": 8000, "luxMax": 40000,
+    "tempMinC": 15, "tempMaxC": 28, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 400,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 180 }
+}

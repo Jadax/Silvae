@@ -1,0 +1,18 @@
+{
+  "slug": "camellia-japonica",
+  "commonNames": ["Camellia", "Japanese camellia"],
+  "scientificName": "Camellia japonica",
+  "family": "Theaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 5000, "luxMax": 20000,
+    "tempMinC": 12, "tempMaxC": 24, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 5.0, "phMax": 6.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 5, "waterAmountMl": 300,
+    "fertIntervalDays": 14, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 150 }
+}

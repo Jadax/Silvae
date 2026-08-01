@@ -1,0 +1,18 @@
+{
+  "slug": "dracaena-angolensis",
+  "commonNames": ["African spear", "Cylindrical snake plant"],
+  "scientificName": "Dracaena angolensis",
+  "family": "Asparagaceae",
+  "toxicity": { "pets": true, "note": "Saponins" },
+  "ideal": {
+    "luxMin": 700, "luxIdeal": 2000, "luxMax": 15000,
+    "tempMinC": 15, "tempMaxC": 32, "humidityMin": 30, "humidityMax": 60,
+    "phMin": 5.5, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 1 },
+    "waterIntervalDays": 14, "waterAmountMl": 200,
+    "fertIntervalDays": 30, "mistIntervalDays": 0,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "MED" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 150 }
+}

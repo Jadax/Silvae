@@ -1,0 +1,18 @@
+{
+  "slug": "sinningia-speciosa",
+  "commonNames": ["Gloxinia", "Florist's gloxinia"],
+  "scientificName": "Sinningia speciosa",
+  "family": "Gesneriaceae",
+  "toxicity": { "pets": true, "note": "Mildly toxic to pets if ingested; may cause stomach upset." },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 5000, "luxMax": 15000,
+    "tempMinC": 16, "tempMaxC": 26, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 2, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 100,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 12, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 30 }
+}

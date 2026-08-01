@@ -1,0 +1,18 @@
+{
+  "slug": "phoenix-roebelenii",
+  "commonNames": ["Pygmy date palm"],
+  "scientificName": "Phoenix roebelenii",
+  "family": "Arecaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 5000, "luxMax": 25000,
+    "tempMinC": 12, "tempMaxC": 29, "humidityMin": 40, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 6, "waterAmountMl": 400,
+    "fertIntervalDays": 21, "mistIntervalDays": 5,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "MED" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 200 }
+}

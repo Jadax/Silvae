@@ -1,0 +1,18 @@
+{
+  "slug": "strelitzia-nicolai",
+  "commonNames": ["White bird of paradise"],
+  "scientificName": "Strelitzia nicolai",
+  "family": "Strelitziaceae",
+  "toxicity": { "pets": true, "note": "Leaves and seeds are mildly toxic" },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 8000, "luxMax": 40000,
+    "tempMinC": 15, "tempMaxC": 29, "humidityMin": 40, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 600,
+    "fertIntervalDays": 14, "mistIntervalDays": 5,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 400 }
+}

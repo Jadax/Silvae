@@ -1,0 +1,18 @@
+{
+  "slug": "rhododendron-simsii",
+  "commonNames": ["Florist's azalea", "Indoor azalea"],
+  "scientificName": "Rhododendron simsii",
+  "family": "Ericaceae",
+  "toxicity": { "pets": true, "note": "All parts toxic (grayanotoxins)" },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 5000, "luxMax": 20000,
+    "tempMinC": 13, "tempMaxC": 22, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 4.5, "phMax": 5.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 250,
+    "fertIntervalDays": 14, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 60 }
+}

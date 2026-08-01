@@ -1,0 +1,18 @@
+{
+  "slug": "jatropha-podagrica",
+  "commonNames": ["Buddha belly plant", "Gout plant", "Bottle plant"],
+  "scientificName": "Jatropha podagrica",
+  "family": "Euphorbiaceae",
+  "toxicity": { "pets": true, "note": "All parts are toxic if ingested; sap is a skin irritant." },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 50000,
+    "tempMinC": 15, "tempMaxC": 32, "humidityMin": 45, "humidityMax": 65,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 150,
+    "fertIntervalDays": 21, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 100 }
+}

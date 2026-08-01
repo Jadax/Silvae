@@ -1,0 +1,18 @@
+{
+  "slug": "hibiscus-moscheutos",
+  "commonNames": ["Swamp rose mallow", "Rose mallow", "Dinner plate hibiscus"],
+  "scientificName": "Hibiscus moscheutos",
+  "family": "Malvaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 50000,
+    "tempMinC": 7, "tempMaxC": 30, "humidityMin": 50, "humidityMax": 75,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 2, "waterAmountMl": 250,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "FAST", "maxHeightCm": 180 }
+}

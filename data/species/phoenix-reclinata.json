@@ -1,0 +1,18 @@
+{
+  "slug": "phoenix-reclinata",
+  "commonNames": ["Senegal date palm", "Wild date palm", "Reclining date palm"],
+  "scientificName": "Phoenix reclinata",
+  "family": "Arecaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 12000, "luxMax": 40000,
+    "tempMinC": 5, "tempMaxC": 30, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 200,
+    "fertIntervalDays": 21, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "LOW", "cold": "MED" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 300 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "etlingera-elatior",
+  "commonNames": ["Torch ginger", "Philippine waxflower", "Siam rose"],
+  "scientificName": "Etlingera elatior",
+  "family": "Zingiberaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 12000, "luxMax": 30000,
+    "tempMinC": 18, "tempMaxC": 32, "humidityMin": 60, "humidityMax": 85,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 250,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 300 }
+}

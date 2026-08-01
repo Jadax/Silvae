@@ -1,0 +1,18 @@
+{
+  "slug": "selaginella-martensii",
+  "commonNames": ["Frosty fern", "Martens' spikemoss"],
+  "scientificName": "Selaginella martensii",
+  "family": "Selaginellaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 600, "luxIdeal": 1500, "luxMax": 6000,
+    "tempMinC": 15, "tempMaxC": 26, "humidityMin": 60, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 150,
+    "fertIntervalDays": 30, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 30 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "antirrhinum-majus",
+  "commonNames": ["Snapdragon", "Dragon flower", "Garden snapdragon"],
+  "scientificName": "Antirrhinum majus",
+  "family": "Plantaginaceae",
+  "toxicity": { "pets": true, "note": "Mildly toxic to pets if ingested in quantity." },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 50000,
+    "tempMinC": 7, "tempMaxC": 26, "humidityMin": 40, "humidityMax": 65,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 150,
+    "fertIntervalDays": 14, "mistIntervalDays": 3,
+    "repotIntervalMonths": 12, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "FAST", "maxHeightCm": 90 }
+}

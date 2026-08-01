@@ -1,0 +1,18 @@
+{
+  "slug": "cestrum-nocturnum",
+  "commonNames": ["Night-blooming jasmine", "Queen of the night", "Night jessamine"],
+  "scientificName": "Cestrum nocturnum",
+  "family": "Solanaceae",
+  "toxicity": { "pets": true, "note": "All parts are toxic to pets and humans if ingested." },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 12000, "luxMax": 40000,
+    "tempMinC": 13, "tempMaxC": 30, "humidityMin": 45, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 250 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "monstera-deliciosa",
+  "commonNames": ["Swiss cheese plant"],
+  "scientificName": "Monstera deliciosa",
+  "family": "Araceae",
+  "toxicity": { "pets": true, "note": "Insoluble calcium oxalates" },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 2500, "luxMax": 20000,
+    "tempMinC": 18, "tempMaxC": 30, "humidityMin": 50, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 7.0,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 500,
+    "fertIntervalDays": 14, "mistIntervalDays": 7,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 300 }
+}

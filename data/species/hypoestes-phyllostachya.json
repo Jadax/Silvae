@@ -1,0 +1,18 @@
+{
+  "slug": "hypoestes-phyllostachya",
+  "commonNames": ["Polka dot plant", "Freckle face"],
+  "scientificName": "Hypoestes phyllostachya",
+  "family": "Acanthaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 3000, "luxMax": 12000,
+    "tempMinC": 18, "tempMaxC": 26, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 5, "waterAmountMl": 150,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 60 }
+}

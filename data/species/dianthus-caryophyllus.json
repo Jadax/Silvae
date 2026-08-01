@@ -1,0 +1,18 @@
+{
+  "slug": "dianthus-caryophyllus",
+  "commonNames": ["Carnation", "Clove pink", "Border carnation"],
+  "scientificName": "Dianthus caryophyllus",
+  "family": "Caryophyllaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 50000,
+    "tempMinC": 5, "tempMaxC": 26, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 150,
+    "fertIntervalDays": 14, "mistIntervalDays": 3,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 60 }
+}

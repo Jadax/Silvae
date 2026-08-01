@@ -1,0 +1,18 @@
+{
+  "slug": "calathea-roseopicta",
+  "commonNames": ["Medallion calathea", "Rose-painted calathea"],
+  "scientificName": "Goeppertia roseopicta",
+  "family": "Marantaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 600, "luxIdeal": 1500, "luxMax": 8000,
+    "tempMinC": 18, "tempMaxC": 26, "humidityMin": 60, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 2, "p": 1, "k": 1 },
+    "waterIntervalDays": 5, "waterAmountMl": 200,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 60 }
+}

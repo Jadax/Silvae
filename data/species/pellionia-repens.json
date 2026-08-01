@@ -1,0 +1,18 @@
+{
+  "slug": "pellionia-repens",
+  "commonNames": ["Rainbow vine", "Wavy watermelon begonia"],
+  "scientificName": "Pellionia repens",
+  "family": "Urticaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 3000, "luxMax": 10000,
+    "tempMinC": 16, "tempMaxC": 27, "humidityMin": 60, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 150,
+    "fertIntervalDays": 30, "mistIntervalDays": 1,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 20 }
+}

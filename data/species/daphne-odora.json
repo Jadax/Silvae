@@ -1,0 +1,18 @@
+{
+  "slug": "daphne-odora",
+  "commonNames": ["Winter daphne", "Fragrant daphne", "Daphne"],
+  "scientificName": "Daphne odora",
+  "family": "Thymelaeaceae",
+  "toxicity": { "pets": true, "note": "All parts, especially berries, are highly toxic to pets and humans if ingested." },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 12000, "luxMax": 35000,
+    "tempMinC": 5, "tempMaxC": 28, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 200,
+    "fertIntervalDays": 30, "mistIntervalDays": 2,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 120 }
+}

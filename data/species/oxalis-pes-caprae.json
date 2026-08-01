@@ -1,0 +1,18 @@
+{
+  "slug": "oxalis-pes-caprae",
+  "commonNames": ["Bermuda buttercup", "Sourgrass", "Buttercup oxalis"],
+  "scientificName": "Oxalis pes-caprae",
+  "family": "Oxalidaceae",
+  "toxicity": { "pets": true, "note": "Contains soluble oxalates; toxic to pets and livestock if ingested in quantity." },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 15000, "luxMax": 50000,
+    "tempMinC": 5, "tempMaxC": 26, "humidityMin": 40, "humidityMax": 65,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 100,
+    "fertIntervalDays": 21, "mistIntervalDays": 3,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "FAST", "maxHeightCm": 30 }
+}

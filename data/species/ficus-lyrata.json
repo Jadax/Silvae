@@ -1,0 +1,18 @@
+{
+  "slug": "ficus-lyrata",
+  "commonNames": ["Fiddle-leaf fig"],
+  "scientificName": "Ficus lyrata",
+  "family": "Moraceae",
+  "toxicity": { "pets": true, "note": "Milky sap is an irritant" },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 5000, "luxMax": 30000,
+    "tempMinC": 15, "tempMaxC": 29, "humidityMin": 40, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 500,
+    "fertIntervalDays": 14, "mistIntervalDays": 7,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 14
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 300 }
+}

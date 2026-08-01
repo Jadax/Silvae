@@ -1,0 +1,18 @@
+{
+  "slug": "guzmania-lingulata",
+  "commonNames": ["Scarlet star", "Guzmania"],
+  "scientificName": "Guzmania lingulata",
+  "family": "Bromeliaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 3000, "luxMax": 12000,
+    "tempMinC": 15, "tempMaxC": 29, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 6, "waterAmountMl": 100,
+    "fertIntervalDays": 30, "mistIntervalDays": 3,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 50 }
+}

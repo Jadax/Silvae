@@ -1,0 +1,18 @@
+{
+  "slug": "phlebodium-aureum",
+  "commonNames": ["Blue star fern"],
+  "scientificName": "Phlebodium aureum",
+  "family": "Polypodiaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 4000, "luxMax": 15000,
+    "tempMinC": 16, "tempMaxC": 27, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 6, "waterAmountMl": 200,
+    "fertIntervalDays": 21, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 60 }
+}

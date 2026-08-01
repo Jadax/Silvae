@@ -1,0 +1,13 @@
+{
+  "description": "Symptom → disease rule table (10.3). Weight threshold for a hit is >= 2.",
+  "rules": [
+    { "id": "overwater", "weight": 4, "symptoms": { "leafColor": "yellow", "soil": "moist", "lowerLeaves": true, "potHasDrainage": false }, "likelyCause": "Overwatering / root rot risk", "treatment": ["Let soil dry out", "Inspect roots", "Repot with drainage"] },
+    { "id": "underwater", "weight": 4, "symptoms": { "leafCrisp": "dry-brown", "soil": "dry", "droop": true }, "likelyCause": "Underwatering", "treatment": ["Water thoroughly", "Check pot for drainage", "Monitor daily"] },
+    { "id": "low-light", "weight": 3, "symptoms": { "leafColor": "pale", "stretched": true, "light": "low" }, "likelyCause": "Too little light", "treatment": ["Move closer to a window", "Rotate weekly", "Consider grow light"] },
+    { "id": "sunburn", "weight": 3, "symptoms": { "leafBurn": "brown-spots", "directSun": true, "spotsOnExposed": true }, "likelyCause": "Sunburn (too much direct light)", "treatment": ["Move away from direct sun", "Acclimatise gradually"] },
+    { "id": "low-humidity", "weight": 2, "symptoms": { "leafCrisp": "brown-tips", "envHumidity": "low" }, "likelyCause": "Low humidity", "treatment": ["Mist regularly", "Use a pebble tray", "Group plants"] },
+    { "id": "spider-mite", "weight": 3, "symptoms": { "webbing": true, "stippling": true }, "likelyCause": "Spider mites", "treatment": ["Rinse leaves", "Apply neem oil", "Isolate plant"] },
+    { "id": "mealybug", "weight": 3, "symptoms": { "whiteFluff": true, "stickyResidue": true }, "likelyCause": "Mealybugs", "treatment": ["Remove with alcohol swab", "Apply insecticidal soap"] },
+    { "id": "aphid", "weight": 3, "symptoms": { "curledLeaves": true, "stickyResidue": true, "insects": true }, "likelyCause": "Aphids", "treatment": ["Wash off", "Neem oil", "Encourage ladybugs"] }
+  ]
+}

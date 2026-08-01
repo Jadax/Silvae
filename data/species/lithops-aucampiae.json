@@ -1,0 +1,18 @@
+{
+  "slug": "lithops-aucampiae",
+  "commonNames": ["Living stones", "Pebble plant"],
+  "scientificName": "Lithops aucampiae",
+  "family": "Aizoaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 50000,
+    "tempMinC": 20, "tempMaxC": 30, "humidityMin": 20, "humidityMax": 40,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 0, "p": 1, "k": 1 },
+    "waterIntervalDays": 21, "waterAmountMl": 50,
+    "fertIntervalDays": 60, "mistIntervalDays": 0,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "LOW", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 5 }
+}

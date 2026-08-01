@@ -1,0 +1,18 @@
+{
+  "slug": "hedychium-coronarium",
+  "commonNames": ["Butterfly ginger", "White ginger lily", "Garland lily"],
+  "scientificName": "Hedychium coronarium",
+  "family": "Zingiberaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 10000, "luxMax": 30000,
+    "tempMinC": 16, "tempMaxC": 30, "humidityMin": 60, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 150 }
+}

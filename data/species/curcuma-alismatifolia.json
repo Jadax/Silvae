@@ -1,0 +1,18 @@
+{
+  "slug": "curcuma-alismatifolia",
+  "commonNames": ["Siam tulip", "Thai tulip", "Ginger tulip"],
+  "scientificName": "Curcuma alismatifolia",
+  "family": "Zingiberaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 50000,
+    "tempMinC": 15, "tempMaxC": 32, "humidityMin": 55, "humidityMax": 75,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 60 }
+}

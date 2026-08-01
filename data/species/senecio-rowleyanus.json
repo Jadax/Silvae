@@ -1,0 +1,18 @@
+{
+  "slug": "senecio-rowleyanus",
+  "commonNames": ["String of pearls"],
+  "scientificName": "Senecio rowleyanus",
+  "family": "Asteraceae",
+  "toxicity": { "pets": true, "note": "Pyrrolizidine alkaloids" },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 8000, "luxMax": 30000,
+    "tempMinC": 10, "tempMaxC": 27, "humidityMin": 20, "humidityMax": 50,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 12, "waterAmountMl": 60,
+    "fertIntervalDays": 30, "mistIntervalDays": 0,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "MED" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 90 }
+}

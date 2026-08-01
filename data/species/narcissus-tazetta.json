@@ -1,0 +1,18 @@
+{
+  "slug": "narcissus-tazetta",
+  "commonNames": ["Paperwhite narcissus", "Bunch-flowered daffodil", "Paperwhites"],
+  "scientificName": "Narcissus tazetta",
+  "family": "Amaryllidaceae",
+  "toxicity": { "pets": true, "note": "Bulbs contain lycorine; toxic to pets and humans if ingested." },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 50000,
+    "tempMinC": 5, "tempMaxC": 24, "humidityMin": 40, "humidityMax": 65,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 100,
+    "fertIntervalDays": 21, "mistIntervalDays": 3,
+    "repotIntervalMonths": 12, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "FAST", "maxHeightCm": 45 }
+}

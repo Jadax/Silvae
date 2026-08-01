@@ -1,0 +1,18 @@
+{
+  "slug": "acalypha-wilkesiana",
+  "commonNames": ["Copper leaf", "Jacob's coat", "Fire dragon"],
+  "scientificName": "Acalypha wilkesiana",
+  "family": "Euphorbiaceae",
+  "toxicity": { "pets": true, "note": "Sap is a mild skin irritant and toxic to pets if ingested." },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 12000, "luxMax": 40000,
+    "tempMinC": 16, "tempMaxC": 30, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 150,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 150 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "callisia-repens",
+  "commonNames": ["Turtle vine", "Bolivian wandering Jew"],
+  "scientificName": "Callisia repens",
+  "family": "Commelinaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 2500, "luxMax": 12000,
+    "tempMinC": 15, "tempMaxC": 27, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 6, "waterAmountMl": 100,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 30 }
+}

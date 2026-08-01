@@ -1,0 +1,18 @@
+{
+  "slug": "papaver-nudicaule",
+  "commonNames": ["Iceland poppy", "Arctic poppy", "Icelandic poppy"],
+  "scientificName": "Papaver nudicaule",
+  "family": "Papaveraceae",
+  "toxicity": { "pets": true, "note": "Sap contains alkaloids; mildly toxic to pets if ingested." },
+  "ideal": {
+    "luxMin": 10000, "luxIdeal": 25000, "luxMax": 60000,
+    "tempMinC": 5, "tempMaxC": 26, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 100,
+    "fertIntervalDays": 30, "mistIntervalDays": 3,
+    "repotIntervalMonths": 12, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "LOW", "cold": "HIGH" },
+  "growth": { "rate": "FAST", "maxHeightCm": 40 }
+}

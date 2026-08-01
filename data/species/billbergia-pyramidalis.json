@@ -1,0 +1,18 @@
+{
+  "slug": "billbergia-pyramidalis",
+  "commonNames": ["Vase plant", "Foolproof plant"],
+  "scientificName": "Billbergia pyramidalis",
+  "family": "Bromeliaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 10000, "luxMax": 30000,
+    "tempMinC": 16, "tempMaxC": 28, "humidityMin": 45, "humidityMax": 65,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 100,
+    "fertIntervalDays": 30, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 50 }
+}

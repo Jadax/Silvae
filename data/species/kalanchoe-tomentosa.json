@@ -1,0 +1,18 @@
+{
+  "slug": "kalanchoe-tomentosa",
+  "commonNames": ["Panda plant"],
+  "scientificName": "Kalanchoe tomentosa",
+  "family": "Crassulaceae",
+  "toxicity": { "pets": true, "note": "Bufadienolides; cardiac risk" },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 5000, "luxMax": 25000,
+    "tempMinC": 10, "tempMaxC": 27, "humidityMin": 10, "humidityMax": 40,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 1 },
+    "waterIntervalDays": 12, "waterAmountMl": 80,
+    "fertIntervalDays": 30, "mistIntervalDays": 0,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "MED" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 45 }
+}

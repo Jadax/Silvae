@@ -1,0 +1,18 @@
+{
+  "slug": "hippeastrum",
+  "commonNames": ["Amaryllis"],
+  "scientificName": "Hippeastrum hybridum",
+  "family": "Amaryllidaceae",
+  "toxicity": { "pets": true, "note": "Bulb is toxic if ingested" },
+  "ideal": {
+    "luxMin": 3000, "luxIdeal": 8000, "luxMax": 30000,
+    "tempMinC": 15, "tempMaxC": 24, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 60 }
+}

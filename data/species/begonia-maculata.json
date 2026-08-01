@@ -1,0 +1,18 @@
+{
+  "slug": "begonia-maculata",
+  "commonNames": ["Polka dot begonia", "Spotted begonia"],
+  "scientificName": "Begonia maculata",
+  "family": "Begoniaceae",
+  "toxicity": { "pets": true, "note": "Soluble oxalates; sap is a mild irritant" },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 3000, "luxMax": 15000,
+    "tempMinC": 15, "tempMaxC": 29, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 250,
+    "fertIntervalDays": 14, "mistIntervalDays": 5,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 14
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 120 }
+}

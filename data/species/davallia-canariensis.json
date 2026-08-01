@@ -1,0 +1,18 @@
+{
+  "slug": "davallia-canariensis",
+  "commonNames": ["Hare's foot fern", "Rabbit's foot fern", "Deer's foot fern"],
+  "scientificName": "Davallia canariensis",
+  "family": "Davalliaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 4000, "luxMax": 12000,
+    "tempMinC": 15, "tempMaxC": 27, "humidityMin": 50, "humidityMax": 75,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 150,
+    "fertIntervalDays": 30, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "MED", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 30 }
+}

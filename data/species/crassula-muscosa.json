@@ -1,0 +1,18 @@
+{
+  "slug": "crassula-muscosa",
+  "commonNames": ["Watch chain", "Toy cypress", "Zipper plant"],
+  "scientificName": "Crassula muscosa",
+  "family": "Crassulaceae",
+  "toxicity": { "pets": true, "note": "Crassula species are mildly toxic to pets if ingested." },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 50000,
+    "tempMinC": 10, "tempMaxC": 28, "humidityMin": 30, "humidityMax": 50,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 7, "waterAmountMl": 50,
+    "fertIntervalDays": 30, "mistIntervalDays": 7,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "MED" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 20 }
+}

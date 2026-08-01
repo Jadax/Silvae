@@ -1,0 +1,18 @@
+{
+  "slug": "portulacaria-afra",
+  "commonNames": ["Elephant bush", "Dwarf jade"],
+  "scientificName": "Portulacaria afra",
+  "family": "Didiereaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 8000, "luxMax": 40000,
+    "tempMinC": 7, "tempMaxC": 29, "humidityMin": 10, "humidityMax": 40,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 14, "waterAmountMl": 80,
+    "fertIntervalDays": 45, "mistIntervalDays": 0,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "MED" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 200 }
+}
