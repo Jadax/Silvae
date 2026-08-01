@@ -64,7 +64,7 @@ jobs:
           track: ${{ inputs.track || 'internal' }}
           status: completed
       - name: Upload app bundle
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: silvae-release-aab
           path: apps/android/app/build/outputs/bundle/release/app-release.aab
