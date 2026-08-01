@@ -5,7 +5,10 @@
 
 APP_HOME=$(CDPATH= cd -- "$(dirname -- "$0")" >/dev/null && pwd -P) || exit
 
-DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
+# Keep these unquoted inside the variable: shell quotes are not re-evaluated
+# after variable expansion, so embedded quote characters would be passed to
+# Java and make every CI invocation fail before Gradle starts.
+DEFAULT_JVM_OPTS='-Xmx64m -Xms64m'
 
 warn () {
     echo "$*"
