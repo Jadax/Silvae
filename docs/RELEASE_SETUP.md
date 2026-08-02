@@ -41,6 +41,24 @@ absent, rather than producing a misleading unsigned "release".
 4. Deploy Firestore rules and indexes, then seed species data using the scripts
    in the root package.
 
+## Vercel website setup
+
+1. Sign in to [Vercel](https://vercel.com) with the GitHub account that can
+   access `Jadax/Silvae`, then select **Add New â†’ Project** and import that
+   repository.
+2. Leave the project root as the repository root. The committed `vercel.json`
+   selects the web build, exposes the root `api/` serverless adapters, and
+   provides SPA navigation fallback.
+3. In **Settings â†’ Environment Variables**, add every value from
+   `.env.example` for **Production**, **Preview**, and **Development**. The
+   Firebase Vite config is public build configuration; all other values are
+   server secrets. Redeploy after setting the variables.
+4. Deploy `main` to Production. Future pushes to `main` deploy automatically;
+   pull requests receive Preview URLs.
+5. In **Settings â†’ Domains**, either use the generated `*.vercel.app` address
+   or add a domain you own and follow Vercel's DNS records exactly. Add that
+   final HTTPS URL to Firebase Authentication's Authorized domains list.
+
 ## Releasing
 
 - Every normal commit runs checks.
