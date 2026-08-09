@@ -3,7 +3,10 @@ import type { Diagnosis, Symptoms } from "../dto/doctor.js";
 interface Rule {
   id: string;
   weight: number;
-  symptoms: Partial<Record<keyof Symptoms, boolean | string>>;
+  /** Every key must match; an array value matches any of its entries. */
+  symptoms: Partial<Record<keyof Symptoms, boolean | string | (boolean | string)[]>>;
+  /** At least one of these keys must be present/truthy to satisfy the rule. */
+  atLeastOne?: (keyof Symptoms)[];
   likelyCause: string;
   treatment: string[];
 }
@@ -12,7 +15,8 @@ const RULES: Rule[] = [
   {
     id: "overwater",
     weight: 4,
-    symptoms: { leafColor: "yellow", soil: "moist", lowerLeaves: true, potHasDrainage: false },
+    symptoms: { leafColor: "yellow", soil: ["moist", "soaked"] },
+    atLeastOne: ["droop", "lowerLeaves"],
     likelyCause: "Overwatering / root rot risk",
     treatment: ["Let soil dry out", "Inspect roots", "Repot with drainage"],
   },
@@ -75,10 +79,16 @@ const RULES: Rule[] = [
 ];
 
 export function matches(rule: Rule, answers: Symptoms): boolean {
-  return Object.entries(rule.symptoms).every(([key, expected]) => {
+  for (const [key, expected] of Object.entries(rule.symptoms)) {
     const got = answers[key as keyof Symptoms];
-    return got === expected;
-  });
+    if (Array.isArray(expected)) {
+      if (got === undefined || !expected.includes(got)) return false;
+    } else if (got !== expected) {
+      return false;
+    }
+  }
+  if (rule.atLeastOne && !rule.atLeastOne.some((k) => Boolean(answers[k]))) return false;
+  return true;
 }
 
 function confidence(score: number, weight: number): Diagnosis["confidence"] {

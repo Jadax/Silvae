@@ -210,6 +210,11 @@ describe("doctor/rules", () => {
     assert.equal(res[0]?.id, "overwater");
   });
 
+  it("detects overwatering from waterlogged soil with drooping leaves", () => {
+    const res = diagnose({ leafColor: "yellow", soil: "soaked", droop: true });
+    assert.equal(res[0]?.id, "overwater");
+  });
+
   it("returns empty for no symptoms", () => {
     assert.deepEqual(diagnose({}), []);
   });
