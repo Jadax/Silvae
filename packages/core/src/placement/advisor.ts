@@ -51,8 +51,8 @@ export function suitability(species: Species, lux: number): number {
 export function assessSpot(input: PlacementInput): SpotAssessment {
   const lux = input.room.measuredLux ?? estimateLux(input);
   const score = suitability(input.species, lux);
-  const reason = `~${lux.toLocaleString()} lux ${input.env.season} — ${
-    score >= 80 ? "great fit" : score >= 50 ? "workable" : "not ideal"
+  const reason = `~${lux.toLocaleString()} lux in ${input.env.season} sun, which looks like ${
+    score >= 80 ? "a great fit" : score >= 50 ? "a workable fit" : "a poor fit"
   } for ${input.species.commonNames[0]}`;
   return {
     roomId: input.room.id,

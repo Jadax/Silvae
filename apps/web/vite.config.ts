@@ -10,7 +10,7 @@ export default defineConfig({
       manifest: {
         name: "Silvae",
         short_name: "Silvae",
-        description: "Free-forever plant care — schedules, AI doctor, progress history.",
+        description: "Free plant care with watering reminders, a plant doctor, and a growth journal.",
         theme_color: "#2d7650",
         background_color: "#fffaf0",
         display: "standalone",
@@ -26,6 +26,21 @@ export default defineConfig({
       },
     }),
   ],
+  build: {
+    chunkSizeWarningLimit: 600,
+    rolldownOptions: {
+      output: {
+        codeSplitting: {
+          groups: [
+            { name: "vendor-react", test: /[\\/]node_modules[\\/](react|react-dom|scheduler|react-router|react-router-dom)[\\/]/ },
+            { name: "vendor-query", test: /[\\/]node_modules[\\/]@tanstack[\\/]/ },
+            { name: "vendor-dexie", test: /[\\/]node_modules[\\/]dexie[\\/]/ },
+            { name: "vendor-firebase", test: /[\\/]node_modules[\\/](firebase|@firebase)[\\/]/ },
+          ],
+        },
+      },
+    },
+  },
   server: {
     port: 5173,
     proxy: {

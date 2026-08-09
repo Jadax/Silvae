@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../lib/auth";
+import SettingsPanel from "../components/SettingsPanel";
 
 export default function Account() {
   const { status, user, signUp, signIn, signInGoogle, signInAnon, signOutUser } = useAuth();
@@ -24,24 +25,18 @@ export default function Account() {
     }
   }
 
-  if (status === "unconfigured") {
-    return (
-      <>
-        <h1>Account</h1>
+  return (
+    <>
+      <h1>Account</h1>
+      <SettingsPanel />
+      {status === "unconfigured" ? (
         <p className="muted">
-          Offline mode — everything is stored on this device. Set{" "}
+          Offline mode. Everything else is stored on this device. Set{" "}
           <code>VITE_FIREBASE_CONFIG</code> at build time to enable sync + accounts.
         </p>
-      </>
-    );
-  }
-
-  if (status === "loading") return <p className="muted">Loading…</p>;
-
-  if (user) {
-    return (
-      <>
-        <h1>Account</h1>
+      ) : status === "loading" ? (
+        <p className="muted">Loading…</p>
+      ) : user ? (
         <div className="card" style={{ maxWidth: 440 }}>
           <p>
             <strong>{user.isAnonymous ? "Anonymous preview" : user.displayName ?? user.email}</strong>
@@ -64,56 +59,54 @@ export default function Account() {
             </button>
           )}
         </div>
-      </>
-    );
-  }
-
-  return (
-    <>
-      <h1>{mode === "signup" ? "Create account" : "Sign in"}</h1>
-      <form onSubmit={(e) => void submit(e)}>
-        {mode === "signup" && (
-          <label>
-            Name
-            <input value={name} onChange={(e) => setName(e.target.value)} />
-          </label>
-        )}
-        <label>
-          Email
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            minLength={6}
-            required
-          />
-        </label>
-        {error && (
-          <p className="muted" style={{ color: "var(--danger)" }}>
-            {error}
+      ) : (
+        <>
+          <h2>{mode === "signup" ? "Create account" : "Sign in"}</h2>
+          <form onSubmit={(e) => void submit(e)}>
+            {mode === "signup" && (
+              <label>
+                Name
+                <input value={name} onChange={(e) => setName(e.target.value)} />
+              </label>
+            )}
+            <label>
+              Email
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            </label>
+            <label>
+              Password
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                minLength={6}
+                required
+              />
+            </label>
+            {error && (
+              <p className="muted" style={{ color: "var(--danger)" }}>
+                {error}
+              </p>
+            )}
+            <button className="btn" disabled={busy}>
+              {busy ? "Please wait…" : mode === "signup" ? "Create account" : "Sign in"}
+            </button>
+          </form>
+          <div style={{ display: "flex", gap: "0.5rem", marginTop: "1rem" }}>
+            <button className="btn secondary" onClick={() => void signInGoogle()}>
+              Continue with Google
+            </button>
+            <button className="btn secondary" onClick={() => void signInAnon()}>
+              Anonymous preview
+            </button>
+          </div>
+          <p className="muted">
+            <button className="btn secondary" onClick={() => setMode(mode === "signup" ? "signin" : "signup")}>
+              {mode === "signup" ? "Already have an account? Sign in" : "New here? Create an account"}
+            </button>
           </p>
-        )}
-        <button className="btn" disabled={busy}>
-          {busy ? "Please wait…" : mode === "signup" ? "Create account" : "Sign in"}
-        </button>
-      </form>
-      <div style={{ display: "flex", gap: "0.5rem", marginTop: "1rem" }}>
-        <button className="btn secondary" onClick={() => void signInGoogle()}>
-          Continue with Google
-        </button>
-        <button className="btn secondary" onClick={() => void signInAnon()}>
-          Anonymous preview
-        </button>
-      </div>
-      <p className="muted">
-        <button className="btn secondary" onClick={() => setMode(mode === "signup" ? "signin" : "signup")}>
-          {mode === "signup" ? "Already have an account? Sign in" : "New here? Create an account"}
-        </button>
-      </p>
+        </>
+      )}
     </>
   );
 }

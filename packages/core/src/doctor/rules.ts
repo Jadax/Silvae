@@ -38,6 +38,13 @@ const RULES: Rule[] = [
     treatment: ["Move away from direct sun", "Acclimatise gradually"],
   },
   {
+    id: "leaf-spot",
+    weight: 2,
+    symptoms: { leafBurn: "brown-spots" },
+    likelyCause: "Fungal leaf spot (possible)",
+    treatment: ["Remove affected leaves", "Water the soil, not the leaves", "Improve air flow"],
+  },
+  {
     id: "low-humidity",
     weight: 2,
     symptoms: { leafCrisp: "brown-tips", envHumidity: "low" },

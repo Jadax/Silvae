@@ -18,7 +18,7 @@ import {
   type User,
 } from "firebase/auth";
 import { auth, isFirebaseConfigured } from "./firebase";
-import { ensureUserDoc, pruneExpiredCaches, setUid, subscribeToCloud } from "./repo";
+import { ensureUserDoc, flushPendingWrites, pruneExpiredCaches, setUid, subscribeToCloud } from "./repo";
 
 type AuthStatus = "unconfigured" | "loading" | "anonymous" | "signed-in";
 
@@ -43,6 +43,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const a = auth;
     if (!a) return;
+    const onOnline = () => void flushPendingWrites();
+    window.addEventListener("online", onOnline);
     const unsub = onAuthStateChanged(a, async (u) => {
       setUser(u);
       if (u) {
@@ -50,6 +52,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (u.isAnonymous) setStatus("anonymous");
         else setStatus("signed-in");
         subscribeToCloud(u.uid);
+        void flushPendingWrites();
         if (!u.isAnonymous) void ensureUserDoc();
         void pruneExpiredCaches();
       } else {
@@ -60,7 +63,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         });
       }
     });
-    return unsub;
+    return () => {
+      window.removeEventListener("online", onOnline);
+      unsub();
+    };
   }, []);
 
   const value = useMemo<AuthContextValue>(

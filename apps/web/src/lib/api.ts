@@ -76,7 +76,7 @@ export function describeIdentifyError(err: unknown): string {
   if (err instanceof IdentifyError) {
     switch (err.code) {
       case "no_key":
-        return "Species ID isn't configured on the server yet — try searching the catalog below.";
+        return "Photo ID isn't set up on this server yet. Try searching the catalog below.";
       case "budget_exhausted":
         return "Today's identification budget is used up. Try again tomorrow, or search the catalog below.";
       case "upstream":
@@ -87,7 +87,7 @@ export function describeIdentifyError(err: unknown): string {
         return "The request was malformed. Try again.";
       default:
         return err.status === 429
-          ? "Too many requests — try again in a minute."
+          ? "Too many requests. Try again in a minute."
           : "Identification failed. Check your connection and try again.";
     }
   }

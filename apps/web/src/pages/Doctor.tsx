@@ -6,7 +6,10 @@ import {
   identifyPlant,
   type IdentifyResponse,
 } from "../lib/api";
-import { fileToPayload, matchCatalog, sha256Hex, type MatchedSpecies } from "../lib/identify";
+import { fileToPayload, matchCatalog, photoSymptoms, pestFromDisease, sha256Hex, type MatchedSpecies } from "../lib/identify";
+import { detectTrimBounds } from "../lib/trim";
+import type { Rect } from "../lib/crop";
+import CropTool from "../components/CropTool";
 
 type Form = {
   leafColor?: string;
@@ -126,6 +129,21 @@ function toSymptoms(form: Form): Symptoms {
   };
 }
 
+/** Write photo-inferred symptom flags into the checklist form for confirmation. */
+function applyInferred(form: Form, inferred: Symptoms): Form {
+  const next = { ...form };
+  (Object.keys(inferred) as (keyof Symptoms)[]).forEach((key) => {
+    const value = inferred[key];
+    if (value === true) {
+      if (key === "potHasDrainage") next.lacksDrainage = false;
+      else (next as Record<string, boolean | string | undefined>)[key] = true;
+    } else if (typeof value === "string") {
+      (next as Record<string, boolean | string | undefined>)[key] = value;
+    }
+  });
+  return next;
+}
+
 function confidenceClass(c: Diagnosis["confidence"]): string {
   if (c === "high") return "badge";
   if (c === "medium") return "badge badge-warn";
@@ -136,9 +154,10 @@ export default function Doctor() {
   const [form, setForm] = useState<Form>({});
   const [results, setResults] = useState<Diagnosis[] | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [photoDriven, setPhotoDriven] = useState(false);
 
   const [photo, setPhoto] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [preset, setPreset] = useState<Rect | null>(null);
   const [idState, setIdState] = useState<"idle" | "processing" | "done" | "error">("idle");
   const [idResult, setIdResult] = useState<IdentifyResponse | null>(null);
   const [idMatches, setIdMatches] = useState<MatchedSpecies[]>([]);
@@ -148,23 +167,24 @@ export default function Doctor() {
     setForm((f) => ({ ...f, [key]: value }));
 
   const pickPhoto = (file: File | null) => {
-    if (previewUrl) URL.revokeObjectURL(previewUrl);
     setPhoto(file);
-    setPreviewUrl(file ? URL.createObjectURL(file) : null);
+    setPreset(null);
     setIdState("idle");
     setIdResult(null);
     setIdMatches([]);
     setIdError(null);
+    if (!file) return;
+    // Screenshot chrome auto-trim: the crop tool preselects the plant region.
+    void detectTrimBounds(file).then(setPreset);
   };
 
-  const runIdentify = async () => {
-    if (!photo) return;
+  const runIdentify = async (source: File | Blob) => {
     setIdState("processing");
     setIdError(null);
     setIdResult(null);
     setIdMatches([]);
     try {
-      const payload = await fileToPayload(photo);
+      const payload = await fileToPayload(source);
       if (!payload) throw new Error("encode_failed");
       const fingerprint = await sha256Hex(payload.bytes);
       const res = await identifyPlant({
@@ -181,8 +201,28 @@ export default function Doctor() {
   };
 
   const submit = () => {
+    setPhotoDriven(false);
     setResults(diagnose(toSymptoms(form)));
     setSubmitted(true);
+  };
+
+  const photoInferred = idResult ? photoSymptoms(idResult) : null;
+  const hasInferred = Boolean(photoInferred && Object.keys(photoInferred).length > 0);
+  const healthSuspicion = idResult?.isHealthy ? !idResult.isHealthy.binary : false;
+  const showHealthBridge = hasInferred || healthSuspicion;
+  const pest = idResult ? pestFromDisease(idResult) : undefined;
+
+  const prefillFromPhoto = () => {
+    if (!idResult || !photoInferred) return;
+    const inferred = photoSymptoms(idResult);
+    const next = applyInferred(form, inferred);
+    setForm(next);
+    setPhotoDriven(true);
+    setResults(diagnose({ ...toSymptoms(next), ...inferred }));
+    setSubmitted(true);
+    requestAnimationFrame(() => {
+      document.getElementById("diagnosis")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   };
 
   const reset = () => {
@@ -195,46 +235,46 @@ export default function Doctor() {
     <>
       <h1>Plant Doctor</h1>
       <p className="muted">
-        Photo identification (D‑1) + symptom dialogue (D‑2). Photo runs through a serverless
-        Plant.id proxy; symptoms are diagnosed entirely on your device.
+        Identify a plant from a photo, or describe what looks wrong. Photo ID sends the image to
+        our plant service; the symptom check runs entirely on your device.
       </p>
 
       <section className="card" aria-label="Identify by photo">
         <h2>What plant is this?</h2>
         <p className="muted">
-          Take a photo or upload a screenshot from your phone — it's downscaled on your device and
-          matched against the Silvae catalog.
+          Take a photo or upload a screenshot, crop it to the plant, and we'll match it against
+          the Silvae catalog.
         </p>
-        <label>
-          Photo
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => pickPhoto(e.target.files?.[0] ?? null)}
-          />
-        </label>
-        {previewUrl && (
-          <img
-            src={previewUrl}
-            alt="Photo to identify"
-            style={{ maxWidth: "100%", maxHeight: 240, margin: "0.5rem 0", borderRadius: 8 }}
-          />
+        {!photo ? (
+          <label>
+            Photo
+            <input
+              type="file"
+              accept="image/*"
+              capture="environment"
+              onChange={(e) => pickPhoto(e.target.files?.[0] ?? null)}
+            />
+          </label>
+        ) : (
+          <>
+            <CropTool
+              file={photo}
+              preset={preset}
+              busy={idState === "processing"}
+              onSubmit={(crop) => void runIdentify(crop ?? photo)}
+              onCancel={() => pickPhoto(null)}
+            />
+            <label className="muted" style={{ display: "block", marginTop: "0.5rem" }}>
+              <input
+                type="file"
+                accept="image/*"
+                capture="environment"
+                onChange={(e) => pickPhoto(e.target.files?.[0] ?? null)}
+              />{" "}
+              Choose a different file
+            </label>
+          </>
         )}
-        <div className="actions">
-          <button
-            type="button"
-            className="btn"
-            disabled={!photo || idState === "processing"}
-            onClick={() => void runIdentify()}
-          >
-            {idState === "processing" ? "Identifying…" : "Identify plant"}
-          </button>
-          {previewUrl && (
-            <button type="button" className="btn secondary" onClick={() => pickPhoto(null)}>
-              Clear
-            </button>
-          )}
-        </div>
 
         {idState === "error" && idError && (
           <p className="muted">
@@ -249,8 +289,9 @@ export default function Doctor() {
               idResult.isPlant.probability < 0.4 && (
                 <p className="muted">
                   That doesn't look like a plant to us (confidence{" "}
-                  {Math.round(idResult.isPlant.probability * 100)}%). Try a clearer photo of just
-                  the leaves.
+                  {Math.round(idResult.isPlant.probability * 100)}%). Crop tighter around the
+                  leaves and try again, or{" "}
+                  <Link to="/discover">browse the catalog.</Link>
                 </p>
               )}
 
@@ -266,7 +307,7 @@ export default function Doctor() {
                     <div className="diagnosis-head">
                       {m.inCatalog && m.slug ? (
                         <strong>
-                          <Link to={`/plants/${m.slug}`}>{m.commonNames[0] ?? m.scientificName}</Link>
+                          <Link to={`/species/${m.slug}`}>{m.commonNames[0] ?? m.scientificName}</Link>
                         </strong>
                       ) : (
                         <strong>{m.commonNames[0] ?? m.scientificName}</strong>
@@ -282,13 +323,13 @@ export default function Doctor() {
                       {m.inCatalog ? (
                         <>
                           {" "}
-                          · in your catalog —{" "}
-                          <Link to={`/plants/${m.slug}`}>open care guide</Link>
+                          · has a care guide ·{" "}
+                          <Link to={`/species/${m.slug}`}>open it</Link>
                         </>
                       ) : (
                         <>
                           {" "}
-                          · not in the catalog yet —{" "}
+                          · not in the catalog yet ·{" "}
                           <Link to={`/discover?q=${encodeURIComponent(m.scientificName)}`}>
                             search the catalog
                           </Link>
@@ -315,6 +356,39 @@ export default function Doctor() {
                   ? ` (${Math.round(idResult.disease.probability * 100)}%)`
                   : ""}
               </p>
+            )}
+            {pest && (
+              <div className="pest-card" role="status">
+                <span className="pest-icon" aria-hidden>{pest.icon}</span>
+                <div>
+                  <div className="pest-head">
+                    <strong>Detected: {pest.pest}</strong>
+                    <span className={`badge ${pest.severity === "stubborn" ? "badge-low" : pest.severity === "moderate" ? "badge-warn" : "badge"}`}>{pest.severity}</span>
+                  </div>
+                  <p className="muted">Photos can mislead — confirm what you see on the plant first.</p>
+                  <ol className="treatment">
+                    {pest.treatments.map((step, i) => <li key={i}>{step}</li>)}
+                  </ol>
+                </div>
+              </div>
+            )}
+            {showHealthBridge && (
+              <div className="alert peach health-bridge" role="status">
+                <span aria-hidden>🩺</span>
+                <div>
+                  <strong>This photo may show a problem.</strong>
+                  <p className="muted">
+                    {idResult.disease?.name
+                      ? <>The service flagged <strong>{idResult.disease.name}</strong>. Photos can mislead, so check what you actually see before acting.</>
+                      : "Something may be off, but the photo alone isn't clear enough. Check the symptoms below."}
+                  </p>
+                  {hasInferred && (
+                    <button className="btn secondary" type="button" onClick={prefillFromPhoto}>
+                      Check these symptoms for me
+                    </button>
+                  )}
+                </div>
+              </div>
             )}
             {idResult.cached && <p className="muted">Reused a cached result for this photo.</p>}
           </div>
@@ -421,10 +495,14 @@ export default function Doctor() {
       </section>
 
       {submitted && results !== null && (
-        <section className="card results" aria-label="Diagnosis">
+        <section className="card results" aria-label="Diagnosis" id="diagnosis">
           <h2>Diagnosis</h2>
           {results.length === 0 ? (
-            <p>No issues detected from what you described — that’s good news. Keep up the routine.</p>
+            photoDriven ? (
+              <p>Nothing in the checklist lined up with a known issue. If the photo still worries you, try a sharper photo or re-check the symptoms.</p>
+            ) : (
+              <p>Nothing stands out from what you described. Good news. Keep doing what you're doing.</p>
+            )
           ) : (
             <ol className="diagnoses">
               {results.map((d) => (
@@ -444,7 +522,7 @@ export default function Doctor() {
             </ol>
           )}
           <p className="muted">
-            Rule‑based guidance to help you decide — not a substitute for a professional agronomist
+            These are suggestions to help you decide, not a diagnosis from a professional agronomist
             or vet.
           </p>
         </section>

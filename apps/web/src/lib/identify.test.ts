@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { matchCatalog, normalizeName, sha256Hex } from "./identify";
+import { matchCatalog, normalizeName, photoSymptoms, pestFromDisease, sha256Hex } from "./identify";
 
 const CATALOG = [
   {
@@ -79,5 +79,56 @@ describe("sha256Hex", () => {
     expect(await sha256Hex(bytes)).toBe(
       "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
     );
+  });
+});
+
+describe("photoSymptoms", () => {
+  it("maps a flagged disease onto checklist symptoms", () => {
+    expect(photoSymptoms({ disease: { name: "Mealybugs" } })).toEqual({
+      whiteFluff: true,
+      stickyResidue: true,
+    });
+  });
+
+  it("maps spider mites onto webbing and stippling", () => {
+    expect(photoSymptoms({ disease: { name: "Spider mites" } })).toEqual({
+      webbing: true,
+      stippling: true,
+    });
+  });
+
+  it("maps fungal leaf spot onto brown leaf patches", () => {
+    expect(photoSymptoms({ disease: { name: "Fungal leaf spot" } })).toEqual({
+      leafBurn: "brown-spots",
+    });
+  });
+
+  it("returns an empty object when no disease is flagged", () => {
+    expect(photoSymptoms({ species: [] })).toEqual({});
+  });
+});
+
+describe("pestFromDisease", () => {
+  it("returns a treatment plan for a known pest", () => {
+    const pest = pestFromDisease({ disease: { name: "Aphids" } });
+    expect(pest?.pest).toBe("Aphids");
+    expect(pest?.treatments.length).toBeGreaterThan(0);
+    expect(pest?.severity).toBe("easy");
+  });
+
+  it("resolves thrips with a stubborn plan", () => {
+    const pest = pestFromDisease({ disease: { name: "Thrips (insect)" } });
+    expect(pest?.pest).toBe("Thrips");
+    expect(pest?.severity).toBe("stubborn");
+  });
+
+  it("matches whiteflies and scales", () => {
+    expect(pestFromDisease({ disease: { name: "Whitefly" } })?.pest).toBe("Whiteflies");
+    expect(pestFromDisease({ disease: { name: "Scale insects" } })?.pest).toBe("Scale insects");
+  });
+
+  it("returns undefined when no pest is named", () => {
+    expect(pestFromDisease({ disease: { name: "Fungal leaf spot" } })).toBeUndefined();
+    expect(pestFromDisease({ species: [] })).toBeUndefined();
   });
 });

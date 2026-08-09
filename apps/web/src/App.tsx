@@ -1,11 +1,14 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
 import { Link, NavLink, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import Discover from "./pages/Discover";
-import PlantDetail from "./pages/PlantDetail";
-import AddPlant from "./pages/AddPlant";
-import Account from "./pages/Account";
-import Doctor from "./pages/Doctor";
+
+const Home = lazy(() => import("./pages/Home"));
+const Discover = lazy(() => import("./pages/Discover"));
+const PlantDetail = lazy(() => import("./pages/PlantDetail"));
+const SpeciesGuide = lazy(() => import("./pages/SpeciesGuide"));
+const AddPlant = lazy(() => import("./pages/AddPlant"));
+const Account = lazy(() => import("./pages/Account"));
+const Doctor = lazy(() => import("./pages/Doctor"));
+const Onboarding = lazy(() => import("./pages/Onboarding"));
 import { useAuth } from "./lib/auth";
 
 const THEME_KEY = "silvae-theme";
@@ -70,14 +73,18 @@ export default function App() {
         </button>
       </header>
       <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/discover" element={<Discover />} />
-          <Route path="/plants/:id" element={<PlantDetail />} />
-          <Route path="/add" element={<AddPlant />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/doctor" element={<Doctor />} />
-        </Routes>
+        <Suspense fallback={<p className="muted">Loading…</p>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/discover" element={<Discover />} />
+            <Route path="/plants/:id" element={<PlantDetail />} />
+            <Route path="/species/:slug" element={<SpeciesGuide />} />
+            <Route path="/add" element={<AddPlant />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/doctor" element={<Doctor />} />
+            <Route path="/onboard" element={<Onboarding />} />
+          </Routes>
+        </Suspense>
       </main>
       <Navigation mobile />
     </div>

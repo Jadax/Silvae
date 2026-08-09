@@ -1,12 +1,16 @@
 import { z } from "zod";
 import { POT_TYPES, SOIL_TYPES } from "../constants.js";
 
+export const PLANT_LOCATIONS = ["indoor", "outdoor"] as const;
+export type PlantLocation = (typeof PLANT_LOCATIONS)[number];
+
 export const PlantSchema = z.object({
   id: z.string(),
   ownerUid: z.string(),
   name: z.string().min(1),
   speciesSlug: z.string(),
   avatarPhotoUrl: z.string().optional(),
+  locationType: z.enum(PLANT_LOCATIONS).optional(),
   roomId: z.string().optional(),
   spotName: z.string().optional(),
   potType: z.enum(POT_TYPES).default("plastic"),

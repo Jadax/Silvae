@@ -16,11 +16,12 @@ export interface ScheduleResult {
 
 export interface ScheduleInput {
   species: Species;
-  plant: Pick<Plant, "potType" | "potSizeCm" | "soilType">;
+  plant: Pick<Plant, "potType" | "potSizeCm" | "soilType" | "locationType">;
   env: Env;
   last: Date;
   luxEstimate?: number;
   isGrowingSeason?: boolean;
+  isOutdoor?: boolean;
 }
 
 const GROWING_SEASONS = new Set(["spring", "summer"]);
@@ -55,6 +56,12 @@ export function nextWaterAt(input: ScheduleInput): ScheduleResult {
 
   const growing = input.isGrowingSeason ?? GROWING_SEASONS.has(input.env.season);
   if (input.species.growth.rate === "FAST" && growing) push("fastGrowth", -0.1);
+
+  const outdoor = input.isOutdoor ?? input.plant.locationType === "outdoor";
+  if (outdoor) {
+    if (input.env.season === "winter" || input.env.tempC < 5) push("outdoorDormant", +0.25);
+    else if (input.env.tempC < 10) push("outdoorCool", +0.1);
+  }
 
   const base = input.species.ideal.waterIntervalDays;
   d = clamp(d, base * 0.5, base * 1.8);

@@ -1,17 +1,20 @@
 # Silvae project status
 
-Updated: 1 August 2026
+Updated: 9 August 2026
 
 ## Current position
 
-Silvae is between the foundation phase (P0) and the web MVP phase (P1). The shared TypeScript care engine, schemas, weather calculations, doctor rules, API contract, Firestore rules, 400-species catalog, and basic CI are in place. The web app is a usable local-first vertical slice. Android is still a UI/architecture scaffold rather than a functional client.
+Silvae is between the foundation phase (P0) and the web MVP phase (P1). The shared TypeScript care engine, schemas, weather calculations, doctor rules, API contract, Firestore rules, 400-species catalog, and basic CI are in place. The web app is a usable local-first vertical slice with a finished onboarding flow, plant photo timeline, and offline-first cloud sync. Android is still a UI/architecture scaffold rather than a functional client.
 
 ## What works now
 
 - Web PWA shell, offline service worker, local Dexie storage, and optional Firebase authentication.
+- First-run onboarding (`/onboard`): location, pets, and add-your-first-plant, with a Home redirect until completed.
 - Add, list, view, and delete plants; calculate watering dates and amounts; log care events.
-- Browse and search 400 species.
-- Rule-based symptom diagnosis and server-backed photo identification flow.
+- Plant photos: journal photos and notes, before/after comparison, a timeline thumbnail gallery with a keyboard-friendly lightbox, and "use as avatar" from any photo.
+- Browse and search 400 species, each with a public care guide (`/species/:slug`) reachable from Discover and identification results.
+- Rule-based symptom diagnosis and server-backed photo identification flow (photos or screenshots: automatic chrome/border stripping plus a draw-to-crop tool before the Plant.id proxy call).
+- Local-to-Firestore sync with a pending-write queue: offline creates/updates/deletes are queued and flushed on reconnect, and conflicting edits resolve by newest write.
 - Server functions for identification, weather, and share invitations.
 - Shared care-engine and identification unit tests.
 - A shared warm visual system and easy four-destination navigation for web and Android.
@@ -28,12 +31,10 @@ Silvae is between the foundation phase (P0) and the web MVP phase (P1). The shar
 
 ### P1: finish the web MVP
 
-- Build first-run onboarding and a photo-first add-plant flow.
-- Add plant photos, editing, timeline/progress gallery, and clearer success/error feedback.
-- Finish local-to-Firestore sync and conflict handling; verify offline create/update/delete.
-- Add route-level code splitting (the current production JavaScript bundle is about 1.2 MB before gzip).
+- Route-level code splitting with lazy-loaded pages and split vendor chunks (entry ~8 kB; the former 1.2 MB bundle is now per-page chunks + cached vendor chunks).
 - Add Playwright journeys for onboarding, plant creation, care logging, diagnosis, and offline recovery.
 - Run a WCAG AA and Lighthouse pass, then test installation on iOS and Android browsers.
+- Verify Firestore sync across two signed-in devices, including offline create/update/delete recovery.
 
 ### P2: make Android functional
 

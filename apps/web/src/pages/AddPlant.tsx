@@ -3,18 +3,28 @@ import { useNavigate } from "react-router-dom";
 import { addDays } from "@silvae/core";
 import { addPlant } from "../lib/repo";
 import { preparePlantPhoto } from "../lib/photos";
+import { describeIdentifyError, identifyPlant } from "../lib/api";
+import { fileToPayload, matchCatalog, sha256Hex, type MatchedSpecies } from "../lib/identify";
 import { SPECIES } from "../lib/seed";
+import { useSaveSettings } from "../lib/settings";
 
 const POT_TYPES = ["plastic", "terracotta", "ceramic", "self-watering"] as const;
 const SOIL_TYPES = ["standard", "well-draining", "retentive"] as const;
 
 export default function AddPlant() {
   const navigate = useNavigate();
+  const saveSettings = useSaveSettings();
   const [step, setStep] = useState(1);
   const [name, setName] = useState("");
-  const [speciesSlug, setSpeciesSlug] = useState("");
-  const [speciesSearch, setSpeciesSearch] = useState("");
+  const [speciesSlug, setSpeciesSlug] = useState(
+    () => new URLSearchParams(window.location.search).get("species") ?? "",
+  );
+  const [speciesSearch, setSpeciesSearch] = useState(() => {
+    const slug = new URLSearchParams(window.location.search).get("species") ?? "";
+    return SPECIES.find((entry) => entry.slug === slug)?.commonNames[0] ?? "";
+  });
   const [spotName, setSpotName] = useState("");
+  const [locationType, setLocationType] = useState<"indoor" | "outdoor">("indoor");
   const [potType, setPotType] = useState<(typeof POT_TYPES)[number]>("plastic");
   const [soilType, setSoilType] = useState<(typeof SOIL_TYPES)[number]>("standard");
   const [potSizeCm, setPotSizeCm] = useState("20");
@@ -22,6 +32,9 @@ export default function AddPlant() {
   const [photo, setPhoto] = useState<string | undefined>();
   const [photoBusy, setPhotoBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [idState, setIdState] = useState<"idle" | "busy" | "done" | "error">("idle");
+  const [idMatches, setIdMatches] = useState<MatchedSpecies[]>([]);
+  const [idError, setIdError] = useState<string | null>(null);
 
   const species = SPECIES.find((entry) => entry.slug === speciesSlug);
   const matches = useMemo(() => {
@@ -43,6 +56,32 @@ export default function AddPlant() {
       setError(reason instanceof Error ? reason.message : "We couldn't save that photo.");
     } finally {
       setPhotoBusy(false);
+    }
+  }
+
+  async function identifyFromPhoto(file: File) {
+    setIdState("busy");
+    setIdError(null);
+    setIdMatches([]);
+    try {
+      const payload = await fileToPayload(file);
+      if (!payload) throw new Error("encode_failed");
+      const fingerprint = await sha256Hex(payload.bytes);
+      const res = await identifyPlant({ imageFingerprint: fingerprint, base64: payload.base64 });
+      const matches = matchCatalog(res.species ?? []);
+      setIdMatches(matches);
+      const top = matches.find((m) => m.inCatalog) ?? matches[0];
+      if (top?.inCatalog && top.slug) {
+        setSpeciesSlug(top.slug);
+        setSpeciesSearch(top.commonNames[0] ?? top.scientificName);
+      } else if (top) {
+        setSpeciesSlug("");
+        setSpeciesSearch(top.scientificName);
+      }
+      setIdState("done");
+    } catch (err) {
+      setIdState("error");
+      setIdError(describeIdentifyError(err));
     }
   }
 
@@ -72,6 +111,7 @@ export default function AddPlant() {
       ownerUid: "local",
       name: name.trim(),
       speciesSlug: species.slug,
+      locationType,
       potType,
       soilType,
       potSizeCm: Number(potSizeCm) || undefined,
@@ -82,6 +122,7 @@ export default function AddPlant() {
       sharedWith: [],
       nextWaterAt: addDays(now, species.ideal.waterIntervalDays).toISOString(),
     });
+    await saveSettings.mutateAsync({ onboarded: true });
     navigate(`/plants/${id}`);
   }
 
@@ -108,7 +149,7 @@ export default function AddPlant() {
             {photo ? <img src={photo} alt="Your plant" /> : <span aria-hidden>🪴</span>}
             <label className="photo-button">
               {photo ? "Change photo" : photoBusy ? "Preparing photo…" : "Add a photo"}
-              <input type="file" accept="image/*" onChange={(event) => void selectPhoto(event.target.files?.[0])} disabled={photoBusy} />
+              <input type="file" accept="image/*" capture="environment" onChange={(event) => void selectPhoto(event.target.files?.[0])} disabled={photoBusy} />
             </label>
           </div>
           <label>
@@ -120,6 +161,30 @@ export default function AddPlant() {
         {step === 2 && <>
           <h2>What kind of plant is {name || "this"}?</h2>
           <p className="muted">Search by a common name or scientific name. You can change it later.</p>
+          <div className="identify-card">
+            <div className="identify-row">
+              <span aria-hidden>📷</span>
+              <div>
+                <strong>Not sure what it is?</strong>
+                <p className="muted">Take a photo and we'll guess the type. You get to confirm before it's set.</p>
+              </div>
+              <label className="btn secondary photo-button identify-button">
+                {idState === "busy" ? "Looking…" : "Identify from photo"}
+                <input type="file" accept="image/*" capture="environment" disabled={idState === "busy"} onChange={(event) => { const f = event.target.files?.[0]; if (f) void identifyFromPhoto(f); event.currentTarget.value = ""; }} />
+              </label>
+            </div>
+            {idState === "done" && idMatches.length > 0 && (() => {
+              const best = idMatches.find((m) => m.inCatalog) ?? idMatches[0];
+              return (
+                <p className={`identify-result ${best?.inCatalog ? "" : "warn"}`}>
+                  {best?.inCatalog
+                    ? <>Looks like <strong>{best.commonNames[0] ?? best.scientificName}</strong>{best.confidence !== undefined ? ` (${Math.round(best.confidence * 100)}%)` : ""}. Confirm it below or pick another.</>
+                    : <>We matched <em>{best?.scientificName}</em>, but there's no care guide for it yet. Pick the closest match below.</>}
+                </p>
+              );
+            })()}
+            {idState === "error" && idError && <p className="form-error">{idError}</p>}
+          </div>
           <label>
             Search the plant library
             <input type="search" value={speciesSearch} onChange={(event) => setSpeciesSearch(event.target.value)} placeholder="Pothos, monstera, snake plant…" autoFocus />
@@ -134,7 +199,11 @@ export default function AddPlant() {
 
         {step === 3 && <>
           <h2>Where will {name || "your plant"} live?</h2>
-          <p className="muted">This helps make your care advice more useful. Everything can be changed later.</p>
+          <p className="muted">Outdoor plants use real weather: frost and heat warnings, plus rain-aware watering.</p>
+          <div className="segmented" role="radiogroup" aria-label="Indoor or outdoor">
+            <button type="button" className={locationType === "indoor" ? "selected" : ""} onClick={() => setLocationType("indoor")} role="radio" aria-checked={locationType === "indoor"}><span aria-hidden>🏠</span><div><strong>Indoor</strong><small>Living room, shelf, windowsill</small></div></button>
+            <button type="button" className={locationType === "outdoor" ? "selected" : ""} onClick={() => setLocationType("outdoor")} role="radio" aria-checked={locationType === "outdoor"}><span aria-hidden>☀️</span><div><strong>Outdoor</strong><small>Garden, balcony, patio</small></div></button>
+          </div>
           <div className="form-grid">
             <label>Favourite spot<input value={spotName} onChange={(event) => setSpotName(event.target.value)} placeholder="Living room window" /></label>
             <label>Pot type<select value={potType} onChange={(event) => setPotType(event.target.value as (typeof POT_TYPES)[number])}>{POT_TYPES.map((type) => <option key={type}>{type}</option>)}</select></label>
