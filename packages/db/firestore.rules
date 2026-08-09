@@ -71,6 +71,9 @@ service cloud.firestore {
 
     // caches/{kind}/{key}: any signed-in user may read; writes happen via the
     // server (admin SDK bypasses rules) or app users on cache miss.
+    match /caches/{doc} {
+      allow read, write: if signedIn();
+    }
     match /caches/{kind}/{key} {
       allow read: if signedIn();
       allow write: if signedIn();

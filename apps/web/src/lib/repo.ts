@@ -71,13 +71,21 @@ export async function pruneExpiredCaches(opts?: {
   const maxAgeMs = opts?.maxAgeMs ?? 7 * 24 * 60 * 60 * 1000; // 7 days default
   const batch = opts?.batch ?? 50;
   const cutoff = Timestamp.fromMillis(Date.now() - maxAgeMs);
-  const snap = await getDocs(
-    query(collection(firestoreDb, "caches"), orderBy("createdAt", "asc"), queryLimit(batch)),
-  );
-  const expired = snap.docs.filter((d) => {
-    const c = d.data().createdAt;
-    return c instanceof Timestamp && c.seconds < cutoff.seconds;
-  });
+  // Cache docs live in the sub-collections `caches/{kind}/{key}`; query each
+  // kind so the read matches the rules (a bare `collection("caches")` query has
+  // no matching rule and would be denied).
+  const expired: Awaited<ReturnType<typeof getDocs>>["docs"] = [];
+  for (const kind of ["id", "weather"] as const) {
+    const snap = await getDocs(
+      query(collection(firestoreDb, "caches", kind), orderBy("createdAt", "asc"), queryLimit(batch)),
+    );
+    expired.push(
+      ...snap.docs.filter((d) => {
+        const c = d.data().createdAt;
+        return c instanceof Timestamp && c.seconds < cutoff.seconds;
+      }),
+    );
+  }
   await Promise.all(expired.map((d) => deleteDoc(d.ref)));
   return expired.length;
 }
