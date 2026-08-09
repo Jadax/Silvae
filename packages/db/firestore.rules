@@ -69,14 +69,11 @@ service cloud.firestore {
       allow write: if signedIn();
     }
 
-    // caches/{kind}/{key}: any signed-in user may read; writes happen via the
-    // server (admin SDK bypasses rules) or app users on cache miss.
-    match /caches/{doc} {
+    // caches/{key}: any signed-in user may read; writes happen via the server
+    // (admin SDK bypasses rules) or app users on cache miss. Document ids are
+    // kind-prefixed (`id:{fingerprint}`, `weather:{lat,lon}`).
+    match /caches/{key} {
       allow read, write: if signedIn();
-    }
-    match /caches/{kind}/{key} {
-      allow read: if signedIn();
-      allow write: if signedIn();
     }
 
     // Share links (S-5/S-6): creator + holder.

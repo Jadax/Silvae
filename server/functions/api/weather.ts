@@ -6,7 +6,10 @@ const Query = z.object({
   lon: z.coerce.number().min(-180).max(180),
 });
 
-const CACHE_COLLECTION = "caches/weather";
+// Cache docs: single `caches` collection with kind-prefixed ids (`weather:{key}`)
+// so the path stays a valid one-segment collection reference for every SDK.
+const CACHE_COLLECTION = "caches";
+const CACHE_DOC_PREFIX = "weather:";
 const TTL_MS = 3 * 60 * 60 * 1000; // 3 h per location
 
 export default async function handler(req: Request): Promise<Response> {
@@ -18,7 +21,7 @@ export default async function handler(req: Request): Promise<Response> {
     return Response.json({ error: "invalid_query", issues: parsed.error.issues }, { status: 400 });
   }
   const { lat, lon } = parsed.data;
-  const key = `${lat.toFixed(2)},${lon.toFixed(2)}`;
+  const key = `${CACHE_DOC_PREFIX}${lat.toFixed(2)},${lon.toFixed(2)}`;
   const { db } = admin();
 
   const doc = await db.collection(CACHE_COLLECTION).doc(key).get();
@@ -55,7 +58,7 @@ export default async function handler(req: Request): Promise<Response> {
   await db
     .collection(CACHE_COLLECTION)
     .doc(key)
-    .set({ payload, expiresAt: new Date(Date.now() + TTL_MS).toISOString() });
+    .set({ payload, createdAt: new Date().toISOString(), expiresAt: new Date(Date.now() + TTL_MS).toISOString() });
 
   return Response.json({ cached: false, ...payload });
 }

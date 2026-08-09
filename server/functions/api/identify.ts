@@ -8,7 +8,10 @@ const Body = z.object({
   longitude: z.number().optional(),
 });
 
-const CACHE_COLLECTION = "caches/id";
+// Cache docs: single `caches` collection with kind-prefixed ids (`id:{fingerprint}`)
+// so the path stays a valid one-segment collection reference for every SDK.
+const CACHE_COLLECTION = "caches";
+const cacheDocId = (fingerprint: string): string => `id:${fingerprint}`;
 const TTL_MS = 90 * 24 * 60 * 60 * 1000; // ~90 days: same photo never costs again
 
 export interface IdentifySpecies {
@@ -154,7 +157,7 @@ export default async function handler(req: Request): Promise<Response> {
 
   if (db) {
     try {
-      const cached = await db.collection(CACHE_COLLECTION).doc(imageFingerprint).get();
+      const cached = await db.collection(CACHE_COLLECTION).doc(cacheDocId(imageFingerprint)).get();
       if (cached.exists) {
         return Response.json({ ...cached.data(), cached: true });
       }
@@ -194,8 +197,8 @@ export default async function handler(req: Request): Promise<Response> {
     try {
       await db
         .collection(CACHE_COLLECTION)
-        .doc(imageFingerprint)
-        .set({ ...result, expiresAt: new Date(Date.now() + TTL_MS).toISOString() });
+        .doc(cacheDocId(imageFingerprint))
+        .set({ ...result, createdAt: new Date().toISOString(), expiresAt: new Date(Date.now() + TTL_MS).toISOString() });
     } catch {
       // cache write failed — the fresh result is still returned
     }

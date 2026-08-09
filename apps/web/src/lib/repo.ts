@@ -7,7 +7,6 @@ import {
   getDocs,
   limit as queryLimit,
   onSnapshot,
-  orderBy,
   query,
   serverTimestamp,
   setDoc,
@@ -59,27 +58,23 @@ export async function ensureUserDoc(): Promise<void> {
 }
 
 /**
- * Client-side TTL sweep for the `caches/{kind}/{key}` collection (D-4). Any
- * signed-in client may prune the oldest expired entries; no cron/function
- * required (zero-cost on Spark). Deletes apply to cache docs only.
+ * Client-side TTL sweep for the `caches` collection (D-4). Any signed-in
+ * client may prune the oldest expired entries; no cron/function required
+ * (zero-cost on Spark). Deletes apply to cache docs only.
  */
-export async function pruneExpiredCaches(opts?: {
-  maxAgeMs?: number;
-  batch?: number;
-}): Promise<number> {
+export async function pruneExpiredCaches(opts?: { batch?: number }): Promise<number> {
   if (!firestoreDb || !isFirebaseConfigured) return 0;
-  const maxAgeMs = opts?.maxAgeMs ?? 7 * 24 * 60 * 60 * 1000; // 7 days default
   const batch = opts?.batch ?? 50;
-  const cutoff = Timestamp.fromMillis(Date.now() - maxAgeMs);
-  // Best-effort sweep. Cache docs written by the server live under
-  // `caches/{kind}/{key}`; the top-level collection query below is the only
-  // segment-valid reference for the web SDK and returns empty today.
+  // Best-effort sweep: the server writes cache docs into the `caches`
+  // collection with kind-prefixed ids and an `expiresAt` timestamp.
   const snap = await getDocs(
-    query(collection(firestoreDb, "caches"), orderBy("createdAt", "asc"), queryLimit(batch)),
+    query(collection(firestoreDb, "caches"), queryLimit(batch)),
   );
   const expired = snap.docs.filter((d) => {
-    const c = d.data().createdAt;
-    return c instanceof Timestamp && c.seconds < cutoff.seconds;
+    const at = d.data().expiresAt;
+    if (typeof at === "string") return Date.parse(at) < Date.now();
+    if (at instanceof Timestamp) return at.toMillis() < Date.now();
+    return false;
   });
   await Promise.all(expired.map((d) => deleteDoc(d.ref)));
   return expired.length;
