@@ -33,6 +33,32 @@ interface PlantIdPayload {
   };
 }
 
+interface PlantNetPayload {
+  results?: {
+    score?: number;
+    species?: { scientificNameWithoutAuthor?: string };
+  }[];
+}
+
+/**
+ * Normalize the raw PlantNet v2 identification payload into the public
+ * `IdentifyResponse` shape. PlantNet has no health/disease fields, so only
+ * the species suggestions are carried across. Kept pure for testability.
+ */
+export function normalizePlantNet(payload: unknown): Omit<IdentifyResponse, "cached"> {
+  const p = payload as PlantNetPayload;
+  return {
+    species: (p?.results ?? [])
+      .filter(
+        (r) => typeof r?.species?.scientificNameWithoutAuthor === "string",
+      )
+      .map((r) => ({
+        scientificName: r.species!.scientificNameWithoutAuthor!,
+        ...(typeof r.score === "number" ? { confidence: r.score } : {}),
+      })),
+  };
+}
+
 /**
  * Normalize the raw Plant.id v3 identification payload into the public
  * `IdentifyResponse` shape (openapi.yaml). Kept pure for testability.
@@ -56,6 +82,56 @@ export function normalizePlantId(payload: unknown): Omit<IdentifyResponse, "cach
       ? { disease: { name: disease.name, probability: disease.probability } }
       : {}),
   };
+}
+
+async function tryPlantId(
+  base64: string,
+  latitude?: number,
+  longitude?: number,
+): Promise<Response> {
+  const key = process.env.PLANT_ID_API_KEY!;
+  const upstream = await fetch("https://api.plant.id/v3/identifications", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Api-Key": key },
+    body: JSON.stringify({ images: [base64], latitude, longitude, health: "auto" }),
+  });
+  if (upstream.status === 429) {
+    return Response.json(
+      { error: "budget_exhausted", hint: "fall back to PlantNet → manual search" },
+      { status: 429 },
+    );
+  }
+  if (!upstream.ok) {
+    return Response.json({ error: "upstream", status: upstream.status }, { status: 502 });
+  }
+  const payload = await upstream.json();
+  return Response.json({ cached: false, source: "plant-id", ...normalizePlantId(payload) });
+}
+
+async function tryPlantNet(base64: string, latitude?: number, longitude?: number): Promise<Response> {
+  const key = process.env.PLANTNET_API_KEY!;
+  const project = process.env.PLANTNET_PROJECT ?? "all";
+  const base64Data = base64.includes(",") ? base64.slice(base64.indexOf(",") + 1) : base64;
+  const form = new FormData();
+  form.append("images", new Blob([Buffer.from(base64Data, "base64")]), "plant.webp");
+  if (typeof latitude === "number") form.append("latitude", String(latitude));
+  if (typeof longitude === "number") form.append("longitude", String(longitude));
+
+  const upstream = await fetch(
+    `https://my-api.plantnet.org/v2/identify/${encodeURIComponent(project)}?api-key=${encodeURIComponent(key)}`,
+    { method: "POST", body: form },
+  );
+  if (upstream.status === 429) {
+    return Response.json(
+      { error: "budget_exhausted", hint: "fall back to TFLite → manual search" },
+      { status: 429 },
+    );
+  }
+  if (!upstream.ok) {
+    return Response.json({ error: "upstream", status: upstream.status }, { status: 502 });
+  }
+  const payload = await upstream.json();
+  return Response.json({ cached: false, source: "plantnet", ...normalizePlantNet(payload) });
 }
 
 export default async function handler(req: Request): Promise<Response> {
@@ -87,8 +163,9 @@ export default async function handler(req: Request): Promise<Response> {
     }
   }
 
-  const key = process.env.PLANT_ID_API_KEY;
-  if (!key) {
+  const plantIdKey = process.env.PLANT_ID_API_KEY;
+  const plantNetKey = process.env.PLANTNET_API_KEY;
+  if (!plantIdKey && !plantNetKey) {
     return Response.json(
       { error: "no_key", hint: "fall back to TFLite → PlantNet → manual search" },
       { status: 503 },
@@ -98,30 +175,21 @@ export default async function handler(req: Request): Promise<Response> {
     return Response.json({ error: "image_required" }, { status: 400 });
   }
 
-  const upstream = await fetch("https://api.plant.id/v3/identifications", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "Api-Key": key },
-    body: JSON.stringify({
-      images: [base64],
-      latitude,
-      longitude,
-      health: "auto",
-    }),
-  });
-
-  if (upstream.status === 429) {
-    return Response.json(
-      { error: "budget_exhausted", hint: "fall back to TFLite → PlantNet → manual search" },
-      { status: 429 },
-    );
+  // Preferred provider is Plant.id (richer health/disease data). If it is not
+  // configured, or it runs out of quota / is unavailable, fall back to the free
+  // (non-commercial) PlantNet API before giving up.
+  let res: Response;
+  if (plantIdKey) {
+    res = await tryPlantId(base64, latitude, longitude);
+    if (plantNetKey && (res.status === 429 || res.status === 502)) {
+      res = await tryPlantNet(base64, latitude, longitude);
+    }
+  } else {
+    res = await tryPlantNet(base64, latitude, longitude);
   }
-  if (!upstream.ok) {
-    return Response.json({ error: "upstream", status: upstream.status }, { status: 502 });
-  }
+  if (!res.ok) return res;
 
-  const payload = await upstream.json();
-  const result: IdentifyResponse = { cached: false, ...normalizePlantId(payload) };
-
+  const result = (await res.json()) as Record<string, unknown>;
   if (db) {
     try {
       await db
