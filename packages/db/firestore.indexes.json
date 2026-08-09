@@ -47,13 +47,6 @@
         { "fieldPath": "plantId", "order": "ASCENDING" },
         { "fieldPath": "month", "order": "ASCENDING" }
       ]
-    },
-    {
-      "collectionGroup": "caches",
-      "queryScope": "COLLECTION",
-      "fields": [
-        { "fieldPath": "createdAt", "order": "ASCENDING" }
-      ]
     }
   ],
   "fieldOverrides": []
