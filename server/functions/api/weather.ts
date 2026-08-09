@@ -12,7 +12,7 @@ const TTL_MS = 3 * 60 * 60 * 1000; // 3 h per location
 export default async function handler(req: Request): Promise<Response> {
   if (req.method !== "GET") return new Response("Method Not Allowed", { status: 405 });
 
-  const url = new URL(req.url);
+  const url = new URL(req.url, "https://internal.silvae.invalid");
   const parsed = Query.safeParse(Object.fromEntries(url.searchParams));
   if (!parsed.success) {
     return Response.json({ error: "invalid_query", issues: parsed.error.issues }, { status: 400 });
