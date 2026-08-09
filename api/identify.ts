@@ -1,4 +1,6 @@
-// Vercel discovers functions from the repository-root `api` directory.
-// Keep the implementation with the server package so it remains testable and
-// reusable outside the Vercel adapter.
-export { default } from "../server/functions/api/identify.js";
+// Vercel function adapter; see `server/functions/api/identify.ts`.
+// Dynamic import keeps this CJS shim from `require()`-ing an ES module.
+export default async function handler(req: Request): Promise<Response> {
+  const impl = (await import("../server/functions/api/identify.js")).default;
+  return impl(req);
+}
