@@ -1,6 +1,6 @@
 // Vercel function adapter; see `server/functions/api/identify.ts`.
-// Dynamic import keeps this CJS shim from `require()`-ing an ES module.
-export default async function handler(req: Request): Promise<Response> {
-  const impl = (await import("../server/functions/api/identify.js")).default;
-  return impl(req);
+// Named-method export uses Vercel's Web `fetch`-style API so the returned
+// `Response` is actually sent (a default export is treated as `(req, res)`).
+export function POST(request: Request): Promise<Response> {
+  return import("../server/functions/api/identify.js").then((m) => m.default(request));
 }
