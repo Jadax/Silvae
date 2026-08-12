@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { addDays } from "@silvae/core";
 import { addPlant } from "../lib/repo";
 import { preparePlantPhoto } from "../lib/photos";
-import { describeIdentifyError, identifyPlant } from "../lib/api";
-import { fileToPayload, matchCatalog, sha256Hex, type MatchedSpecies } from "../lib/identify";
+import { describeIdentifyError } from "../lib/api";
+import { identifyFromFile, type MatchedSpecies } from "../lib/identify";
 import { SPECIES } from "../lib/seed";
 import { useSaveSettings } from "../lib/settings";
 
@@ -64,11 +64,7 @@ export default function AddPlant() {
     setIdError(null);
     setIdMatches([]);
     try {
-      const payload = await fileToPayload(file);
-      if (!payload) throw new Error("encode_failed");
-      const fingerprint = await sha256Hex(payload.bytes);
-      const res = await identifyPlant({ imageFingerprint: fingerprint, base64: payload.base64 });
-      const matches = matchCatalog(res.species ?? []);
+      const { matches } = await identifyFromFile(file);
       setIdMatches(matches);
       const top = matches.find((m) => m.inCatalog) ?? matches[0];
       if (top?.inCatalog && top.slug) {

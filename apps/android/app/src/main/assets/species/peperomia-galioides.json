@@ -1,0 +1,18 @@
+{
+  "slug": "peperomia-galioides",
+  "commonNames": ["Needle leaf peperomia", "Pine peperomia"],
+  "scientificName": "Peperomia galioides",
+  "family": "Piperaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 4000, "luxMax": 12000,
+    "tempMinC": 16, "tempMaxC": 27, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 100,
+    "fertIntervalDays": 30, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 25 }
+}

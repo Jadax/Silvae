@@ -1,0 +1,18 @@
+{
+  "slug": "houttuynia-cordata",
+  "commonNames": ["Chameleon plant", "Fish mint", "Heartleaf houttuynia"],
+  "scientificName": "Houttuynia cordata",
+  "family": "Saururaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 3000, "luxIdeal": 8000, "luxMax": 25000,
+    "tempMinC": 10, "tempMaxC": 28, "humidityMin": 55, "humidityMax": 80,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 2, "waterAmountMl": 200,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "FAST", "maxHeightCm": 45 }
+}

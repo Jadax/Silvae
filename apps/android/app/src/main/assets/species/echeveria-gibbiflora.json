@@ -1,0 +1,18 @@
+{
+  "slug": "echeveria-gibbiflora",
+  "commonNames": ["Dusty rose", "Wax rosette", "Echeveria"],
+  "scientificName": "Echeveria gibbiflora",
+  "family": "Crassulaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 10000, "luxIdeal": 25000, "luxMax": 60000,
+    "tempMinC": 8, "tempMaxC": 30, "humidityMin": 25, "humidityMax": 45,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 6, "waterAmountMl": 100,
+    "fertIntervalDays": 30, "mistIntervalDays": 7,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "LOW", "cold": "MED" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 45 }
+}

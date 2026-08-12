@@ -1,0 +1,18 @@
+{
+  "slug": "sedum-morganianum",
+  "commonNames": ["Burro's tail", "Donkey tail"],
+  "scientificName": "Sedum morganianum",
+  "family": "Crassulaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 8000, "luxMax": 30000,
+    "tempMinC": 5, "tempMaxC": 27, "humidityMin": 10, "humidityMax": 40,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 10, "waterAmountMl": 60,
+    "fertIntervalDays": 30, "mistIntervalDays": 0,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 60
+  },
+  "tolerance": { "drought": "HIGH", "shade": "LOW", "cold": "MED" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 90 }
+}

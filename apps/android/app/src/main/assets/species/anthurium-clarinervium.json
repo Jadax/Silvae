@@ -1,0 +1,18 @@
+{
+  "slug": "anthurium-clarinervium",
+  "commonNames": ["Velvet anthurium"],
+  "scientificName": "Anthurium clarinervium",
+  "family": "Araceae",
+  "toxicity": { "pets": true, "note": "Calcium oxalate crystals" },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 2000, "luxMax": 10000,
+    "tempMinC": 18, "tempMaxC": 28, "humidityMin": 70, "humidityMax": 85,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 2, "p": 1, "k": 1 },
+    "waterIntervalDays": 6, "waterAmountMl": 200,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 60 }
+}

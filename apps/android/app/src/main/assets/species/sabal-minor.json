@@ -1,0 +1,18 @@
+{
+  "slug": "sabal-minor",
+  "commonNames": ["Dwarf palmetto", "Bluestem palmetto", "Bush palmetto"],
+  "scientificName": "Sabal minor",
+  "family": "Arecaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 3000, "luxIdeal": 8000, "luxMax": 25000,
+    "tempMinC": -10, "tempMaxC": 30, "humidityMin": 40, "humidityMax": 65,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 150,
+    "fertIntervalDays": 30, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 90 }
+}

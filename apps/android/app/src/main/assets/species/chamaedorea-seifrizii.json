@@ -1,0 +1,18 @@
+{
+  "slug": "chamaedorea-seifrizii",
+  "commonNames": ["Bamboo palm", "Reed palm", "Seifriz's chamaedorea"],
+  "scientificName": "Chamaedorea seifrizii",
+  "family": "Arecaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 5000, "luxMax": 15000,
+    "tempMinC": 15, "tempMaxC": 28, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 200,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 150 }
+}

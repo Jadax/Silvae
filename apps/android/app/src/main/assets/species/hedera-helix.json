@@ -1,0 +1,18 @@
+{
+  "slug": "hedera-helix",
+  "commonNames": ["English ivy"],
+  "scientificName": "Hedera helix",
+  "family": "Araliaceae",
+  "toxicity": { "pets": true, "note": "Saponins and foliage irritants" },
+  "ideal": {
+    "luxMin": 500, "luxIdeal": 1500, "luxMax": 15000,
+    "tempMinC": 5, "tempMaxC": 24, "humidityMin": 40, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 6, "waterAmountMl": 200,
+    "fertIntervalDays": 21, "mistIntervalDays": 5,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "HIGH", "cold": "HIGH" },
+  "growth": { "rate": "FAST", "maxHeightCm": 200 }
+}

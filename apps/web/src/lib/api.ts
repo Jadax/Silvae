@@ -3,6 +3,7 @@
  * Mirrors `packages/api/src/client.d.ts` (generated from openapi.yaml) without
  * pulling a types-only workspace package into the web bundle.
  */
+import { auth } from "./firebase";
 
 export interface IdentifyRequest {
   /** sha256 of the downscaled image bytes — dedupes repeats via the server cache. */
@@ -52,9 +53,13 @@ export async function identifyPlant(
   body: IdentifyRequest,
   base = "/api",
 ): Promise<IdentifyResponse> {
+  const idToken = await auth?.currentUser?.getIdToken();
   const res = await fetch(`${base}/identify`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      ...(idToken ? { Authorization: `Bearer ${idToken}` } : {}),
+    },
     body: JSON.stringify(body),
   });
 
@@ -85,6 +90,8 @@ export function describeIdentifyError(err: unknown): string {
         return "No usable image was sent. Pick a photo and try again.";
       case "invalid_body":
         return "The request was malformed. Try again.";
+      case "unauthorized":
+        return "Sign-in expired. Refresh the page and try again.";
       default:
         return err.status === 429
           ? "Too many requests. Try again in a minute."

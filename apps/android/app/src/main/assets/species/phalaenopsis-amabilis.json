@@ -1,0 +1,18 @@
+{
+  "slug": "phalaenopsis-amabilis",
+  "commonNames": ["Moth orchid", "Phalaenopsis"],
+  "scientificName": "Phalaenopsis amabilis",
+  "family": "Orchidaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 700, "luxIdeal": 2000, "luxMax": 12000,
+    "tempMinC": 18, "tempMaxC": 29, "humidityMin": 50, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 3, "p": 2, "k": 3 },
+    "waterIntervalDays": 8, "waterAmountMl": 100,
+    "fertIntervalDays": 14, "mistIntervalDays": 5,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 60 }
+}

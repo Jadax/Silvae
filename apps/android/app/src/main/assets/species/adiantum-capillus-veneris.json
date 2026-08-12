@@ -1,0 +1,18 @@
+{
+  "slug": "adiantum-capillus-veneris",
+  "commonNames": ["Southern maidenhair fern", "Venus hair fern"],
+  "scientificName": "Adiantum capillus-veneris",
+  "family": "Pteridaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 700, "luxIdeal": 2000, "luxMax": 10000,
+    "tempMinC": 16, "tempMaxC": 27, "humidityMin": 60, "humidityMax": 90,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 3, "waterAmountMl": 200,
+    "fertIntervalDays": 21, "mistIntervalDays": 1,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 45 }
+}

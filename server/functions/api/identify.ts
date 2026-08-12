@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { admin } from "../lib/firebase.js";
+import { admin, requireUid, AuthError } from "../lib/firebase.js";
 
 const Body = z.object({
   imageFingerprint: z.string().min(8),
@@ -139,6 +139,15 @@ async function tryPlantNet(base64: string, latitude?: number, longitude?: number
 
 export default async function handler(req: Request): Promise<Response> {
   if (req.method !== "POST") return new Response("Method Not Allowed", { status: 405 });
+
+  // Plant.id/PlantNet quota is a shared, cost-sensitive pool (blueprint D-4) —
+  // require a real account so an anonymous script can't drain the daily budget.
+  try {
+    await requireUid(req);
+  } catch (err) {
+    if (err instanceof AuthError) return Response.json({ error: "unauthorized" }, { status: 401 });
+    throw err;
+  }
 
   const parsed = Body.safeParse(await req.json());
   if (!parsed.success) {

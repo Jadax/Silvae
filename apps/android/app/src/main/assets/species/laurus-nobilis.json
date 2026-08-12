@@ -1,0 +1,18 @@
+{
+  "slug": "laurus-nobilis",
+  "commonNames": ["Bay laurel", "Sweet bay"],
+  "scientificName": "Laurus nobilis",
+  "family": "Lauraceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 6000, "luxMax": 30000,
+    "tempMinC": 5, "tempMaxC": 27, "humidityMin": 30, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 300,
+    "fertIntervalDays": 21, "mistIntervalDays": 5,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 250 }
+}

@@ -43,10 +43,10 @@ service cloud.firestore {
       allow create: if isCreator('uid');
     }
 
-    // Care events: compact, offline-synced (17.1). Owner read/write; shared
-    // caregivers may append to shared plants.
+    // Care events: compact, offline-synced (17.1). Owner-scoped — this is
+    // per-plant care history, not public; do not widen to blanket signedIn().
     match /care_events/{eventId} {
-      allow read: if signedIn();
+      allow read: if isOwner('uid');
       allow create: if isCreator('uid');
       allow update, delete: if isOwner('uid');
     }
@@ -63,10 +63,12 @@ service cloud.firestore {
       allow create: if isCreator('uid');
     }
 
-    // Rollups (summary_stats/{plantId_month}): app reads own plant stats.
+    // Rollups (summary_stats/{plantId_month}): server-maintained only (17.1,
+    // 13.1) — client writes would let anyone tamper with stats or fake quota
+    // usage. The admin SDK bypasses these rules for the cron/API writer.
     match /summary_stats/{plantId_month} {
       allow read: if signedIn();
-      allow write: if signedIn();
+      allow write: if false;
     }
 
     // caches/{key}: any signed-in user may read; writes happen via the server
@@ -76,10 +78,14 @@ service cloud.firestore {
       allow read, write: if signedIn();
     }
 
-    // Share links (S-5/S-6): creator + holder.
+    // Share links (S-5/S-6): any signed-in user may read/create (an invitee
+    // isn't the creator yet), but only the creator may delete — and no
+    // generic update, so a link can't be hijacked to point at a different
+    // plant or invitee after creation.
     match /share_links/{token} {
       allow read: if signedIn();
-      allow write: if signedIn();
+      allow create: if isCreator('createdBy');
+      allow delete: if isOwner('createdBy');
     }
   }
 }

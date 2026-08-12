@@ -1,0 +1,18 @@
+{
+  "slug": "selaginella-uncinata",
+  "commonNames": ["Peacock moss", "Blue spikemoss"],
+  "scientificName": "Selaginella uncinata",
+  "family": "Selaginellaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 600, "luxIdeal": 1500, "luxMax": 8000,
+    "tempMinC": 15, "tempMaxC": 24, "humidityMin": 70, "humidityMax": 90,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 2, "waterAmountMl": 150,
+    "fertIntervalDays": 30, "mistIntervalDays": 1,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 15 }
+}

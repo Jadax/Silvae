@@ -1,0 +1,18 @@
+{
+  "slug": "dodonaea-viscosa",
+  "commonNames": ["Hop bush", "Sand olive", "Sticky hopbush"],
+  "scientificName": "Dodonaea viscosa",
+  "family": "Sapindaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 10000, "luxIdeal": 25000, "luxMax": 60000,
+    "tempMinC": 5, "tempMaxC": 32, "humidityMin": 30, "humidityMax": 55,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 200,
+    "fertIntervalDays": 30, "mistIntervalDays": 3,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "FAST", "maxHeightCm": 400 }
+}

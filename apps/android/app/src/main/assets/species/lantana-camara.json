@@ -1,0 +1,18 @@
+{
+  "slug": "lantana-camara",
+  "commonNames": ["Lantana", "Common lantana", "Shrub verbena"],
+  "scientificName": "Lantana camara",
+  "family": "Verbenaceae",
+  "toxicity": { "pets": true, "note": "Unripe berries and leaves are toxic to pets and livestock if ingested." },
+  "ideal": {
+    "luxMin": 10000, "luxIdeal": 25000, "luxMax": 60000,
+    "tempMinC": 10, "tempMaxC": 32, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 200,
+    "fertIntervalDays": 21, "mistIntervalDays": 3,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 120 }
+}

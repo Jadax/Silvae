@@ -1,0 +1,18 @@
+{
+  "slug": "tradescantia-zebrina",
+  "commonNames": ["Wandering dude", "Inch plant"],
+  "scientificName": "Tradescantia zebrina",
+  "family": "Commelinaceae",
+  "toxicity": { "pets": true, "note": "Skin and mouth irritant" },
+  "ideal": {
+    "luxMin": 700, "luxIdeal": 2500, "luxMax": 20000,
+    "tempMinC": 10, "tempMaxC": 29, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 6, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 0,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 14
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "MED" },
+  "growth": { "rate": "FAST", "maxHeightCm": 60 }
+}

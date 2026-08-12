@@ -1,0 +1,18 @@
+{
+  "slug": "opuntia-ficus-indica",
+  "commonNames": ["Prickly pear", "Barbary fig", "Indian fig opuntia"],
+  "scientificName": "Opuntia ficus-indica",
+  "family": "Cactaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 15000, "luxIdeal": 40000, "luxMax": 90000,
+    "tempMinC": 5, "tempMaxC": 38, "humidityMin": 20, "humidityMax": 45,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 10, "waterAmountMl": 150,
+    "fertIntervalDays": 30, "mistIntervalDays": 7,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "LOW", "cold": "MED" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 300 }
+}

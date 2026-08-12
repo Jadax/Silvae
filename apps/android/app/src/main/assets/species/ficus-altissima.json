@@ -1,0 +1,18 @@
+{
+  "slug": "ficus-altissima",
+  "commonNames": ["Lofty fig", "Yellow gem"],
+  "scientificName": "Ficus altissima",
+  "family": "Moraceae",
+  "toxicity": { "pets": true, "note": "Milky sap may irritate" },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 4000, "luxMax": 25000,
+    "tempMinC": 18, "tempMaxC": 29, "humidityMin": 40, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 300,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 300 }
+}

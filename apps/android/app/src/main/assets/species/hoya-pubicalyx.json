@@ -1,0 +1,18 @@
+{
+  "slug": "hoya-pubicalyx",
+  "commonNames": ["Wax plant", "Porcelain flower"],
+  "scientificName": "Hoya pubicalyx",
+  "family": "Apocynaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 3000, "luxMax": 15000,
+    "tempMinC": 18, "tempMaxC": 28, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 9, "waterAmountMl": 200,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 300 }
+}

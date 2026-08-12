@@ -1,0 +1,18 @@
+{
+  "slug": "euphorbia-lactea",
+  "commonNames": ["Candelabra cactus", "Mottled spurge"],
+  "scientificName": "Euphorbia lactea",
+  "family": "Euphorbiaceae",
+  "toxicity": { "pets": true, "note": "Milky sap is toxic and irritates skin" },
+  "ideal": {
+    "luxMin": 4000, "luxIdeal": 10000, "luxMax": 40000,
+    "tempMinC": 18, "tempMaxC": 30, "humidityMin": 20, "humidityMax": 40,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 2 },
+    "waterIntervalDays": 14, "waterAmountMl": 150,
+    "fertIntervalDays": 30, "mistIntervalDays": 0,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "LOW", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 200 }
+}

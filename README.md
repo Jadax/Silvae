@@ -1,6 +1,6 @@
 # Silvae 🌱
 
-Free‑forever plant care platform: web PWA (reference implementation) + native Android. Local‑first, AI on‑device, no credit card, no paid tiers — ever.
+Free‑forever plant care platform: web PWA (reference implementation) + native Android. A free account is required to keep your plants and care history safe — AI runs on‑device, no credit card, no paid tiers, ever.
 
 ## Stack (all free tier, see §6 of the blueprint)
 
@@ -28,6 +28,7 @@ docs/             this blueprint, CONTENT.md, SECURITY.md
 
 ```bash
 pnpm install
+cp .env.example apps/web/.env.local   # fill in VITE_FIREBASE_CONFIG — required, accounts are mandatory
 pnpm dev          # apps/web at http://localhost:5173
 ```
 

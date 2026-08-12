@@ -1,0 +1,18 @@
+{
+  "slug": "zantedeschia-aethiopica",
+  "commonNames": ["Calla lily", "Arum lily"],
+  "scientificName": "Zantedeschia aethiopica",
+  "family": "Araceae",
+  "toxicity": { "pets": true, "note": "Calcium oxalate crystals" },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 5000, "luxMax": 20000,
+    "tempMinC": 16, "tempMaxC": 24, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 4, "waterAmountMl": 250,
+    "fertIntervalDays": 14, "mistIntervalDays": 3,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 90 }
+}

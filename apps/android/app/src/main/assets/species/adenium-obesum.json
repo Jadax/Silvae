@@ -1,0 +1,18 @@
+{
+  "slug": "adenium-obesum",
+  "commonNames": ["Desert rose"],
+  "scientificName": "Adenium obesum",
+  "family": "Apocynaceae",
+  "toxicity": { "pets": true, "note": "Sap is toxic; wear gloves when pruning" },
+  "ideal": {
+    "luxMin": 6000, "luxIdeal": 12000, "luxMax": 40000,
+    "tempMinC": 20, "tempMaxC": 32, "humidityMin": 20, "humidityMax": 40,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 10, "waterAmountMl": 250,
+    "fertIntervalDays": 14, "mistIntervalDays": 0,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "LOW", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 150 }
+}

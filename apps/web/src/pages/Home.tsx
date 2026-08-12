@@ -3,18 +3,14 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { recentCareEvents, listPlants, logCareEvent, savePlant } from "../lib/repo";
 import { speciesBySlug } from "../lib/seed";
-import { applyStillMoist, applyWater, envForPlant } from "../lib/care";
+import { applyStillMoist, applyWater, envForPlant, waterStatusLabel } from "../lib/care";
 import { usePlace, useSettings } from "../lib/settings";
 import { useWeather } from "../hooks/useWeather";
 import { seasonForMonth } from "../lib/weather";
 import type { CareEventRow, PlantRow } from "../lib/db";
 
 function waterStatus(plant: PlantRow) {
-  if (!plant.nextWaterAt) return { label: "Schedule pending", tone: "neutral", days: undefined };
-  const days = Math.ceil((new Date(plant.nextWaterAt).getTime() - Date.now()) / 86400000);
-  if (days <= 0) return { label: "Water today", tone: "due", days: 0 };
-  if (days === 1) return { label: "Water tomorrow", tone: "soon", days };
-  return { label: `Water in ${days} days`, tone: "happy", days };
+  return waterStatusLabel(plant.nextWaterAt);
 }
 
 export function PlantCard({ plant }: { plant: PlantRow }) {

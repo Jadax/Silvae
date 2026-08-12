@@ -1,0 +1,18 @@
+{
+  "slug": "plumeria-alba",
+  "commonNames": ["White frangipani", "Nosegay tree", "White plumeria"],
+  "scientificName": "Plumeria alba",
+  "family": "Apocynaceae",
+  "toxicity": { "pets": true, "note": "Milky sap is a skin irritant and toxic to pets if ingested." },
+  "ideal": {
+    "luxMin": 10000, "luxIdeal": 25000, "luxMax": 60000,
+    "tempMinC": 15, "tempMaxC": 32, "humidityMin": 40, "humidityMax": 65,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 400 }
+}

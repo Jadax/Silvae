@@ -1,0 +1,18 @@
+{
+  "slug": "musa-basjoo",
+  "commonNames": ["Hardy banana", "Japanese fibre banana", "Basjoo"],
+  "scientificName": "Musa basjoo",
+  "family": "Musaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 60000,
+    "tempMinC": 10, "tempMaxC": 30, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 2 },
+    "waterIntervalDays": 3, "waterAmountMl": 250,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "MED" },
+  "growth": { "rate": "FAST", "maxHeightCm": 250 }
+}

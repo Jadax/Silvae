@@ -1,0 +1,18 @@
+{
+  "slug": "philodendron-erubescens",
+  "commonNames": ["Blushing philodendron", "Red-leaf philodendron", "Imperial red philodendron"],
+  "scientificName": "Philodendron erubescens",
+  "family": "Araceae",
+  "toxicity": { "pets": true, "note": "Leaves contain insoluble calcium oxalates; toxic to pets if ingested." },
+  "ideal": {
+    "luxMin": 3000, "luxIdeal": 8000, "luxMax": 20000,
+    "tempMinC": 16, "tempMaxC": 28, "humidityMin": 55, "humidityMax": 75,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 150,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 250 }
+}

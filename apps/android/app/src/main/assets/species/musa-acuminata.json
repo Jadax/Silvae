@@ -1,0 +1,18 @@
+{
+  "slug": "musa-acuminata",
+  "commonNames": ["Dwarf banana", "Cavendish banana"],
+  "scientificName": "Musa acuminata",
+  "family": "Musaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 12000, "luxMax": 50000,
+    "tempMinC": 18, "tempMaxC": 30, "humidityMin": 60, "humidityMax": 85,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 4, "p": 1, "k": 3 },
+    "waterIntervalDays": 4, "waterAmountMl": 500,
+    "fertIntervalDays": 7, "mistIntervalDays": 3,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "LOW", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 200 }
+}

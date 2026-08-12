@@ -92,6 +92,17 @@ const addDays = (date: Date, days: number): Date => {
   return out;
 };
 
+export type WaterTone = "neutral" | "due" | "soon" | "happy";
+
+/** Friendly "water today / tomorrow / in N days" label shared by Home and PlantDetail. */
+export function waterStatusLabel(nextWaterAt: string | Date | undefined): { label: string; tone: WaterTone; days?: number } {
+  if (!nextWaterAt) return { label: "Schedule pending", tone: "neutral" };
+  const days = Math.ceil((new Date(nextWaterAt).getTime() - Date.now()) / DAY);
+  if (days <= 0) return { label: "Water today", tone: "due", days: 0 };
+  if (days === 1) return { label: "Water tomorrow", tone: "soon", days };
+  return { label: `Water in ${days} days`, tone: "happy", days };
+}
+
 export type CareKind = "water" | "fertilize" | "mist";
 
 /** How many days until the next task of a kind, based on its last event. */

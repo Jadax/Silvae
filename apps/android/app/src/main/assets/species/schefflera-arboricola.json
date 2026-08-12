@@ -1,0 +1,18 @@
+{
+  "slug": "schefflera-arboricola",
+  "commonNames": ["Dwarf umbrella tree", "Schefflera"],
+  "scientificName": "Schefflera arboricola",
+  "family": "Araliaceae",
+  "toxicity": { "pets": true, "note": "Calcium oxalate crystals" },
+  "ideal": {
+    "luxMin": 700, "luxIdeal": 2500, "luxMax": 20000,
+    "tempMinC": 13, "tempMaxC": 29, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 8, "waterAmountMl": 300,
+    "fertIntervalDays": 21, "mistIntervalDays": 7,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 300 }
+}

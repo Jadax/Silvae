@@ -1,0 +1,18 @@
+{
+  "slug": "ensete-ventricosum",
+  "commonNames": ["Red Abyssinian banana", "Ensete", "False banana"],
+  "scientificName": "Ensete ventricosum",
+  "family": "Musaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 50000,
+    "tempMinC": 15, "tempMaxC": 30, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 2 },
+    "waterIntervalDays": 3, "waterAmountMl": 250,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 300 }
+}

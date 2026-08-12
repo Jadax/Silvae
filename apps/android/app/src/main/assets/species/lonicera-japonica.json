@@ -1,0 +1,18 @@
+{
+  "slug": "lonicera-japonica",
+  "commonNames": ["Japanese honeysuckle", "Gold-and-silver flower", "Honeysuckle"],
+  "scientificName": "Lonicera japonica",
+  "family": "Caprifoliaceae",
+  "toxicity": { "pets": true, "note": "Berries can cause GI upset in pets if ingested in quantity." },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 50000,
+    "tempMinC": 5, "tempMaxC": 30, "humidityMin": 45, "humidityMax": 65,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 250,
+    "fertIntervalDays": 21, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "FAST", "maxHeightCm": 500 }
+}

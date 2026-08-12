@@ -1,0 +1,18 @@
+{
+  "slug": "ficus-microcarpa",
+  "commonNames": ["Ginseng ficus", "Banyan fig"],
+  "scientificName": "Ficus microcarpa",
+  "family": "Moraceae",
+  "toxicity": { "pets": true, "note": "Milky sap may irritate" },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 4000, "luxMax": 25000,
+    "tempMinC": 16, "tempMaxC": 27, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 8, "waterAmountMl": 250,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 100 }
+}

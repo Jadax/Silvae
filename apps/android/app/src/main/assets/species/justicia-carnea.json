@@ -1,0 +1,18 @@
+{
+  "slug": "justicia-carnea",
+  "commonNames": ["Brazilian plume", "Flamingo flower", "Jacobinia"],
+  "scientificName": "Justicia carnea",
+  "family": "Acanthaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 3000, "luxIdeal": 8000, "luxMax": 25000,
+    "tempMinC": 15, "tempMaxC": 28, "humidityMin": 55, "humidityMax": 75,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 150 }
+}

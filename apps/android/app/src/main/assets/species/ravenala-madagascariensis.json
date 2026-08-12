@@ -1,0 +1,18 @@
+{
+  "slug": "ravenala-madagascariensis",
+  "commonNames": ["Traveler's palm", "Traveler's tree"],
+  "scientificName": "Ravenala madagascariensis",
+  "family": "Strelitziaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 60000,
+    "tempMinC": 16, "tempMaxC": 32, "humidityMin": 50, "humidityMax": 75,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 250,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "LOW", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 400 }
+}

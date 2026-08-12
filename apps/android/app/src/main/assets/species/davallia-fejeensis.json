@@ -1,0 +1,18 @@
+{
+  "slug": "davallia-fejeensis",
+  "commonNames": ["Rabbit's foot fern"],
+  "scientificName": "Davallia fejeensis",
+  "family": "Polypodiaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 3000, "luxMax": 12000,
+    "tempMinC": 16, "tempMaxC": 27, "humidityMin": 60, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 5, "waterAmountMl": 200,
+    "fertIntervalDays": 21, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 60 }
+}

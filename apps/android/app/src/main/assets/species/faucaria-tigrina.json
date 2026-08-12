@@ -1,0 +1,18 @@
+{
+  "slug": "faucaria-tigrina",
+  "commonNames": ["Tiger's jaw", "Tiger jaws"],
+  "scientificName": "Faucaria tigrina",
+  "family": "Aizoaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 10000, "luxIdeal": 25000, "luxMax": 50000,
+    "tempMinC": 10, "tempMaxC": 30, "humidityMin": 30, "humidityMax": 50,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 10, "waterAmountMl": 50,
+    "fertIntervalDays": 30, "mistIntervalDays": 7,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "LOW", "cold": "MED" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 10 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "portulaca-grandiflora",
+  "commonNames": ["Moss rose", "Rose moss", "Sun plant"],
+  "scientificName": "Portulaca grandiflora",
+  "family": "Portulacaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 15000, "luxIdeal": 40000, "luxMax": 90000,
+    "tempMinC": 13, "tempMaxC": 35, "humidityMin": 30, "humidityMax": 50,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 5, "waterAmountMl": 100,
+    "fertIntervalDays": 30, "mistIntervalDays": 5,
+    "repotIntervalMonths": 12, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "LOW", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 20 }
+}

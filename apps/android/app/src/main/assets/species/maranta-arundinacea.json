@@ -1,0 +1,18 @@
+{
+  "slug": "maranta-arundinacea",
+  "commonNames": ["Arrowroot", "West Indian arrowroot", "Maranta"],
+  "scientificName": "Maranta arundinacea",
+  "family": "Marantaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 5000, "luxMax": 12000,
+    "tempMinC": 16, "tempMaxC": 28, "humidityMin": 60, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 3, "waterAmountMl": 150,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 14
+  },
+  "tolerance": { "drought": "LOW", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 90 }
+}

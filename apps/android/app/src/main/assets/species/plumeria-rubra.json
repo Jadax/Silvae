@@ -1,0 +1,18 @@
+{
+  "slug": "plumeria-rubra",
+  "commonNames": ["Frangipani", "Plumeria"],
+  "scientificName": "Plumeria rubra",
+  "family": "Apocynaceae",
+  "toxicity": { "pets": true, "note": "Milky sap is toxic and irritates skin" },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 50000,
+    "tempMinC": 18, "tempMaxC": 30, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.5, "phMax": 7.0,
+    "npk": { "n": 4, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 400,
+    "fertIntervalDays": 14, "mistIntervalDays": 0,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "LOW", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 300 }
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Tinted by the system on Android 13+ themed-icon launchers; fill color is ignored. -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,22 C72,31 83,45 83,58 C83,78 68,90 54,90 C40,90 25,78 25,58 C25,45 36,31 54,22 Z" />
+</vector>

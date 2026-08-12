@@ -39,7 +39,7 @@ export default function Discover() {
   return (
     <>
       <h1>Discover</h1>
-      <p className="muted">Browse the full species library. No account needed.</p>
+      <p className="muted">Browse the full species library.</p>
 
       {place && (
         <section className="card area-panel">
@@ -104,7 +104,7 @@ export default function Discover() {
         )}
       </div>
       {petsOn && petSafe && <p className="muted">We've hidden the plants that are risky for your pets. You can turn the filter off anytime.</p>}
-      {!place && <p className="muted">Tip: <Link to="/setup">set your location</Link> to see which species fit your area.</p>}
+      {!place && <p className="muted">Tip: <Link to="/account">set your location</Link> to see which species fit your area.</p>}
       <table style={{ marginTop: "1rem" }}>
         <thead>
           <tr>

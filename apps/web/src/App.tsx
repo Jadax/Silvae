@@ -9,6 +9,7 @@ const AddPlant = lazy(() => import("./pages/AddPlant"));
 const Account = lazy(() => import("./pages/Account"));
 const Doctor = lazy(() => import("./pages/Doctor"));
 const Onboarding = lazy(() => import("./pages/Onboarding"));
+const Welcome = lazy(() => import("./pages/Welcome"));
 import { useAuth } from "./lib/auth";
 
 const THEME_KEY = "silvae-theme";
@@ -45,12 +46,48 @@ export default function App() {
     const saved = localStorage.getItem(THEME_KEY);
     return saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
-  useAuth();
+  const { status } = useAuth();
 
   useEffect(() => {
     document.documentElement.dataset.theme = dark ? "dark" : "light";
     localStorage.setItem(THEME_KEY, dark ? "dark" : "light");
   }, [dark]);
+
+  if (status === "loading") {
+    return (
+      <div className="auth-loading">
+        <p>Loading…</p>
+      </div>
+    );
+  }
+
+  if (status === "unconfigured") {
+    return (
+      <div className="auth-page">
+        <div className="auth-brand">
+          <span className="brand-mark" aria-hidden><LeafIcon /></span>
+          <strong>Silvae</strong>
+          <small>Grow happy, free forever</small>
+        </div>
+        <section className="card auth-card">
+          <span className="eyebrow">Setup needed</span>
+          <h1>Accounts aren't configured yet</h1>
+          <p className="muted">
+            Silvae needs a Firebase project to create accounts. Set <code>VITE_FIREBASE_CONFIG</code> at
+            build time (see <code>.env.example</code>) and reload.
+          </p>
+        </section>
+      </div>
+    );
+  }
+
+  if (status === "signed-out") {
+    return (
+      <Suspense fallback={<div className="auth-loading"><p>Loading…</p></div>}>
+        <Welcome />
+      </Suspense>
+    );
+  }
 
   return (
     <div className="app">

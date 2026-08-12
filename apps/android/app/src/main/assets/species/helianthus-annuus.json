@@ -1,0 +1,18 @@
+{
+  "slug": "helianthus-annuus",
+  "commonNames": ["Common sunflower", "Sunflower"],
+  "scientificName": "Helianthus annuus",
+  "family": "Asteraceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 15000, "luxIdeal": 40000, "luxMax": 90000,
+    "tempMinC": 10, "tempMaxC": 32, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 2, "waterAmountMl": 300,
+    "fertIntervalDays": 14, "mistIntervalDays": 3,
+    "repotIntervalMonths": 12, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "LOW", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 300 }
+}

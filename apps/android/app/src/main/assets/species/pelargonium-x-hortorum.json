@@ -1,0 +1,18 @@
+{
+  "slug": "pelargonium-x-hortorum",
+  "commonNames": ["Zonal geranium"],
+  "scientificName": "Pelargonium × hortorum",
+  "family": "Geraniaceae",
+  "toxicity": { "pets": true, "note": "Geraniol and linalool; mild stomach upset" },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 8000, "luxMax": 40000,
+    "tempMinC": 10, "tempMaxC": 27, "humidityMin": 30, "humidityMax": 50,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 5, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 0,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 14
+  },
+  "tolerance": { "drought": "MED", "shade": "LOW", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 60 }
+}

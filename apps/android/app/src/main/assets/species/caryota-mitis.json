@@ -1,0 +1,18 @@
+{
+  "slug": "caryota-mitis",
+  "commonNames": ["Fishtail palm", "Clustering fishtail palm", "Mitis palm"],
+  "scientificName": "Caryota mitis",
+  "family": "Arecaceae",
+  "toxicity": { "pets": true, "note": "Fruits contain needle-like oxalate crystals; toxic to pets if ingested." },
+  "ideal": {
+    "luxMin": 3000, "luxIdeal": 8000, "luxMax": 20000,
+    "tempMinC": 15, "tempMaxC": 30, "humidityMin": 55, "humidityMax": 75,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 250,
+    "fertIntervalDays": 30, "mistIntervalDays": 2,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 400 }
+}

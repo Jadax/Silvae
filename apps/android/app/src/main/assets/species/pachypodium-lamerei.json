@@ -1,0 +1,18 @@
+{
+  "slug": "pachypodium-lamerei",
+  "commonNames": ["Madagascar palm"],
+  "scientificName": "Pachypodium lamerei",
+  "family": "Apocynaceae",
+  "toxicity": { "pets": true, "note": "Milky sap and spines; toxic if ingested" },
+  "ideal": {
+    "luxMin": 6000, "luxIdeal": 15000, "luxMax": 40000,
+    "tempMinC": 18, "tempMaxC": 30, "humidityMin": 20, "humidityMax": 40,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 10, "waterAmountMl": 250,
+    "fertIntervalDays": 21, "mistIntervalDays": 0,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "LOW", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 300 }
+}

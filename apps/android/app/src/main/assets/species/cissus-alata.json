@@ -1,0 +1,18 @@
+{
+  "slug": "cissus-alata",
+  "commonNames": ["Grape ivy", "Venezuela treebine"],
+  "scientificName": "Cissus alata",
+  "family": "Vitaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 5000, "luxMax": 15000,
+    "tempMinC": 15, "tempMaxC": 28, "humidityMin": 45, "humidityMax": 70,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 150,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 200 }
+}

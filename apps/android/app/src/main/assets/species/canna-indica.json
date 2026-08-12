@@ -1,0 +1,18 @@
+{
+  "slug": "canna-indica",
+  "commonNames": ["Canna lily", "Indian shot"],
+  "scientificName": "Canna indica",
+  "family": "Cannaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 10000, "luxIdeal": 30000, "luxMax": 60000,
+    "tempMinC": 15, "tempMaxC": 30, "humidityMin": 40, "humidityMax": 65,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "LOW", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 200 }
+}

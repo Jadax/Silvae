@@ -1,0 +1,18 @@
+{
+  "slug": "asparagus-densiflorus",
+  "commonNames": ["Asparagus fern", "Foxtail fern"],
+  "scientificName": "Asparagus densiflorus",
+  "family": "Asparagaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 4000, "luxMax": 20000,
+    "tempMinC": 15, "tempMaxC": 27, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 250,
+    "fertIntervalDays": 21, "mistIntervalDays": 3,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 60 }
+}

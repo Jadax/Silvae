@@ -1,0 +1,18 @@
+{
+  "slug": "selaginella-lepidophylla",
+  "commonNames": ["Resurrection plant", "Rose of Jericho", "Dinosaur plant"],
+  "scientificName": "Selaginella lepidophylla",
+  "family": "Selaginellaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 5000, "luxMax": 15000,
+    "tempMinC": 10, "tempMaxC": 30, "humidityMin": 40, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 5, "waterAmountMl": 100,
+    "fertIntervalDays": 30, "mistIntervalDays": 2,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 15 }
+}

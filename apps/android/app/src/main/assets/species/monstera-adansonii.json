@@ -1,0 +1,18 @@
+{
+  "slug": "monstera-adansonii",
+  "commonNames": ["Swiss cheese vine", "Monkey mask plant"],
+  "scientificName": "Monstera adansonii",
+  "family": "Araceae",
+  "toxicity": { "pets": true, "note": "Calcium oxalate crystals" },
+  "ideal": {
+    "luxMin": 700, "luxIdeal": 2000, "luxMax": 15000,
+    "tempMinC": 18, "tempMaxC": 30, "humidityMin": 50, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 7.0,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 6, "waterAmountMl": 300,
+    "fertIntervalDays": 14, "mistIntervalDays": 5,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 300 }
+}

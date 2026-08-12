@@ -1,0 +1,18 @@
+{
+  "slug": "nertera-granadensis",
+  "commonNames": ["Coral moss", "Bead plant", "Coral bead plant"],
+  "scientificName": "Nertera granadensis",
+  "family": "Rubiaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 5000, "luxMax": 15000,
+    "tempMinC": 10, "tempMaxC": 24, "humidityMin": 60, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 2, "waterAmountMl": 100,
+    "fertIntervalDays": 30, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 15 }
+}

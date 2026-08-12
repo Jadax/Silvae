@@ -1,0 +1,18 @@
+{
+  "slug": "soleirolia-soleirolii",
+  "commonNames": ["Baby's tears", "Mind-your-own-business"],
+  "scientificName": "Soleirolia soleirolii",
+  "family": "Urticaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 3000, "luxMax": 10000,
+    "tempMinC": 15, "tempMaxC": 26, "humidityMin": 60, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 2, "waterAmountMl": 100,
+    "fertIntervalDays": 30, "mistIntervalDays": 1,
+    "repotIntervalMonths": 12, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 10 }
+}

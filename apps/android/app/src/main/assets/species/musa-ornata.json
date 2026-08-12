@@ -1,0 +1,18 @@
+{
+  "slug": "musa-ornata",
+  "commonNames": ["Flowering banana", "Ornamental banana", "Bronze banana"],
+  "scientificName": "Musa ornata",
+  "family": "Musaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 10000, "luxIdeal": 25000, "luxMax": 60000,
+    "tempMinC": 15, "tempMaxC": 32, "humidityMin": 55, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 2, "waterAmountMl": 300,
+    "fertIntervalDays": 14, "mistIntervalDays": 1,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 250 }
+}

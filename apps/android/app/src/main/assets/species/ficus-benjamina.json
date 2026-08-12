@@ -1,0 +1,18 @@
+{
+  "slug": "ficus-benjamina",
+  "commonNames": ["Weeping fig"],
+  "scientificName": "Ficus benjamina",
+  "family": "Moraceae",
+  "toxicity": { "pets": true, "note": "Milky sap is an irritant" },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 4000, "luxMax": 25000,
+    "tempMinC": 15, "tempMaxC": 29, "humidityMin": 40, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 6, "waterAmountMl": 400,
+    "fertIntervalDays": 21, "mistIntervalDays": 7,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 14
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 250 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "scindapsus-pictus",
+  "commonNames": ["Satin pothos", "Silver pothos"],
+  "scientificName": "Scindapsus pictus",
+  "family": "Araceae",
+  "toxicity": { "pets": true, "note": "Calcium oxalate crystals" },
+  "ideal": {
+    "luxMin": 500, "luxIdeal": 1500, "luxMax": 10000,
+    "tempMinC": 18, "tempMaxC": 29, "humidityMin": 50, "humidityMax": 80,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 8, "waterAmountMl": 250,
+    "fertIntervalDays": 21, "mistIntervalDays": 5,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 300 }
+}

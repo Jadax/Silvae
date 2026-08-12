@@ -1,0 +1,18 @@
+{
+  "slug": "capsicum-annuum",
+  "commonNames": ["Chili pepper", "Chilli"],
+  "scientificName": "Capsicum annuum",
+  "family": "Solanaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 3000, "luxIdeal": 10000, "luxMax": 50000,
+    "tempMinC": 18, "tempMaxC": 29, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 3, "p": 1, "k": 3 },
+    "waterIntervalDays": 3, "waterAmountMl": 300,
+    "fertIntervalDays": 14, "mistIntervalDays": 0,
+    "repotIntervalMonths": 12, "rotateIntervalDays": 14
+  },
+  "tolerance": { "drought": "LOW", "shade": "LOW", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 120 }
+}

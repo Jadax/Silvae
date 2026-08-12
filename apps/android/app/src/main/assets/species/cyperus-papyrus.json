@@ -1,0 +1,18 @@
+{
+  "slug": "cyperus-papyrus",
+  "commonNames": ["Papyrus", "Egyptian paper plant", "Paper reed"],
+  "scientificName": "Cyperus papyrus",
+  "family": "Cyperaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 12000, "luxMax": 40000,
+    "tempMinC": 13, "tempMaxC": 30, "humidityMin": 55, "humidityMax": 80,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 1, "waterAmountMl": 300,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 250 }
+}

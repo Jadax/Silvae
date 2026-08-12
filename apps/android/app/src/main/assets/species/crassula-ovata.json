@@ -1,0 +1,18 @@
+{
+  "slug": "crassula-ovata",
+  "commonNames": ["Jade plant", "Money plant"],
+  "scientificName": "Crassula ovata",
+  "family": "Crassulaceae",
+  "toxicity": { "pets": true, "note": "Mildly toxic; can cause vomiting" },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 6000, "luxMax": 30000,
+    "tempMinC": 10, "tempMaxC": 29, "humidityMin": 20, "humidityMax": 50,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 1 },
+    "waterIntervalDays": 14, "waterAmountMl": 150,
+    "fertIntervalDays": 30, "mistIntervalDays": 0,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 180 }
+}

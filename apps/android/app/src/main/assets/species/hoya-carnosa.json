@@ -1,0 +1,18 @@
+{
+  "slug": "hoya-carnosa",
+  "commonNames": ["Wax plant", "Hoya"],
+  "scientificName": "Hoya carnosa",
+  "family": "Apocynaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 4000, "luxMax": 20000,
+    "tempMinC": 13, "tempMaxC": 29, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 10, "waterAmountMl": 150,
+    "fertIntervalDays": 21, "mistIntervalDays": 3,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 200 }
+}

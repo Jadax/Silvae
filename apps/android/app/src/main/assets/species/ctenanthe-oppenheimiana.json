@@ -1,0 +1,18 @@
+{
+  "slug": "ctenanthe-oppenheimiana",
+  "commonNames": ["Never-never plant"],
+  "scientificName": "Ctenanthe oppenheimiana",
+  "family": "Marantaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 400, "luxIdeal": 1200, "luxMax": 8000,
+    "tempMinC": 16, "tempMaxC": 27, "humidityMin": 60, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 4, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 14
+  },
+  "tolerance": { "drought": "LOW", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 60 }
+}

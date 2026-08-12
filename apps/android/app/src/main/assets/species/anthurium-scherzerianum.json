@@ -1,0 +1,18 @@
+{
+  "slug": "anthurium-scherzerianum",
+  "commonNames": ["Flamingo flower", "Tailflower"],
+  "scientificName": "Anthurium scherzerianum",
+  "family": "Araceae",
+  "toxicity": { "pets": true, "note": "Calcium oxalate crystals" },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 2000, "luxMax": 10000,
+    "tempMinC": 18, "tempMaxC": 27, "humidityMin": 60, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 3,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 50 }
+}

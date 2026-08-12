@@ -1,0 +1,18 @@
+{
+  "slug": "carissa-macrocarpa",
+  "commonNames": ["Natal plum", "Large num-num", "Amatungulu"],
+  "scientificName": "Carissa macrocarpa",
+  "family": "Apocynaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 10000, "luxIdeal": 25000, "luxMax": 60000,
+    "tempMinC": 10, "tempMaxC": 35, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 250,
+    "fertIntervalDays": 30, "mistIntervalDays": 3,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 250 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "convallaria-majalis",
+  "commonNames": ["Lily of the valley", "May bells", "Our Lady's tears"],
+  "scientificName": "Convallaria majalis",
+  "family": "Asparagaceae",
+  "toxicity": { "pets": true, "note": "Contains cardiac glycosides; highly toxic to pets and humans if ingested." },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 3000, "luxMax": 10000,
+    "tempMinC": 5, "tempMaxC": 26, "humidityMin": 55, "humidityMax": 75,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 2, "waterAmountMl": 150,
+    "fertIntervalDays": 30, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "HIGH", "cold": "HIGH" },
+  "growth": { "rate": "FAST", "maxHeightCm": 30 }
+}

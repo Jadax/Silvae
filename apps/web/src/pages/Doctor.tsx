@@ -1,12 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { diagnose, type Diagnosis, type Symptoms } from "@silvae/core";
-import {
-  describeIdentifyError,
-  identifyPlant,
-  type IdentifyResponse,
-} from "../lib/api";
-import { fileToPayload, matchCatalog, photoSymptoms, pestFromDisease, sha256Hex, type MatchedSpecies } from "../lib/identify";
+import { describeIdentifyError, type IdentifyResponse } from "../lib/api";
+import { identifyFromFile, photoSymptoms, pestFromDisease, type MatchedSpecies } from "../lib/identify";
 import { detectTrimBounds } from "../lib/trim";
 import type { Rect } from "../lib/crop";
 import CropTool from "../components/CropTool";
@@ -184,15 +180,9 @@ export default function Doctor() {
     setIdResult(null);
     setIdMatches([]);
     try {
-      const payload = await fileToPayload(source);
-      if (!payload) throw new Error("encode_failed");
-      const fingerprint = await sha256Hex(payload.bytes);
-      const res = await identifyPlant({
-        imageFingerprint: fingerprint,
-        base64: payload.base64,
-      });
-      setIdResult(res);
-      setIdMatches(matchCatalog(res.species ?? []));
+      const { result, matches } = await identifyFromFile(source);
+      setIdResult(result);
+      setIdMatches(matches);
       setIdState("done");
     } catch (err) {
       setIdState("error");

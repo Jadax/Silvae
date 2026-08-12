@@ -1,0 +1,18 @@
+{
+  "slug": "dracaena-surculosa",
+  "commonNames": ["Gold dust dracaena"],
+  "scientificName": "Dracaena surculosa",
+  "family": "Asparagaceae",
+  "toxicity": { "pets": true, "note": "Saponins" },
+  "ideal": {
+    "luxMin": 700, "luxIdeal": 2500, "luxMax": 15000,
+    "tempMinC": 15, "tempMaxC": 29, "humidityMin": 30, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 9, "waterAmountMl": 200,
+    "fertIntervalDays": 30, "mistIntervalDays": 0,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "MED" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 120 }
+}

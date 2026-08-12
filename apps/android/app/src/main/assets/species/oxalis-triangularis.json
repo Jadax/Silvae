@@ -1,0 +1,18 @@
+{
+  "slug": "oxalis-triangularis",
+  "commonNames": ["Purple shamrock", "False shamrock"],
+  "scientificName": "Oxalis triangularis",
+  "family": "Oxalidaceae",
+  "toxicity": { "pets": true, "note": "Contains oxalic acid" },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 5000, "luxMax": 20000,
+    "tempMinC": 15, "tempMaxC": 24, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 5, "waterAmountMl": 150,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 30 }
+}

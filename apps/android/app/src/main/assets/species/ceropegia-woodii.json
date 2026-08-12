@@ -1,0 +1,18 @@
+{
+  "slug": "ceropegia-woodii",
+  "commonNames": ["String of hearts", "Rosary vine"],
+  "scientificName": "Ceropegia woodii",
+  "family": "Apocynaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 5000, "luxMax": 20000,
+    "tempMinC": 10, "tempMaxC": 27, "humidityMin": 20, "humidityMax": 50,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 12, "waterAmountMl": 60,
+    "fertIntervalDays": 30, "mistIntervalDays": 0,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "MED" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 150 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "codiaeum-variegatum",
+  "commonNames": ["Croton", "Garden croton"],
+  "scientificName": "Codiaeum variegatum",
+  "family": "Euphorbiaceae",
+  "toxicity": { "pets": true, "note": "Sap is a skin and mouth irritant" },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 5000, "luxMax": 30000,
+    "tempMinC": 15, "tempMaxC": 29, "humidityMin": 50, "humidityMax": 80,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 5, "waterAmountMl": 250,
+    "fertIntervalDays": 14, "mistIntervalDays": 3,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 14
+  },
+  "tolerance": { "drought": "LOW", "shade": "LOW", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 120 }
+}

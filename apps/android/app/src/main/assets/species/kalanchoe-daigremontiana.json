@@ -1,0 +1,18 @@
+{
+  "slug": "kalanchoe-daigremontiana",
+  "commonNames": ["Mother of thousands", "Devil's backbone"],
+  "scientificName": "Kalanchoe daigremontiana",
+  "family": "Crassulaceae",
+  "toxicity": { "pets": true, "note": "Toxic cardiac glycosides" },
+  "ideal": {
+    "luxMin": 4000, "luxIdeal": 10000, "luxMax": 40000,
+    "tempMinC": 15, "tempMaxC": 28, "humidityMin": 20, "humidityMax": 40,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 2 },
+    "waterIntervalDays": 12, "waterAmountMl": 100,
+    "fertIntervalDays": 30, "mistIntervalDays": 0,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 90 }
+}

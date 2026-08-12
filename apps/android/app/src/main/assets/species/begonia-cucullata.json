@@ -1,0 +1,18 @@
+{
+  "slug": "begonia-cucullata",
+  "commonNames": ["Wax begonia", "Clubed begonia", "Waxy begonia"],
+  "scientificName": "Begonia cucullata",
+  "family": "Begoniaceae",
+  "toxicity": { "pets": true, "note": "Leaves and stems contain insoluble calcium oxalates; toxic if chewed." },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 5000, "luxMax": 15000,
+    "tempMinC": 15, "tempMaxC": 27, "humidityMin": 45, "humidityMax": 65,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 100,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 30 }
+}

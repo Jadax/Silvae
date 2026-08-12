@@ -1,0 +1,18 @@
+{
+  "slug": "dracaena-reflexa",
+  "commonNames": ["Song of India", "Pleomele"],
+  "scientificName": "Dracaena reflexa",
+  "family": "Asparagaceae",
+  "toxicity": { "pets": true, "note": "Saponins; toxic to cats and dogs" },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 2500, "luxMax": 10000,
+    "tempMinC": 18, "tempMaxC": 29, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 6.5,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 9, "waterAmountMl": 250,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 180 }
+}

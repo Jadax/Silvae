@@ -1,0 +1,18 @@
+{
+  "slug": "ledebouria-socialis",
+  "commonNames": ["Silver squill", "Wood hyacinth"],
+  "scientificName": "Ledebouria socialis",
+  "family": "Asparagaceae",
+  "toxicity": { "pets": true, "note": "Bulb is toxic if ingested" },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 5000, "luxMax": 20000,
+    "tempMinC": 15, "tempMaxC": 27, "humidityMin": 30, "humidityMax": 50,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 2 },
+    "waterIntervalDays": 9, "waterAmountMl": 100,
+    "fertIntervalDays": 30, "mistIntervalDays": 0,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 20 }
+}

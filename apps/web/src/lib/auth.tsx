@@ -10,7 +10,6 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
-  signInAnonymously,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -20,7 +19,13 @@ import {
 import { auth, isFirebaseConfigured } from "./firebase";
 import { ensureUserDoc, flushPendingWrites, pruneExpiredCaches, setUid, subscribeToCloud } from "./repo";
 
-type AuthStatus = "unconfigured" | "loading" | "anonymous" | "signed-in";
+/**
+ * "signed-out" is the mandatory registration gate: Silvae requires a real
+ * account (no anonymous/guest mode), so every plant is tied to a person and
+ * safely synced. "unconfigured" only happens in a dev build with no
+ * VITE_FIREBASE_CONFIG, where there is no auth backend to register against.
+ */
+type AuthStatus = "unconfigured" | "loading" | "signed-out" | "signed-in";
 
 interface AuthContextValue {
   status: AuthStatus;
@@ -28,7 +33,6 @@ interface AuthContextValue {
   signUp: (email: string, password: string, name: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signInGoogle: () => Promise<void>;
-  signInAnon: () => Promise<void>;
   signOutUser: () => Promise<void>;
 }
 
@@ -45,22 +49,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!a) return;
     const onOnline = () => void flushPendingWrites();
     window.addEventListener("online", onOnline);
-    const unsub = onAuthStateChanged(a, async (u) => {
+    const unsub = onAuthStateChanged(a, (u) => {
       setUser(u);
       if (u) {
         setUid(u.uid);
-        if (u.isAnonymous) setStatus("anonymous");
-        else setStatus("signed-in");
+        setStatus("signed-in");
         subscribeToCloud(u.uid);
         void flushPendingWrites();
-        if (!u.isAnonymous) void ensureUserDoc();
+        void ensureUserDoc();
         void pruneExpiredCaches();
       } else {
         setUid(undefined);
-        setStatus("loading");
-        await signInAnonymously(a).catch(() => {
-          setStatus("signed-in");
-        });
+        setStatus("signed-out");
       }
     });
     return () => {
@@ -85,10 +85,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       signInGoogle: async () => {
         if (!auth) return;
         await signInWithPopup(auth, new GoogleAuthProvider());
-      },
-      signInAnon: async () => {
-        if (!auth) return;
-        await signInAnonymously(auth);
       },
       signOutUser: async () => {
         if (!auth) return;

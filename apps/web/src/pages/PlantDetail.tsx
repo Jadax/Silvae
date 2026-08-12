@@ -8,7 +8,7 @@ import { addJournalComment, journalPhotos, removeJournalPhoto, saveJournalNote, 
 import BeforeAfter from "../components/BeforeAfter";
 import PhotoGallery from "../components/PhotoGallery";
 import { speciesBySlug } from "../lib/seed";
-import { envForPlant, feedingPlan } from "../lib/care";
+import { envForPlant, feedingPlan, waterStatusLabel } from "../lib/care";
 import { toEnv } from "../lib/weather";
 import { useWeather } from "../hooks/useWeather";
 import type { PlantPhoto, PlantRow } from "../lib/db";
@@ -125,7 +125,7 @@ export default function PlantDetail() {
       <section className="care-overview" aria-label="Care plan">
         <div className="care-highlight">
           <span className="eyebrow">Next little task</span>
-          <h2>{schedule ? formatRelative(schedule.nextAt) : "Care plan loading"}</h2>
+          <h2>{schedule ? waterStatusLabel(schedule.nextAt).label : "Care plan loading"}</h2>
           <p>{schedule ? `Water ${plant.name} around ${formatDate(schedule.nextAt)}.` : "We’re calculating the best next step."}</p>
           <span className={`care-pill ${overdue ? "due" : "happy"}`}><i />{overdue ? "Needs attention" : "Looking good"}</span>
         </div>
@@ -281,4 +281,3 @@ function ageDays(plantedAt?: string): number { return plantedAt ? Math.max(0, Ma
 function formatDate(date: Date): string { return date.toLocaleDateString(undefined, { month: "long", day: "numeric" }); }
 function formatDateTime(date: Date): string { return date.toLocaleDateString(undefined, { month: "short", day: "numeric" }); }
 function capitalize(value: string): string { return value.slice(0, 1).toUpperCase() + value.slice(1); }
-function formatRelative(date: Date): string { const days = Math.ceil((date.getTime() - Date.now()) / DAY); return days <= 0 ? "Water today" : days === 1 ? "Water tomorrow" : `Water in ${days} days`; }

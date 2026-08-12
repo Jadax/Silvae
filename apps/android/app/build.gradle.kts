@@ -1,9 +1,13 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -14,23 +18,33 @@ android {
         applicationId = "org.silvae"
         minSdk = 26
         targetSdk = 35
-        versionCode = 3
-        versionName = "0.3.0"
+        versionCode = 4
+        versionName = "0.4.0"
         vectorDrawables { useSupportLibrary = true }
+        // Same Vercel deployment the web app calls (server/functions/api/*).
+        buildConfigField("String", "API_BASE", "\"https://silvae.vercel.app/api\"")
     }
 
-    val releaseStoreFile = providers.gradleProperty("SILVAE_KEYSTORE_FILE")
-    val releaseStorePassword = providers.gradleProperty("SILVAE_STORE_PASSWORD")
-    val releaseKeyAlias = providers.gradleProperty("SILVAE_KEY_ALIAS")
-    val releaseKeyPassword = providers.gradleProperty("SILVAE_KEY_PASSWORD")
+    // Release signing: values come from (in order of preference) -P gradle
+    // properties, then apps/android/keystore.properties (gitignored — see
+    // apps/android/RELEASE.md). Never committed; release builds are simply
+    // unsigned if neither is present.
+    val keystoreProps = Properties().apply {
+        val file = rootProject.file("keystore.properties")
+        if (file.exists()) file.inputStream().use { load(it) }
+    }
+    fun releaseProp(name: String): String? =
+        (findProperty(name) as String?) ?: keystoreProps.getProperty(name)
+
+    val releaseStoreFile = releaseProp("SILVAE_KEYSTORE_FILE")
 
     signingConfigs {
         create("release") {
-            if (releaseStoreFile.isPresent) {
-                storeFile = file(releaseStoreFile.get())
-                storePassword = releaseStorePassword.orNull
-                keyAlias = releaseKeyAlias.orNull
-                keyPassword = releaseKeyPassword.orNull
+            if (releaseStoreFile != null) {
+                storeFile = rootProject.file(releaseStoreFile)
+                storePassword = releaseProp("SILVAE_STORE_PASSWORD")
+                keyAlias = releaseProp("SILVAE_KEY_ALIAS")
+                keyPassword = releaseProp("SILVAE_KEY_PASSWORD")
             }
         }
     }
@@ -51,7 +65,11 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions { jvmTarget = "17" }
-    buildFeatures { compose = true }
+    buildFeatures { compose = true; buildConfig = true }
+}
+
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
 }
 
 dependencies {
@@ -68,13 +86,27 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.work.runtime)
+    implementation(libs.androidx.hilt.work)
+    ksp(libs.androidx.hilt.work.compiler)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.nav.compose)
+
+    implementation(libs.androidx.nav.compose)
+    implementation(libs.coil.compose)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.okhttp)
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
+    implementation(libs.play.services.auth)
+    implementation(libs.play.services.location)
+    implementation(libs.androidx.exifinterface)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.serialization.json)
 }

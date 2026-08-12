@@ -1,0 +1,18 @@
+{
+  "slug": "spathoglottis-plicata",
+  "commonNames": ["Ground orchid", "Philippine ground orchid", "Purple ground orchid"],
+  "scientificName": "Spathoglottis plicata",
+  "family": "Orchidaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 50000,
+    "tempMinC": 15, "tempMaxC": 32, "humidityMin": 55, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 2, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 90 }
+}

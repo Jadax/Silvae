@@ -1,0 +1,18 @@
+{
+  "slug": "olea-europaea",
+  "commonNames": ["Olive tree", "Common olive", "European olive"],
+  "scientificName": "Olea europaea",
+  "family": "Oleaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 10000, "luxIdeal": 30000, "luxMax": 60000,
+    "tempMinC": 5, "tempMaxC": 32, "humidityMin": 30, "humidityMax": 50,
+    "phMin": 6.5, "phMax": 8.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 5, "waterAmountMl": 200,
+    "fertIntervalDays": 30, "mistIntervalDays": 7,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "LOW", "cold": "MED" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 300 }
+}

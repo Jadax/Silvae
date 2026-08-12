@@ -1,0 +1,18 @@
+{
+  "slug": "euphorbia-tirucalli",
+  "commonNames": ["Pencil cactus", "Fire sticks", "Milkbush"],
+  "scientificName": "Euphorbia tirucalli",
+  "family": "Euphorbiaceae",
+  "toxicity": { "pets": true, "note": "Milky sap is a strong skin irritant and toxic to pets if ingested." },
+  "ideal": {
+    "luxMin": 10000, "luxIdeal": 25000, "luxMax": 60000,
+    "tempMinC": 10, "tempMaxC": 32, "humidityMin": 25, "humidityMax": 45,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 8, "waterAmountMl": 100,
+    "fertIntervalDays": 30, "mistIntervalDays": 7,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "LOW", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 250 }
+}

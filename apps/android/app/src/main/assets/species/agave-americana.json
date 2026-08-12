@@ -1,0 +1,18 @@
+{
+  "slug": "agave-americana",
+  "commonNames": ["Century plant", "American agave", "American aloe"],
+  "scientificName": "Agave americana",
+  "family": "Asparagaceae",
+  "toxicity": { "pets": true, "note": "Sap is an irritant; sharp leaf tips and saponins make it hazardous to pets." },
+  "ideal": {
+    "luxMin": 10000, "luxIdeal": 30000, "luxMax": 60000,
+    "tempMinC": 10, "tempMaxC": 32, "humidityMin": 25, "humidityMax": 45,
+    "phMin": 6.0, "phMax": 7.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 10, "waterAmountMl": 150,
+    "fertIntervalDays": 30, "mistIntervalDays": 7,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "LOW", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 180 }
+}

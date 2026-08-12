@@ -1,0 +1,18 @@
+{
+  "slug": "mesembryanthemum-cordifolium",
+  "commonNames": ["Baby sun rose", "Heartleaf iceplant", "Aptenia"],
+  "scientificName": "Mesembryanthemum cordifolium",
+  "family": "Aizoaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 50000,
+    "tempMinC": 5, "tempMaxC": 30, "humidityMin": 30, "humidityMax": 50,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 6, "waterAmountMl": 100,
+    "fertIntervalDays": 30, "mistIntervalDays": 7,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "MED" },
+  "growth": { "rate": "FAST", "maxHeightCm": 20 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "cissus-rhombifolia",
+  "commonNames": ["Grape ivy", "Oakleaf ivy"],
+  "scientificName": "Cissus rhombifolia",
+  "family": "Vitaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 2500, "luxMax": 15000,
+    "tempMinC": 16, "tempMaxC": 27, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 250,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 300 }
+}

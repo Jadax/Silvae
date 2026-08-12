@@ -1,0 +1,18 @@
+{
+  "slug": "hoya-linearis",
+  "commonNames": ["Linear hoya", "Fairy bells"],
+  "scientificName": "Hoya linearis",
+  "family": "Apocynaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 2500, "luxMax": 12000,
+    "tempMinC": 18, "tempMaxC": 27, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 100,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 100 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "musa-coccinea",
+  "commonNames": ["Scarlet banana", "Red flowering banana", "Okinawa torch"],
+  "scientificName": "Musa coccinea",
+  "family": "Musaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 8000, "luxIdeal": 20000, "luxMax": 50000,
+    "tempMinC": 16, "tempMaxC": 30, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 2 },
+    "waterIntervalDays": 3, "waterAmountMl": 200,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 150 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "tillandsia-ionantha",
+  "commonNames": ["Air plant", "Sky plant"],
+  "scientificName": "Tillandsia ionantha",
+  "family": "Bromeliaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 8000, "luxMax": 30000,
+    "tempMinC": 10, "tempMaxC": 32, "humidityMin": 50, "humidityMax": 80,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 7, "waterAmountMl": 50,
+    "fertIntervalDays": 30, "mistIntervalDays": 3,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 15 }
+}

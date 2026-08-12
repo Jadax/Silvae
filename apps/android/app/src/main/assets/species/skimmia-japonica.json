@@ -1,0 +1,18 @@
+{
+  "slug": "skimmia-japonica",
+  "commonNames": ["Skimmia", "Japanese skimmia", "Reeves skimmia"],
+  "scientificName": "Skimmia japonica",
+  "family": "Rutaceae",
+  "toxicity": { "pets": true, "note": "Berries are toxic to pets if ingested." },
+  "ideal": {
+    "luxMin": 3000, "luxIdeal": 8000, "luxMax": 20000,
+    "tempMinC": 5, "tempMaxC": 28, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 200,
+    "fertIntervalDays": 30, "mistIntervalDays": 2,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "HIGH", "cold": "HIGH" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 150 }
+}

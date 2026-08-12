@@ -1,0 +1,18 @@
+{
+  "slug": "chamaedorea-elegans",
+  "commonNames": ["Parlour palm", "Neanthe bella palm"],
+  "scientificName": "Chamaedorea elegans",
+  "family": "Arecaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 500, "luxIdeal": 1500, "luxMax": 12000,
+    "tempMinC": 15, "tempMaxC": 29, "humidityMin": 40, "humidityMax": 70,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 6, "waterAmountMl": 300,
+    "fertIntervalDays": 21, "mistIntervalDays": 5,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 200 }
+}

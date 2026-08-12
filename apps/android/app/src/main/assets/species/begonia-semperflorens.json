@@ -1,0 +1,18 @@
+{
+  "slug": "begonia-semperflorens",
+  "commonNames": ["Wax begonia", "Fibrous begonia"],
+  "scientificName": "Begonia semperflorens",
+  "family": "Begoniaceae",
+  "toxicity": { "pets": true, "note": "Insoluble oxalates" },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 5000, "luxMax": 20000,
+    "tempMinC": 16, "tempMaxC": 27, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 5, "waterAmountMl": 150,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 40 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "peperomia-dolabriformis",
+  "commonNames": ["Prayer pepper", "Prayer peperomia"],
+  "scientificName": "Peperomia dolabriformis",
+  "family": "Piperaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 5000, "luxMax": 15000,
+    "tempMinC": 16, "tempMaxC": 27, "humidityMin": 45, "humidityMax": 65,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 100,
+    "fertIntervalDays": 30, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 30 }
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "phymatosorus-scolopendria",
+  "commonNames": ["Wart fern", "Monkey's foot fern", "Laurel fern"],
+  "scientificName": "Phymatosorus scolopendria",
+  "family": "Polypodiaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 2000, "luxIdeal": 6000, "luxMax": 15000,
+    "tempMinC": 16, "tempMaxC": 28, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 200,
+    "fertIntervalDays": 30, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 90 }
+}

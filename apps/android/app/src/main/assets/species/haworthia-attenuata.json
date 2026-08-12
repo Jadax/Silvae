@@ -1,0 +1,18 @@
+{
+  "slug": "haworthia-attenuata",
+  "commonNames": ["Zebra haworthia", "Zebra cactus"],
+  "scientificName": "Haworthiopsis attenuata",
+  "family": "Asparagaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 3000, "luxIdeal": 8000, "luxMax": 30000,
+    "tempMinC": 15, "tempMaxC": 28, "humidityMin": 30, "humidityMax": 50,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 2 },
+    "waterIntervalDays": 14, "waterAmountMl": 100,
+    "fertIntervalDays": 30, "mistIntervalDays": 0,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 20 }
+}

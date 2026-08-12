@@ -1,0 +1,18 @@
+{
+  "slug": "bougainvillea-glabra",
+  "commonNames": ["Bougainvillea", "Paper flower", "Lesser bougainvillea"],
+  "scientificName": "Bougainvillea glabra",
+  "family": "Nyctaginaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 15000, "luxIdeal": 40000, "luxMax": 90000,
+    "tempMinC": 13, "tempMaxC": 35, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 4, "waterAmountMl": 250,
+    "fertIntervalDays": 14, "mistIntervalDays": 3,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "LOW", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 600 }
+}

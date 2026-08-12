@@ -1,5 +1,5 @@
 import { SPECIES } from "./seed";
-import type { IdentifyResponse, IdentifySpecies } from "./api";
+import { identifyPlant, type IdentifyResponse, type IdentifySpecies } from "./api";
 import type { Symptoms } from "@silvae/core";
 
 export const MAX_ID_IMAGE_BYTES = 150 * 1024;
@@ -353,4 +353,20 @@ export async function sha256Hex(bytes: Uint8Array): Promise<string> {
   return Array.from(new Uint8Array(digest))
     .map((b) => b.toString(16).padStart(2, "0"))
     .join("");
+}
+
+/**
+ * Shared photo-ID pipeline used by both the Add Plant flow and the Plant
+ * Doctor: downscale, fingerprint, call the identify API, then map the
+ * suggestions onto the offline catalog. Throws on any step's failure —
+ * callers own their own busy/error state around this call.
+ */
+export async function identifyFromFile(
+  source: File | Blob,
+): Promise<{ result: IdentifyResponse; matches: MatchedSpecies[] }> {
+  const payload = await fileToPayload(source);
+  if (!payload) throw new Error("encode_failed");
+  const fingerprint = await sha256Hex(payload.bytes);
+  const result = await identifyPlant({ imageFingerprint: fingerprint, base64: payload.base64 });
+  return { result, matches: matchCatalog(result.species ?? []) };
 }

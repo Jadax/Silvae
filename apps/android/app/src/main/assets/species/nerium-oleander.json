@@ -1,0 +1,18 @@
+{
+  "slug": "nerium-oleander",
+  "commonNames": ["Oleander"],
+  "scientificName": "Nerium oleander",
+  "family": "Apocynaceae",
+  "toxicity": { "pets": true, "note": "Extremely toxic — all parts" },
+  "ideal": {
+    "luxMin": 6000, "luxIdeal": 15000, "luxMax": 50000,
+    "tempMinC": 15, "tempMaxC": 30, "humidityMin": 20, "humidityMax": 40,
+    "phMin": 6.5, "phMax": 7.5,
+    "npk": { "n": 3, "p": 1, "k": 2 },
+    "waterIntervalDays": 7, "waterAmountMl": 400,
+    "fertIntervalDays": 14, "mistIntervalDays": 0,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "HIGH", "shade": "LOW", "cold": "LOW" },
+  "growth": { "rate": "FAST", "maxHeightCm": 300 }
+}

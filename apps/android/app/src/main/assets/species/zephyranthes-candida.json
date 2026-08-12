@@ -1,0 +1,18 @@
+{
+  "slug": "zephyranthes-candida",
+  "commonNames": ["Rain lily", "White zephyr lily", "Fairy lily"],
+  "scientificName": "Zephyranthes candida",
+  "family": "Amaryllidaceae",
+  "toxicity": { "pets": true, "note": "Bulb contains toxic alkaloids; toxic to pets if ingested." },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 10000, "luxMax": 30000,
+    "tempMinC": 10, "tempMaxC": 28, "humidityMin": 40, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 100,
+    "fertIntervalDays": 21, "mistIntervalDays": 3,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 20 }
+}

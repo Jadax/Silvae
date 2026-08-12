@@ -1,0 +1,18 @@
+{
+  "slug": "echeveria-elegans",
+  "commonNames": ["Mexican snowball"],
+  "scientificName": "Echeveria elegans",
+  "family": "Crassulaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 1500, "luxIdeal": 8000, "luxMax": 35000,
+    "tempMinC": 5, "tempMaxC": 27, "humidityMin": 10, "humidityMax": 40,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 12, "waterAmountMl": 80,
+    "fertIntervalDays": 30, "mistIntervalDays": 0,
+    "repotIntervalMonths": 36, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "LOW", "cold": "MED" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 15 }
+}

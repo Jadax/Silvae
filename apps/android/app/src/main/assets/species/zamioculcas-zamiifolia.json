@@ -1,0 +1,18 @@
+{
+  "slug": "zamioculcas-zamiifolia",
+  "commonNames": ["ZZ plant", "Zanzibar gem"],
+  "scientificName": "Zamioculcas zamiifolia",
+  "family": "Araceae",
+  "toxicity": { "pets": true, "note": "Calcium oxalate crystals" },
+  "ideal": {
+    "luxMin": 400, "luxIdeal": 1000, "luxMax": 8000,
+    "tempMinC": 15, "tempMaxC": 29, "humidityMin": 30, "humidityMax": 60,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 2, "p": 1, "k": 1 },
+    "waterIntervalDays": 14, "waterAmountMl": 200,
+    "fertIntervalDays": 30, "mistIntervalDays": 0,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 45
+  },
+  "tolerance": { "drought": "HIGH", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "SLOW", "maxHeightCm": 100 }
+}

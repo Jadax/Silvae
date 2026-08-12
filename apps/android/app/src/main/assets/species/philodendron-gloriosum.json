@@ -1,0 +1,18 @@
+{
+  "slug": "philodendron-gloriosum",
+  "commonNames": ["Velvet philodendron"],
+  "scientificName": "Philodendron gloriosum",
+  "family": "Araceae",
+  "toxicity": { "pets": true, "note": "Calcium oxalate crystals" },
+  "ideal": {
+    "luxMin": 600, "luxIdeal": 1500, "luxMax": 8000,
+    "tempMinC": 18, "tempMaxC": 28, "humidityMin": 65, "humidityMax": 85,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 5, "waterAmountMl": 150,
+    "fertIntervalDays": 21, "mistIntervalDays": 3,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 60 }
+}

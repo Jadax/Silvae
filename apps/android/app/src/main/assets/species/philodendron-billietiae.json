@@ -1,0 +1,18 @@
+{
+  "slug": "philodendron-billietiae",
+  "commonNames": ["Billietiae philodendron", "Philodendron Billietiae"],
+  "scientificName": "Philodendron billietiae",
+  "family": "Araceae",
+  "toxicity": { "pets": true, "note": "Calcium oxalate crystals" },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 2500, "luxMax": 12000,
+    "tempMinC": 18, "tempMaxC": 28, "humidityMin": 60, "humidityMax": 80,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 2, "p": 1, "k": 2 },
+    "waterIntervalDays": 6, "waterAmountMl": 200,
+    "fertIntervalDays": 21, "mistIntervalDays": 3,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 150 }
+}

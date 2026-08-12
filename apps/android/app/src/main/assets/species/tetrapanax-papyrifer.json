@@ -1,0 +1,18 @@
+{
+  "slug": "tetrapanax-papyrifer",
+  "commonNames": ["Rice paper plant", "Chinese rice-paper plant", "Tong cao"],
+  "scientificName": "Tetrapanax papyrifer",
+  "family": "Araliaceae",
+  "toxicity": { "pets": false },
+  "ideal": {
+    "luxMin": 5000, "luxIdeal": 12000, "luxMax": 40000,
+    "tempMinC": 5, "tempMaxC": 30, "humidityMin": 50, "humidityMax": 75,
+    "phMin": 6.0, "phMax": 7.0,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 300,
+    "fertIntervalDays": 14, "mistIntervalDays": 2,
+    "repotIntervalMonths": 24, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "LOW", "shade": "MED", "cold": "HIGH" },
+  "growth": { "rate": "FAST", "maxHeightCm": 400 }
+}

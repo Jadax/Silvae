@@ -1,0 +1,18 @@
+{
+  "slug": "begonia-bowerae",
+  "commonNames": ["Eyelash begonia", "Leopard begonia"],
+  "scientificName": "Begonia bowerae",
+  "family": "Begoniaceae",
+  "toxicity": { "pets": true, "note": "Leaves and stems contain insoluble calcium oxalates; toxic if chewed." },
+  "ideal": {
+    "luxMin": 1000, "luxIdeal": 3000, "luxMax": 10000,
+    "tempMinC": 16, "tempMaxC": 27, "humidityMin": 50, "humidityMax": 70,
+    "phMin": 5.5, "phMax": 6.5,
+    "npk": { "n": 1, "p": 1, "k": 1 },
+    "waterIntervalDays": 3, "waterAmountMl": 100,
+    "fertIntervalDays": 21, "mistIntervalDays": 2,
+    "repotIntervalMonths": 18, "rotateIntervalDays": 30
+  },
+  "tolerance": { "drought": "MED", "shade": "HIGH", "cold": "LOW" },
+  "growth": { "rate": "MEDIUM", "maxHeightCm": 30 }
+}
