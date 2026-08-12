@@ -50,6 +50,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const onOnline = () => void flushPendingWrites();
     window.addEventListener("online", onOnline);
     const unsub = onAuthStateChanged(a, (u) => {
+      if (u?.isAnonymous) {
+        // Leftover session from before mandatory registration — anonymous
+        // accounts never satisfy the sign-up gate, so drop it and treat as
+        // signed-out instead of silently admitting a guest.
+        void signOut(a);
+        return;
+      }
       setUser(u);
       if (u) {
         setUid(u.uid);

@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+- Fixed a gap in the mandatory-registration gate shipped in 0.4.0: browsers/
+  devices that had used Silvae before that release (silent anonymous sign-in)
+  kept a lingering anonymous Firebase session, which `onAuthStateChanged`
+  treated as "signed in," letting them skip the new sign-up/sign-in screen
+  entirely and land straight in onboarding. Anonymous sessions are now
+  detected and signed out on load, correctly falling through to the
+  mandatory sign-up gate.
+
 ## 0.4.0 — 2026-08-12
 
 Mandatory accounts, a real native Android app, and a round of security hardening.
