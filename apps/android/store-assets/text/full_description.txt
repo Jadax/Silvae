@@ -1,0 +1,13 @@
+Silvae helps you keep houseplants (and outdoor ones) alive and thriving — free, forever, no ads, no subscription.
+
+🌱 Personal care plans — every plant gets a watering schedule that adapts to your pot, soil, and the real weather at your location.
+
+🔍 400-species library — browse detailed care guides, filter for pet-safe plants, and see what fits your climate.
+
+🩺 Plant Doctor — identify a plant from a photo, or answer a quick symptom checklist to get a likely cause and treatment steps.
+
+📸 Growth journal — log photos and notes over time, compare before and after, and watch your plants grow.
+
+🔔 Gentle reminders — a nudge when something's thirsty, nothing more.
+
+Your data is yours: everything works offline-first and syncs across your devices once you sign in. No ads, no data sold, ever.

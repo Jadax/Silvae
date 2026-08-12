@@ -50,40 +50,21 @@ only if you're counting the private plant journal (it isn't shared publicly
 between users, so most jurisdictions still treat this as no UGC exposure —
 answer per the questionnaire's exact wording when you fill it in).
 
-## Store listing draft
+## Store listing assets
 
-**App name:** Silvae
+Ready-to-upload files live in `apps/android/store-assets/` (see its README for
+what's covered and what's still missing):
 
-**Short description** (≤80 chars):
-> Free plant care: watering schedules, a plant doctor, and a growth journal.
-
-**Full description:**
-> Silvae helps you keep houseplants (and outdoor ones) alive and thriving —
-> free, forever, no ads, no subscription.
->
-> 🌱 **Personal care plans** — every plant gets a watering schedule that
-> adapts to your pot, soil, and the real weather at your location.
->
-> 🔍 **400-species library** — browse detailed care guides, filter for
-> pet-safe plants, and see what fits your climate.
->
-> 🩺 **Plant Doctor** — identify a plant from a photo, or answer a quick
-> symptom checklist to get a likely cause and treatment steps.
->
-> 📸 **Growth journal** — log photos and notes over time, compare before and
-> after, and watch your plants grow.
->
-> 🔔 **Gentle reminders** — a nudge when something's thirsty, nothing more.
->
-> Your data is yours: everything works offline-first and syncs across your
-> devices once you sign in. No ads, no data sold, ever.
-
-**Category:** Lifestyle (or House & Home, if available in your console)
-
-**Screenshots needed** (Play Console requires at minimum 2, up to 8, per form
-factor): Garden home, Add Plant flow, Plant Detail with care actions,
-Discover list, Plant Doctor, growth journal. None have been captured yet —
-this needs a device/emulator run.
+- **App name / short description / full description** — `store-assets/text/`
+- **App icon (512×512 PNG)** — `store-assets/icon/app_icon_512.png`, composited
+  from the real in-app adaptive-icon vectors, so it always matches what's on
+  the device
+- **Feature graphic (1024×500 PNG)** — `store-assets/feature-graphic/`
+- **Category:** Lifestyle
+- **Phone screenshots (6, 1080×2340)** — `store-assets/screenshots/01_garden.png`
+  through `06_account.png`, real captures from the signed-in app
+- **7"/10" tablet screenshots** — not provided; declare "phone only" in Play
+  Console and skip these fields
 
 ## Privacy policy (live)
 
