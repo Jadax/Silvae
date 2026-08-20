@@ -14,7 +14,7 @@
     "server/*"
   ],
   "devDependencies": {
-    "@types/node": "^26.1.2"
+    "@types/node": "^26.2.0"
   },
   "scripts": {
     "build": "pnpm -r build",
