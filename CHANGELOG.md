@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.4.1 — 2026-08-20
 
 - Fixed a gap in the mandatory-registration gate shipped in 0.4.0: browsers/
   devices that had used Silvae before that release (silent anonymous sign-in)
@@ -9,6 +9,11 @@
   entirely and land straight in onboarding. Anonymous sessions are now
   detected and signed out on load, correctly falling through to the
   mandatory sign-up gate.
+- Removed the stale hardcoded Android API hostname. Release builds now require
+  the live Vercel API base through `SILVAE_API_BASE`, preventing broken mobile
+  deployments when a Vercel project domain changes.
+- Updated Vercel, Android release, and project-status documentation to match
+  the current 0.4.x architecture.
 
 ## 0.4.0 — 2026-08-12
 
