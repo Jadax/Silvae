@@ -38,7 +38,7 @@ automatically).
 ## Before you submit
 
 - [ ] Bump `versionCode` / `versionName` in `app/build.gradle.kts` for every submission.
-- [ ] Verify `google-services.json` (Firebase Android app config) is present — see main session notes; it's gitignored, re-fetch from Firebase Console → Project Settings → your Android app if this is a fresh checkout.
-- [ ] Confirm `BuildConfig.API_BASE` in `app/build.gradle.kts` points at your live Vercel deployment.
+- [ ] Verify `google-services.json` (Firebase Android app config) matches the final `org.silvae` app.
+- [ ] Set the protected GitHub environment variable `SILVAE_API_BASE` to the live Vercel URL ending in `/api`; the release workflow fails closed if it is missing.
 - [ ] Read `PLAY_STORE.md` in this folder for the listing content, data-safety form answers, and privacy policy draft.
 - [ ] Install the release build on a real device and click through sign-up, add-a-plant, Discover, Doctor, and account deletion before submitting — none of this has been run on a device yet (see main session).

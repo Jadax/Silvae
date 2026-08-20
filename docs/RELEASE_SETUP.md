@@ -34,8 +34,8 @@ absent, rather than producing a misleading unsigned "release".
 1. Create a Firebase project; enable Anonymous, Email/Password, and Google
    authentication, Firestore, and Cloud Messaging.
 2. Register both the web PWA and the Android app with the final Android package
-   name. Store Android `google-services.json` as a GitHub secret if/when the
-   native client starts configuring Firebase.
+   name. Android `google-services.json` is client configuration, not a server
+   secret; keep the Firebase service-account JSON private.
 3. Set the values in `.env.example` in Vercel, never in Git. Add R2 credentials
    before enabling cloud image uploads.
 4. Deploy Firestore rules and indexes, then seed species data using the scripts
@@ -58,11 +58,14 @@ absent, rather than producing a misleading unsigned "release".
 5. In **Settings â†’ Domains**, either use the generated `*.vercel.app` address
    or add a domain you own and follow Vercel's DNS records exactly. Add that
    final HTTPS URL to Firebase Authentication's Authorized domains list.
+6. Set the protected GitHub environment variable `SILVAE_API_BASE` to that
+   production URL plus `/api`; Android releases use it instead of a hardcoded
+   hostname.
 
 ## Releasing
 
 - Every normal commit runs checks.
-- A `v0.2.0` tag builds a signed AAB, uploads it to the internal Play track, and
+- A version tag (for example `v0.4.0`) builds a signed AAB, uploads it to the internal Play track, and
   creates a GitHub release. Use the manual workflow only to promote a tested
   bundle to a different track.
 - Play policy declarations, privacy policy URL, store listing copy/screenshots,

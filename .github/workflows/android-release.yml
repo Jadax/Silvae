@@ -36,12 +36,14 @@ jobs:
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
           ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
           PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+          SILVAE_API_BASE: ${{ vars.SILVAE_API_BASE }}
         run: |
           test -n "$ANDROID_KEYSTORE_BASE64"
           test -n "$ANDROID_KEY_ALIAS"
           test -n "$ANDROID_KEY_PASSWORD"
           test -n "$ANDROID_STORE_PASSWORD"
           test -n "$PLAY_SERVICE_ACCOUNT_JSON"
+          test -n "$SILVAE_API_BASE"
       - name: Prepare signing key
         run: |
           echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/silvae-upload.keystore"
@@ -54,6 +56,7 @@ jobs:
           ORG_GRADLE_PROJECT_SILVAE_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ORG_GRADLE_PROJECT_SILVAE_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
           ORG_GRADLE_PROJECT_SILVAE_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          ORG_GRADLE_PROJECT_SILVAE_API_BASE: ${{ vars.SILVAE_API_BASE }}
         run: bash ./gradlew :app:bundleRelease --no-daemon
       - name: Publish to Google Play
         uses: r0adkll/upload-google-play@v1

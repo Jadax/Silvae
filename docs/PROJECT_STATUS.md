@@ -1,10 +1,10 @@
 # Silvae project status
 
-Updated: 9 August 2026
+Updated: 20 August 2026
 
 ## Current position
 
-Silvae is between the foundation phase (P0) and the web MVP phase (P1). The shared TypeScript care engine, schemas, weather calculations, doctor rules, API contract, Firestore rules, 400-species catalog, and basic CI are in place. The web app is a usable local-first vertical slice with a finished onboarding flow, plant photo timeline, and offline-first cloud sync. Android is still a UI/architecture scaffold rather than a functional client.
+Silvae has a working web MVP and a functional Android client foundation. The shared TypeScript care engine, schemas, weather calculations, doctor rules, API contract, Firestore rules, 400-species catalog, CI, local-first web sync, Room-backed Android storage, authentication, care journal, and production build paths are in place.
 
 ## What works now
 
@@ -21,11 +21,9 @@ Silvae is between the foundation phase (P0) and the web MVP phase (P1). The shar
 
 ## Highest-priority work remaining
 
-### P0: make the foundation reproducible
+### P0: make production reproducible
 
-- Create the initial Git commit and move the default branch to `main`.
-- Add the missing Gradle wrapper scripts/JAR so Android and CI build from a clean checkout.
-- Finish environment setup documentation and connect the Firebase/Vercel projects.
+- Connect the Firebase/Vercel projects and set the protected production API base.
 - Add Firestore emulator rule tests; the current rules exist but have no automated test suite.
 - Complete backend routes from the blueprint: R2 upload, notifications, cron/weekly work, and production smoke tests.
 
@@ -36,11 +34,10 @@ Silvae is between the foundation phase (P0) and the web MVP phase (P1). The shar
 - Run a WCAG AA and Lighthouse pass, then test installation on iOS and Android browsers.
 - Verify Firestore sync across two signed-in devices, including offline create/update/delete recovery.
 
-### P2: make Android functional
+### P2: finish Android production hardening
 
-- Replace placeholders with Room entities/repositories, ViewModels, and real feature screens.
-- Implement plant collection, care history, species search, and the doctor flow before cloud sync.
-- Add WorkManager reminders, Firebase auth/sync, image handling, and on-device model delivery.
+- Complete cloud sync conflict handling and production smoke tests.
+- Add on-device model delivery and Compose UI/device tests.
 - Add Compose UI tests and smoke-test the APK on physical devices.
 
 ### Later phases

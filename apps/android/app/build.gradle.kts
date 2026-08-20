@@ -21,8 +21,11 @@ android {
         versionCode = 4
         versionName = "0.4.0"
         vectorDrawables { useSupportLibrary = true }
-        // Same Vercel deployment the web app calls (server/functions/api/*).
-        buildConfigField("String", "API_BASE", "\"https://silvae.vercel.app/api\"")
+        // Supplied as -PSILVAE_API_BASE (or an ORG_GRADLE_PROJECT_...
+        // environment variable) for each deployment. Keep the default empty
+        // so a stale hostname can never ship.
+        val apiBase = providers.gradleProperty("SILVAE_API_BASE").orElse("").get().trimEnd('/')
+        buildConfigField("String", "API_BASE", "\"$apiBase\"")
     }
 
     // Release signing: values come from (in order of preference) -P gradle

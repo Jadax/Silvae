@@ -58,6 +58,9 @@ class IdentifyApi @Inject constructor(
     // (NetworkOnMainThreadException otherwise; see LocationApi.kt for why this
     // class of bug is invisible until you actually run the app on a device).
     suspend fun identify(imageFingerprint: String, base64: String): IdentifyResponse {
+        if (BuildConfig.API_BASE.isBlank()) {
+            throw IdentifyApiException("api_not_configured", 503)
+        }
         val token = authRepository.idToken()
         val bodyJson = json.encodeToString(IdentifyRequestBody(imageFingerprint, base64))
         val requestBuilder = Request.Builder()
