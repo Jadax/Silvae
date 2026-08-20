@@ -45,12 +45,12 @@ export default function Discover() {
         <section className="card area-panel">
           <div className="section-head">
             <div>
-              <span className="eyebrow">🌎 For your area</span>
+              <span className="eyebrow">{"\uD83C\uDF0D"} For your area</span>
               <h2>Plants that love {place.label}</h2>
             </div>
             <div className="segmented-sm" role="group" aria-label="Where the plants will live">
-              <button className={!outdoor ? "selected" : ""} onClick={() => setOutdoor(false)}>🏠 Indoor</button>
-              <button className={outdoor ? "selected" : ""} onClick={() => setOutdoor(true)}>☀️ Outdoor</button>
+              <button className={!outdoor ? "selected" : ""} onClick={() => setOutdoor(false)}>{"\uD83C\uDFE0"} Indoor</button>
+              <button className={outdoor ? "selected" : ""} onClick={() => setOutdoor(true)}>{"\u2600\uFE0F"} Outdoor</button>
             </div>
           </div>
           {bestForArea && bestForArea.length > 0 ? (
@@ -66,10 +66,10 @@ export default function Discover() {
               ))}
             </ol>
           ) : (
-            <p className="muted">No matches in your area with the current filters.</p>
+            <p className="muted">No matches with the current filters.</p>
           )}
           <p className="muted area-note">
-            This is a rough seasonal estimate from your saved location — your actual light, pot and habits matter more.
+            This is a rough seasonal estimate from your saved location. Your actual light, pot, and habits matter more.
           </p>
         </section>
       )}
@@ -79,7 +79,7 @@ export default function Discover() {
           Search
           <input
             type="search"
-            placeholder="Monstera, pothos, snake plant…"
+            placeholder="Monstera, pothos, snake plant..."
             value={q}
             onChange={(e) => setQ(e.target.value)}
           />
@@ -90,7 +90,7 @@ export default function Discover() {
             checked={petSafe}
             onChange={(e) => setPetSafe(e.target.checked)}
           />{" "}
-          🐾 Pet-safe only
+          {"\uD83D\uDC3E"} Pet-safe only
         </label>
         {!place && (
           <label className="check pet-safe-toggle">
@@ -99,11 +99,11 @@ export default function Discover() {
               checked={outdoor}
               onChange={(e) => setOutdoor(e.target.checked)}
             />{" "}
-            ☀️ I'm planning outdoors
+            {"\u2600\uFE0F"} Planning outdoors
           </label>
         )}
       </div>
-      {petsOn && petSafe && <p className="muted">We've hidden the plants that are risky for your pets. You can turn the filter off anytime.</p>}
+      {petsOn && petSafe && <p className="muted">We've hidden plants that are risky for your pets. You can turn the filter off anytime.</p>}
       {!place && <p className="muted">Tip: <Link to="/account">set your location</Link> to see which species fit your area.</p>}
       <table style={{ marginTop: "1rem" }}>
         <thead>
@@ -122,25 +122,25 @@ export default function Discover() {
               <td>
                 <Link to={`/species/${s.slug}`}>{s.commonNames[0]}</Link>
                 <div className="muted">
-                  <em>{s.scientificName}</em> · {s.family}
+                  <em>{s.scientificName}</em> \u00B7 {s.family}
                 </div>
               </td>
               <td>
                 <span className={`pet-flag ${s.toxicity.pets ? "toxic" : "safe"}`}>
-                  {s.toxicity.pets ? "⚠ Toxic to pets" : "🐾 Pet friendly"}
+                  {s.toxicity.pets ? "\u26A0 Toxic to pets" : "\uD83D\uDC3E Pet friendly"}
                 </span>
               </td>
-              <td>every {s.ideal.waterIntervalDays}d · {s.ideal.waterAmountMl} ml</td>
+              <td>every {s.ideal.waterIntervalDays}d \u00B7 {s.ideal.waterAmountMl} ml</td>
               <td>
-                {s.ideal.luxMin}–{s.ideal.luxMax} lux
+                {s.ideal.luxMin}\u2013{s.ideal.luxMax} lux
               </td>
               <td>
-                {s.ideal.tempMinC}–{s.ideal.tempMaxC}°C
+                {s.ideal.tempMinC}\u2013{s.ideal.tempMaxC}{'\u00B0'}C
               </td>
               {place && fit && (
                 <td>
                   <span className={`fit-badge ${fit.fitScore >= 80 ? "great" : fit.fitScore >= 55 ? "ok" : "tough"}`}>
-                    {Math.round(fit.fitScore)} · {fit.summary}
+                    {Math.round(fit.fitScore)} \u00B7 {fit.summary}
                   </span>
                 </td>
               )}

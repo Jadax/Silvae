@@ -11,7 +11,7 @@ export default function Account() {
         <p>
           <strong>{user?.displayName ?? user?.email}</strong>
         </p>
-        <p className="muted">Signed in and syncing with Firestore.</p>
+        <p className="muted">Signed in. Data syncs with Firestore when online.</p>
         <button className="btn secondary" onClick={() => void signOutUser()}>
           Sign out
         </button>

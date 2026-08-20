@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import { irrigation, nextWaterAt, type CareEventType } from "@silvae/core";
-import { careHistory, deletePlant, getPlant, logCareEvent, savePlant } from "../lib/repo";
+import { irrigation, nextWaterAt, POT_TYPES, SOIL_TYPES, type CareEventType } from "@silvae/core";
+import { careHistory, deleteCareEvent, deletePlant, getPlant, logCareEvent, savePlant } from "../lib/repo";
 import { preparePlantPhoto } from "../lib/photos";
 import { addJournalComment, journalPhotos, removeJournalPhoto, saveJournalNote, saveJournalPhoto, setJournalNote } from "../lib/photos";
 import BeforeAfter from "../components/BeforeAfter";
@@ -14,8 +14,6 @@ import { useWeather } from "../hooks/useWeather";
 import type { PlantPhoto, PlantRow } from "../lib/db";
 
 const DAY = 86400000;
-const POT_TYPES = ["plastic", "terracotta", "ceramic", "self-watering"] as const;
-const SOIL_TYPES = ["standard", "well-draining", "retentive"] as const;
 
 export default function PlantDetail() {
   const { id = "" } = useParams();
@@ -25,6 +23,7 @@ export default function PlantDetail() {
   const [editError, setEditError] = useState<string | null>(null);
   const [comparing, setComparing] = useState(false);
   const [noteDraft, setNoteDraft] = useState("");
+  const [careDate, setCareDate] = useState(() => new Date().toISOString().slice(0, 10));
   const { data: plant } = useQuery({ queryKey: ["plant", id], queryFn: () => getPlant(id) });
   const { data: events = [] } = useQuery({ queryKey: ["events", id], queryFn: () => careHistory(id, 30) });
   const { data: photos = [] } = useQuery({ queryKey: ["photos", id], queryFn: () => journalPhotos(id) });
@@ -36,15 +35,20 @@ export default function PlantDetail() {
     void queryClient.invalidateQueries({ queryKey: ["plants"] });
   };
   const logEvent = useMutation({
-    mutationFn: async (type: CareEventType) => {
+    mutationFn: async ({ type, date }: { type: CareEventType; date?: string }) => {
       if (!plant) return;
-      await logCareEvent({ id: crypto.randomUUID(), plantId: plant.id, type, at: new Date().toISOString() });
+      const at = date ? new Date(date + "T12:00:00") : new Date();
+      await logCareEvent({ id: crypto.randomUUID(), plantId: plant.id, type, at: at.toISOString() });
       const species = speciesBySlug(plant.speciesSlug);
       if (species && weather) {
-        const schedule = nextWaterAt({ species, plant, env: toEnv(weather), last: new Date() });
+        const schedule = nextWaterAt({ species, plant, env: toEnv(weather), last: at });
         await savePlant({ ...plant, nextWaterAt: schedule.nextAt.toISOString() });
       }
     },
+    onSuccess: refresh,
+  });
+  const removeEvent = useMutation({
+    mutationFn: (eventId: string) => deleteCareEvent(eventId),
     onSuccess: refresh,
   });
   const remove = useMutation({ mutationFn: () => deletePlant(id), onSuccess: () => navigate("/") });
@@ -77,7 +81,7 @@ export default function PlantDetail() {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["photos", id] }),
   });
 
-  if (!plant) return <p className="muted">Loading…</p>;
+  if (!plant) return <p className="muted">Loading...</p>;
   const species = speciesBySlug(plant.speciesSlug);
   const env = weather ? envForPlant(weather, plant.locationType) : undefined;
   const lastWater = events.find((event) => event.type === "water");
@@ -92,7 +96,7 @@ export default function PlantDetail() {
   const photoEntries = photos.filter((p) => p.kind !== "note");
   const newestPhoto = photoEntries.length ? [...photoEntries].sort((a, b) => b.at.localeCompare(a.at))[0] : undefined;
   const photoNudge = newestPhoto && Date.now() - new Date(newestPhoto.at).getTime() > DAY * 30
-    ? `It's been over a month since ${plant.name}'s last photo. A new one will make the next before-and-after more fun.`
+    ? `It's been a month since ${plant.name}'s last photo. A new one will make the next before-and-after more fun.`
     : null;
 
   async function saveProfile(currentPlant: PlantRow, patch: Partial<PlantRow>, photoFile?: File) {
@@ -101,21 +105,21 @@ export default function PlantDetail() {
       const avatarPhotoUrl = photoFile ? await preparePlantPhoto(photoFile) : currentPlant.avatarPhotoUrl;
       await update.mutateAsync({ ...currentPlant, ...patch, avatarPhotoUrl });
     } catch (reason) {
-      setEditError(reason instanceof Error ? reason.message : "We couldn't save those changes.");
+      setEditError(reason instanceof Error ? reason.message : "Couldn't save those changes.");
     }
   }
 
   return (
     <div className="plant-page">
-      <button className="back-link" onClick={() => navigate("/")}>← My garden</button>
+      <button className="back-link" onClick={() => navigate("/")}>{"\u2190"} My garden</button>
       <header className="plant-hero">
-        <div className="plant-avatar">{plant.avatarPhotoUrl ? <img src={plant.avatarPhotoUrl} alt={plant.name} /> : <span aria-hidden>🪴</span>}</div>
+        <div className="plant-avatar">{plant.avatarPhotoUrl ? <img src={plant.avatarPhotoUrl} alt={plant.name} /> : <span aria-hidden>{'\uD83C\uDF3F'}</span>}</div>
         <div className="plant-title">
-          <span className="eyebrow">{plant.spotName || "Part of your garden"}</span>
+          <span className="eyebrow">{plant.spotName || "Your garden"}</span>
           <h1>{plant.name}</h1>
-          <p><em>{species?.scientificName ?? plant.speciesSlug}</em>{species?.family ? ` · ${species.family}` : ""}</p>
-          <p>{species && <span className={`pet-flag ${species.toxicity.pets ? "toxic" : "safe"}`}>{species.toxicity.pets ? "⚠ Likely toxic to pets" : "🐾 Pet friendly"}</span>}</p>
-          <span className={`loc-badge ${isOutdoor ? "out" : "in"}`}>{isOutdoor ? "☀️ Outdoor" : "🏠 Indoor"}</span>
+          <p><em>{species?.scientificName ?? plant.speciesSlug}</em>{species?.family ? ` \u00B7 ${species.family}` : ""}</p>
+          <p>{species && <span className={`pet-flag ${species.toxicity.pets ? "toxic" : "safe"}`}>{species.toxicity.pets ? "\u26A0 Likely toxic to pets" : "\uD83D\uDC3E Pet friendly"}</span>}</p>
+          <span className={`loc-badge ${isOutdoor ? "out" : "in"}`}>{isOutdoor ? "\u2600\uFE0F Outdoor" : "\uD83C\uDFE0 Indoor"}</span>
         </div>
         <button className="btn secondary" onClick={() => setEditing((current) => !current)}>{editing ? "Cancel" : "Edit plant"}</button>
       </header>
@@ -124,16 +128,16 @@ export default function PlantDetail() {
 
       <section className="care-overview" aria-label="Care plan">
         <div className="care-highlight">
-          <span className="eyebrow">Next little task</span>
-          <h2>{schedule ? waterStatusLabel(schedule.nextAt).label : "Care plan loading"}</h2>
-          <p>{schedule ? `Water ${plant.name} around ${formatDate(schedule.nextAt)}.` : "We’re calculating the best next step."}</p>
+          <span className="eyebrow">Next up</span>
+          <h2>{schedule ? waterStatusLabel(schedule.nextAt).label : "Building care plan"}</h2>
+          <p>{schedule ? `Water ${plant.name} around ${formatDate(schedule.nextAt)}.` : "Working out the best schedule."}</p>
           <span className={`care-pill ${overdue ? "due" : "happy"}`}><i />{overdue ? "Needs attention" : "Looking good"}</span>
         </div>
-        <div className="care-fact"><span aria-hidden>💧</span><div><small>Water amount</small><strong>{waterAmount ? `≈ ${waterAmount.amountMl} ml` : "Checking weather…"}</strong></div></div>
-        <div className="care-fact"><span aria-hidden>☀️</span><div><small>Ideal light</small><strong>{species ? `${species.ideal.luxMin}–${species.ideal.luxMax} lux` : "n/a"}</strong></div></div>
+        <div className="care-fact"><span aria-hidden>{'\uD83D\uDCA7'}</span><div><small>Water amount</small><strong>{waterAmount ? `\u2248 ${waterAmount.amountMl} ml` : "Checking weather..."}</strong></div></div>
+        <div className="care-fact"><span aria-hidden>{'\u2600\uFE0F'}</span><div><small>Ideal light</small><strong>{species ? `${species.ideal.luxMin}\u2013${species.ideal.luxMax} lux` : "n/a"}</strong></div></div>
         {feed && (
           <div className="care-fact">
-            <span aria-hidden>🌱</span>
+            <span aria-hidden>{'\uD83C\uDF31'}</span>
             <div>
               <small>Next feeding</small>
               <strong>{feed.advice.growingSeason ? (feed.nextAt ? `Around ${formatDate(feed.nextAt)}` : "Feeding time!") : "Resting season"}</strong>
@@ -148,35 +152,41 @@ export default function PlantDetail() {
         <details className="care-details">
           <summary>Feeding plan</summary>
           <ul className="modifier-list">
-            <li>Every {feed.advice.intervalDays} days · NPK {feed.advice.npk.n}–{feed.advice.npk.p}–{feed.advice.npk.k} · {feed.advice.strength} appetite</li>
+            <li>Every {feed.advice.intervalDays} days \u00B7 NPK {feed.advice.npk.n}\u2013{feed.advice.npk.p}\u2013{feed.advice.npk.k} \u00B7 {feed.advice.strength} appetite</li>
             <li>{feed.advice.gramsPerLiter} g/L of feed, about {feed.advice.doseMl} ml per watering</li>
             <li>{feed.advice.guidance}</li>
-            {feed.lastFedAt && <li>Last fed {formatDate(new Date(feed.lastFedAt))}{feed.dueInDays <= 0 ? " — due" : ` — in ${feed.dueInDays} day${feed.dueInDays === 1 ? "" : "s"}`}</li>}
+            {feed.lastFedAt && <li>Last fed {formatDate(new Date(feed.lastFedAt))}{feed.dueInDays <= 0 ? " - due now" : ` - in ${feed.dueInDays} day${feed.dueInDays === 1 ? "" : "s"}`}</li>}
           </ul>
         </details>
       )}
 
       {isOutdoor && env && (frostRisk || heatRisk || rainLikely) && (
         <div className="weather-alerts">
-          {frostRisk && <p className="alert peach"><span aria-hidden>❄️</span><strong>Frost risk. </strong>{plant.name} is outdoors and it's under 3°C. Bring it in overnight or cover it.</p>}
-          {heatRisk && <p className="alert peach"><span aria-hidden>🔥</span><strong>Heat warning. </strong>It's above 35°C today. Shade {plant.name} and water in the early morning.</p>}
-          {rainLikely && <p className="alert sage"><span aria-hidden>🌧️</span><strong>Rain is likely. </strong>You can probably skip today's watering.</p>}
+          {frostRisk && <p className="alert peach"><span aria-hidden>{'\u2744\uFE0F'}</span><strong>Frost risk. </strong>{plant.name} is outdoors and it's under 3\u00B0C. Bring it in or cover it.</p>}
+          {heatRisk && <p className="alert peach"><span aria-hidden>{'\uD83D\uDD25'}</span><strong>Heat warning. </strong>It's above 35\u00B0C. Shade {plant.name} and water in the morning.</p>}
+          {rainLikely && <p className="alert sage"><span aria-hidden>{'\uD83C\uDF27\uFE0F'}</span><strong>Rain is likely. </strong>You can skip today's watering.</p>}
         </div>
       )}
 
       <section className="action-section">
-        <div><span className="eyebrow">Care actions</span><h2>A little love goes a long way</h2></div>
-        <div className="care-actions">{(["water", "mist", "fertilize", "prune", "rotate", "clean"] as CareEventType[]).map((type) => <button key={type} className={type === "water" ? "btn" : "btn secondary"} disabled={logEvent.isPending} onClick={() => void logEvent.mutate(type)}>{careIcon(type)} {type}</button>)}</div>
+        <div><span className="eyebrow">Care actions</span><h2>Log what you did</h2></div>
+        <div className="care-date-row">
+          <label className="care-date-label">
+            When
+            <input type="date" value={careDate} onChange={(e) => setCareDate(e.target.value)} max={new Date().toISOString().slice(0, 10)} />
+          </label>
+        </div>
+        <div className="care-actions">{(["water", "mist", "fertilize", "prune", "rotate", "clean"] as CareEventType[]).map((type) => <button key={type} className={type === "water" ? "btn" : "btn secondary"} disabled={logEvent.isPending} onClick={() => void logEvent.mutate({ type, date: careDate })}>{careIcon(type)} {type}</button>)}</div>
       </section>
 
       <section className="history-section">
         <div><span className="eyebrow">Plant diary</span><h2>Care history</h2></div>
-        {events.length === 0 ? <div className="timeline-empty"><span aria-hidden>✨</span><p>No care events yet. Your first small action will appear here.</p></div> : <ol className="timeline">{events.map((event) => <li key={event.id}><span aria-hidden>{careIcon(event.type)}</span><div><strong>{capitalize(event.type)}</strong>{event.note && <small>{event.note}</small>}</div><time dateTime={event.at}>{formatDateTime(new Date(event.at))}</time></li>)}</ol>}
+        {events.length === 0 ? <div className="timeline-empty"><span aria-hidden>{'\u2728'}</span><p>No care events yet. Log your first action above.</p></div> : <ol className="timeline">{events.map((event) => <li key={event.id}><span aria-hidden>{careIcon(event.type)}</span><div><strong>{capitalize(event.type)}</strong>{event.note && <small>{event.note}</small>}</div><time dateTime={event.at}>{formatDateTime(new Date(event.at))}</time><button className="timeline-delete" aria-label={`Delete ${event.type} event`} disabled={removeEvent.isPending} onClick={() => void removeEvent.mutate(event.id)}>{'\u2715'}</button></li>)}</ol>}
       </section>
 
       <section className="history-section">
         <div className="section-head">
-          <div><span className="eyebrow">Growth journal</span><h2>Photos & notes</h2></div>
+          <div><span className="eyebrow">Growth journal</span><h2>Photos and notes</h2></div>
           <div className="journal-actions">
             {photoEntries.length >= 2 && (
               <button className="btn secondary" onClick={() => setComparing((current) => !current)}>
@@ -184,19 +194,23 @@ export default function PlantDetail() {
               </button>
             )}
             <label className="btn secondary journal-add">
-              {addPhoto.isPending ? "Saving…" : "＋ Add photo"}
+              {addPhoto.isPending ? "Saving..." : "\uD83D\uDCF7 Take photo"}
               <input type="file" accept="image/*" capture="environment" disabled={addPhoto.isPending} onChange={(event) => { const f = event.target.files?.[0]; if (f) void addPhoto.mutate(f); event.currentTarget.value = ""; }} />
+            </label>
+            <label className="btn secondary journal-add">
+              {"\uD83D\uDCC1 From album"}
+              <input type="file" accept="image/*" disabled={addPhoto.isPending} onChange={(event) => { const f = event.target.files?.[0]; if (f) void addPhoto.mutate(f); event.currentTarget.value = ""; }} />
             </label>
           </div>
         </div>
-        <p className="muted">Snap a photo or jot a note every so often. It's nice to look back.</p>
+        <p className="muted">Add a photo or note every so often. It's nice to look back.</p>
         <form className="journal-composer" onSubmit={(event) => { event.preventDefault(); if (noteDraft.trim()) void addNote.mutate(noteDraft); }}>
-          <span aria-hidden>✍️</span>
-          <input type="text" placeholder={`How's ${plant.name} doing today?`} value={noteDraft} onChange={(event) => setNoteDraft(event.target.value)} disabled={addNote.isPending} />
-          <button className="btn" disabled={addNote.isPending || !noteDraft.trim()}>{addNote.isPending ? "Saving…" : "Log note"}</button>
+          <span aria-hidden>{'\u270D\uFE0F'}</span>
+          <input type="text" placeholder={`How's ${plant.name} doing?`} value={noteDraft} onChange={(event) => setNoteDraft(event.target.value)} disabled={addNote.isPending} />
+          <button className="btn" disabled={addNote.isPending || !noteDraft.trim()}>{addNote.isPending ? "Saving..." : "Log note"}</button>
         </form>
         {photos.length === 0 ? (
-          <div className="timeline-empty"><span aria-hidden>📷</span><p>No journal entries yet. Add the first one to start the diary.</p></div>
+          <div className="timeline-empty"><span aria-hidden>{'\uD83D\uDCF7'}</span><p>No journal entries yet. Add the first one to start the diary.</p></div>
         ) : (
           <>
             {comparing && <BeforeAfter photos={photoEntries} plantName={plant.name} />}
@@ -209,7 +223,7 @@ export default function PlantDetail() {
         )}
       </section>
 
-      {plant.notes && <section className="notes-card"><span aria-hidden>💛</span><div><strong>Plant notes</strong><p>{plant.notes}</p></div></section>}
+      {plant.notes && <section className="notes-card"><span aria-hidden>{'\uD83D\uDC9B'}</span><div><strong>Plant notes</strong><p>{plant.notes}</p></div></section>}
       <button className="delete-link" onClick={() => void remove.mutate()} disabled={remove.isPending}>Remove {plant.name} from my garden</button>
     </div>
   );
@@ -224,10 +238,11 @@ function EditPlantCard({ plant, saving, error, onSave }: { plant: PlantRow; savi
   const [potSizeCm, setPotSizeCm] = useState(String(plant.potSizeCm ?? ""));
   const [notes, setNotes] = useState(plant.notes ?? "");
   const [photo, setPhoto] = useState<File>();
-  return <section className="card edit-card"><h2>Make it yours</h2><div className="form-grid"><label>Name<input value={name} onChange={(event) => setName(event.target.value)} /></label><label>Favourite spot<input value={spotName} onChange={(event) => setSpotName(event.target.value)} placeholder="Living room window" /></label><label>Where it lives<select value={locationType ?? "indoor"} onChange={(event) => setLocationType(event.target.value as PlantRow["locationType"])}><option value="indoor">🏠 Indoor</option><option value="outdoor">☀️ Outdoor</option></select></label><label>Pot type<select value={potType} onChange={(event) => setPotType(event.target.value as PlantRow["potType"])}>{POT_TYPES.map((type) => <option key={type}>{type}</option>)}</select></label><label>Soil<select value={soilType} onChange={(event) => setSoilType(event.target.value as PlantRow["soilType"])}>{SOIL_TYPES.map((type) => <option key={type}>{type}</option>)}</select></label><label>Pot size (cm)<input type="number" min="1" value={potSizeCm} onChange={(event) => setPotSizeCm(event.target.value)} /></label><label>Plant photo<input type="file" accept="image/*" onChange={(event) => setPhoto(event.target.files?.[0])} /></label></div><label>Notes<textarea value={notes} rows={3} onChange={(event) => setNotes(event.target.value)} /></label>{error && <p className="form-error" role="alert">{error}</p>}<button className="btn" disabled={saving || !name.trim()} onClick={() => void onSave({ name: name.trim(), spotName: spotName.trim() || undefined, locationType, potType, soilType, potSizeCm: Number(potSizeCm) || undefined, notes: notes.trim() || undefined }, photo)}>Save changes</button></section>;
+  const isGlassPot = potType === "glass";
+  return <section className="card edit-card"><h2>Edit plant</h2><div className="form-grid"><label>Name<input value={name} onChange={(event) => setName(event.target.value)} /></label><label>Favourite spot<input value={spotName} onChange={(event) => setSpotName(event.target.value)} placeholder="Living room window" /></label><label>Where it lives<select value={locationType ?? "indoor"} onChange={(event) => setLocationType(event.target.value as PlantRow["locationType"])}><option value="indoor">{"\uD83C\uDFE0"} Indoor</option><option value="outdoor">{"\u2600\uFE0F"} Outdoor</option></select></label><label>Pot type<select value={potType} onChange={(event) => setPotType(event.target.value as PlantRow["potType"])}>{POT_TYPES.map((type) => <option key={type}>{type}</option>)}</select></label>{!isGlassPot && <label>Soil<select value={soilType} onChange={(event) => setSoilType(event.target.value as PlantRow["soilType"])}>{SOIL_TYPES.map((type) => <option key={type}>{type}</option>)}</select></label>}{isGlassPot && <p className="muted" style={{ gridColumn: "span 1", alignSelf: "center" }}>Glass pots typically use water only.</p>}<label>Pot size (cm)<input type="number" min="1" value={potSizeCm} onChange={(event) => setPotSizeCm(event.target.value)} /></label><label>Plant photo<input type="file" accept="image/*" onChange={(event) => setPhoto(event.target.files?.[0])} /></label></div><label>Notes<textarea value={notes} rows={3} onChange={(event) => setNotes(event.target.value)} /></label>{error && <p className="form-error" role="alert">{error}</p>}<button className="btn" disabled={saving || !name.trim()} onClick={() => void onSave({ name: name.trim(), spotName: spotName.trim() || undefined, locationType, potType, soilType: isGlassPot ? "well-draining" : soilType, potSizeCm: Number(potSizeCm) || undefined, notes: notes.trim() || undefined }, photo)}>Save changes</button></section>;
 }
 
-function careIcon(type: CareEventType): string { return ({ water: "💧", mist: "💦", fertilize: "🌱", prune: "✂", rotate: "↻", clean: "✨", repot: "🪴", biostimulate: "🌿" })[type]; }
+function careIcon(type: CareEventType): string { return ({ water: "\uD83D\uDCA7", mist: "\uD83D\uDCA6", fertilize: "\uD83C\uDF31", prune: "\u2702", rotate: "\u21BB", clean: "\u2728", repot: "\uD83C\uDF3F", biostimulate: "\uD83C\uDF3F" })[type]; }
 
 function JournalEntry({ entry, plantName, onDelete, onSaveNote, onComment, deleting, commenting }: {
   entry: PlantPhoto;
@@ -245,9 +260,9 @@ function JournalEntry({ entry, plantName, onDelete, onSaveNote, onComment, delet
   return (
     <li className="journal-list-item">
       <div className="journal-entry-head">
-        <span aria-hidden>{isNote ? "💬" : "📷"}</span>
+        <span aria-hidden>{isNote ? '\uD83D\uDCAC' : '\uD83D\uDCF7'}</span>
         <time dateTime={entry.at}>{formatDateTime(new Date(entry.at))}</time>
-        <button className="journal-delete" aria-label={`Delete journal entry`} disabled={deleting} onClick={() => onDelete(entry.id)}>✕</button>
+        <button className="journal-delete" aria-label={`Delete journal entry`} disabled={deleting} onClick={() => onDelete(entry.id)}>{'\u2715'}</button>
       </div>
       {entry.dataUrl && (
         <figure className="journal-entry">
@@ -261,17 +276,17 @@ function JournalEntry({ entry, plantName, onDelete, onSaveNote, onComment, delet
           <button type="button" className="btn secondary" onClick={() => { setNoteDraft(entry.note ?? ""); setEditingNote(false); }}>Cancel</button>
         </form>
       ) : entry.note ? (
-        <p className="journal-note">{entry.note} <button className="journal-edit" aria-label="Edit note" onClick={() => { setNoteDraft(entry.note ?? ""); setEditingNote(true); }}>✎</button></p>
+        <p className="journal-note">{entry.note} <button className="journal-edit" aria-label="Edit note" onClick={() => { setNoteDraft(entry.note ?? ""); setEditingNote(true); }}>{'\u270E'}</button></p>
       ) : (
-        <button className="journal-note-add" onClick={() => setEditingNote(true)}>＋ Add a caption…</button>
+        <button className="journal-note-add" onClick={() => setEditingNote(true)}>{'\uFF0B'} Add a caption...</button>
       )}
       {(entry.comments?.length ?? 0) > 0 && (
         <ul className="journal-comments">
-          {entry.comments!.map((c) => <li key={c.id}><strong>🌿</strong><span>{c.text}</span><time dateTime={c.at}>{formatDateTime(new Date(c.at))}</time></li>)}
+          {entry.comments!.map((c) => <li key={c.id}><strong>{'\uD83C\uDF3F'}</strong><span>{c.text}</span><time dateTime={c.at}>{formatDateTime(new Date(c.at))}</time></li>)}
         </ul>
       )}
       <form className="journal-comment-form" onSubmit={(event) => { event.preventDefault(); if (commentDraft.trim()) { onComment(commentDraft); setCommentDraft(""); } }}>
-        <input type="text" placeholder="Comment…" value={commentDraft} onChange={(event) => setCommentDraft(event.target.value)} disabled={commenting} />
+        <input type="text" placeholder="Comment..." value={commentDraft} onChange={(event) => setCommentDraft(event.target.value)} disabled={commenting} />
         <button className="btn secondary" disabled={commenting || !commentDraft.trim()}>Reply</button>
       </form>
     </li>

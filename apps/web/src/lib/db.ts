@@ -102,6 +102,10 @@ export async function logCareEvent(event: CareEventRow): Promise<void> {
   await db.careEvents.put(event);
 }
 
+export async function deleteCareEvent(id: string): Promise<void> {
+  await db.careEvents.delete(id);
+}
+
 export async function careHistory(plantId: string, limit = 50): Promise<CareEventRow[]> {
   return db.careEvents
     .where("plantId")

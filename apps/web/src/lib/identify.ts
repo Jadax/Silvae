@@ -186,7 +186,7 @@ export const PESTS: ReadonlyArray<readonly [RegExp, PestInfo]> = [
     severity: "moderate",
     treatments: [
       "Wipe each fluffy spot with a cotton swab dipped in rubbing alcohol",
-      "Check leaf joints and undersides — they love the crevices",
+      "Check leaf joints and undersides; they love the crevices",
       "Re-treat weekly; inspect nearby plants, they spread quietly",
     ],
   }],
@@ -195,7 +195,7 @@ export const PESTS: ReadonlyArray<readonly [RegExp, PestInfo]> = [
     icon: "🕷️",
     severity: "moderate",
     treatments: [
-      "Isolate the plant and raise humidity — mites hate it",
+      "Isolate the plant and raise humidity; mites hate it",
       "Wash the leaves and spray with insecticidal soap or neem",
       "Repeat twice a week for two weeks; the webbing marks where they hide",
     ],
@@ -217,7 +217,7 @@ export const PESTS: ReadonlyArray<readonly [RegExp, PestInfo]> = [
     treatments: [
       "Vacuum adults off in the morning, then use yellow sticky traps",
       "Spray with insecticidal soap, focusing on leaf undersides",
-      "Quarantine — whiteflies spread fast to the whole shelf",
+      "Quarantine; whiteflies spread fast to the whole shelf",
     ],
   }],
   [/thrips?/i, {
@@ -227,7 +227,7 @@ export const PESTS: ReadonlyArray<readonly [RegExp, PestInfo]> = [
     treatments: [
       "Isolate the plant and prune the worst damaged leaves",
       "Wash it down, then treat with insecticidal soap or neem repeatedly",
-      "Thrips are persistent — plan on weekly treatment for several weeks",
+      "Thrips are persistent; plan on weekly treatment for several weeks",
     ],
   }],
   [/fungus gnat|gnat/i, {
@@ -255,7 +255,7 @@ export const PESTS: ReadonlyArray<readonly [RegExp, PestInfo]> = [
     icon: "🔬",
     severity: "stubborn",
     treatments: [
-      "Treat like spider mites — wash, raise humidity, isolate",
+      "Treat like spider mites: wash, raise humidity, isolate",
       "Apply a miticide or sulfur according to the label",
       "These are tiny; treat generously and expect a long campaign",
     ],

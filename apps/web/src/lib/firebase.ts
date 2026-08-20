@@ -12,7 +12,7 @@ function parseConfig(): FirebaseOptions | null {
   try {
     return JSON.parse(raw) as FirebaseOptions;
   } catch {
-    console.warn("VITE_FIREBASE_CONFIG is set but is not valid JSON — running offline.");
+    console.warn("VITE_FIREBASE_CONFIG is set but is not valid JSON, running offline.");
     return null;
   }
 }

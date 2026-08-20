@@ -16,7 +16,7 @@ export type WindowDirection = (typeof WINDOW_DIRECTIONS)[number];
 export const WINDOW_TYPES = ["none", "sheer", "curtains"] as const;
 export type WindowType = (typeof WINDOW_TYPES)[number];
 
-export const POT_TYPES = ["plastic", "terracotta", "ceramic", "self-watering"] as const;
+export const POT_TYPES = ["plastic", "terracotta", "ceramic", "self-watering", "glass"] as const;
 export type PotType = (typeof POT_TYPES)[number];
 
 export const SOIL_TYPES = ["well-draining", "standard", "retentive"] as const;

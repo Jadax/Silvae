@@ -9,9 +9,10 @@ import {
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  getRedirectResult,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-  signInWithPopup,
+  signInWithRedirect,
   signOut,
   updateProfile,
   type User,
@@ -20,10 +21,8 @@ import { auth, isFirebaseConfigured } from "./firebase";
 import { ensureUserDoc, flushPendingWrites, pruneExpiredCaches, setUid, subscribeToCloud } from "./repo";
 
 /**
- * "signed-out" is the mandatory registration gate: Silvae requires a real
- * account (no anonymous/guest mode), so every plant is tied to a person and
- * safely synced. "unconfigured" only happens in a dev build with no
- * VITE_FIREBASE_CONFIG, where there is no auth backend to register against.
+ * Registration/sign-in gate. Rendered full-screen whenever there's no
+ * signed-in account.
  */
 type AuthStatus = "unconfigured" | "loading" | "signed-out" | "signed-in";
 
@@ -49,6 +48,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!a) return;
     const onOnline = () => void flushPendingWrites();
     window.addEventListener("online", onOnline);
+    void getRedirectResult(a);
     const unsub = onAuthStateChanged(a, (u) => {
       if (u?.isAnonymous) {
         // Leftover session from before mandatory registration — anonymous
@@ -91,7 +91,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
       signInGoogle: async () => {
         if (!auth) return;
-        await signInWithPopup(auth, new GoogleAuthProvider());
+        await signInWithRedirect(auth, new GoogleAuthProvider());
       },
       signOutUser: async () => {
         if (!auth) return;

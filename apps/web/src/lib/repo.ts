@@ -17,6 +17,7 @@ import {
 import {
   addPlant as addLocalPlant,
   careHistory as localCareHistory,
+  deleteCareEvent as deleteLocalCareEvent,
   deletePlant as deleteLocalPlant,
   getPlant as getLocalPlant,
   listPlants as listLocalPlants,
@@ -224,6 +225,15 @@ export async function logCareEvent(event: CareEventRow): Promise<void> {
       notes: event.note ?? undefined,
     }).catch((err) => {
       console.warn("Silvae sync: care event not uploaded:", err);
+    });
+  }
+}
+
+export async function deleteCareEvent(id: string): Promise<void> {
+  await deleteLocalCareEvent(id);
+  if (cloudReady()) {
+    void deleteDoc(doc(firestoreDb!, "care_events", id)).catch((err) => {
+      console.warn("Silvae sync: care event delete not uploaded:", err);
     });
   }
 }

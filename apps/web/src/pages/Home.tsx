@@ -22,7 +22,7 @@ export function PlantCard({ plant }: { plant: PlantRow }) {
   return (
     <Link className="plant-card" to={`/plants/${plant.id}`}>
       <div className="plant-visual">
-        {plant.avatarPhotoUrl ? <img src={plant.avatarPhotoUrl} alt="" /> : <span aria-hidden>🌿</span>}
+        {plant.avatarPhotoUrl ? <img src={plant.avatarPhotoUrl} alt="" /> : <span aria-hidden>{'\uD83C\uDF3F'}</span>}
         <i />
       </div>
       <div className="plant-card-body">
@@ -32,7 +32,7 @@ export function PlantCard({ plant }: { plant: PlantRow }) {
         </div>
         <span className={`care-pill ${status.tone}`}><i />{status.label}</span>
       </div>
-      {risky && <span className="pet-badge" title="Toxic to pets">⚠ pets</span>}
+      {risky && <span className="pet-badge" title="Toxic to pets">{'\u26A0'} pets</span>}
     </Link>
   );
 }
@@ -96,7 +96,7 @@ export default function Home() {
   const tomorrow = sorted.filter((plant) => waterStatus(plant).days === 1);
   const overdueCount = due.length;
   const season = seasonForMonth(new Date().getMonth());
-  const seasonIcon = { spring: "🌸", summer: "☀️", autumn: "🍂", winter: "❄️" }[season];
+  const seasonIcon = { spring: "\uD83C\uDF38", summer: "\u2600\uFE0F", autumn: "\uD83C\uDF42", winter: "\u2744\uFE0F" }[season];
   const outdoorPlants = plants.filter((plant) => plant.locationType === "outdoor");
   const frostOut = weather && weather.tempC < 3 ? outdoorPlants : [];
   const heatOut = weather && weather.tempC > 35 ? outdoorPlants : [];
@@ -106,15 +106,15 @@ export default function Home() {
     <div className="home-page">
       <section className="welcome-panel">
         <div>
-          <span className="eyebrow">Your little patch of green</span>
-          <h1>{plants.length ? "Good to see you!" : "Let’s grow something lovely."}</h1>
-          <p>{plants.length ? (overdueCount ? `${overdueCount} plant${overdueCount === 1 ? " is" : "s are"} thirsty today.` : "Everything looks happy today. Nice work!") : "Plant care is mostly remembering to water. We'll do the remembering, you keep the plant alive."}</p>
-          <Link className="btn sun" to="/add">Add your first plant <span aria-hidden>→</span></Link>
+          <span className="eyebrow">Your garden</span>
+          <h1>{plants.length ? "Good to see you!" : "Let's get growing"}</h1>
+          <p>{plants.length ? (overdueCount ? `${overdueCount} plant${overdueCount === 1 ? " needs" : "s need"} water today.` : "Everything looks happy today.") : "Plant care is mostly remembering to water. We'll do the remembering."}</p>
+          <Link className="btn sun" to="/add">Add your first plant <span aria-hidden>{'\u2192'}</span></Link>
         </div>
         <div className="sunny-art" aria-hidden>
           <span className="sun-orb" />
-          <span className="leaf leaf-one">🌿</span>
-          <span className="leaf leaf-two">☘️</span>
+          <span className="leaf leaf-one">{'\uD83C\uDF3F'}</span>
+          <span className="leaf leaf-two">{'\u2618\uFE0F'}</span>
           <span className="pot" />
         </div>
       </section>
@@ -123,14 +123,14 @@ export default function Home() {
         <section className="weather-strip" aria-label="Weather">
           {place && weather ? (
             <>
-              <Link className="weather-chip" to="/account" title="Change location">📍 {place.label}</Link>
+              <Link className="weather-chip" to="/account" title="Change location">{'\uD83D\uDCCD'} {place.label}</Link>
               <span className="weather-chip">{seasonIcon} {season}</span>
-              <span className="weather-chip">🌡 {Math.round(weather.tempC)}°C</span>
-              <span className="weather-chip">💧 {Math.round(weather.rh)}% humidity</span>
-              {warnings > 0 && <Link className="weather-chip warn" to="/account">⛅ {warnings} outdoor warning{warnings === 1 ? "" : "s"}</Link>}
+              <span className="weather-chip">{'\uD83C\uDF21\uFE0F'} {Math.round(weather.tempC)}{'\u00B0'}C</span>
+              <span className="weather-chip">{'\uD83D\uDCA7'} {Math.round(weather.rh)}% humidity</span>
+              {warnings > 0 && <Link className="weather-chip warn" to="/account">{'\u26C5'} {warnings} outdoor warning{warnings === 1 ? "" : "s"}</Link>}
             </>
           ) : (
-            <Link className="weather-chip warn" to="/account">📍 Set your location for real weather + outdoor warnings</Link>
+            <Link className="weather-chip warn" to="/account">{'\uD83D\uDCCD'} Set your location for weather data</Link>
           )}
         </section>
       )}
@@ -138,7 +138,7 @@ export default function Home() {
       {due.length > 0 && (
         <section className="today-section" aria-label="Today">
           <div className="section-heading">
-            <div><span className="eyebrow">Today</span><h2>Water me first 💧</h2></div>
+            <div><span className="eyebrow">Today</span><h2>Water me first {'\uD83D\uDCA7'}</h2></div>
           </div>
           <div className="today-list">
             {due.map((plant) => {
@@ -148,14 +148,14 @@ export default function Home() {
               return (
                 <div className="today-card" key={plant.id}>
                   <div className="today-plant">
-                    <Link className="today-avatar" to={`/plants/${plant.id}`}>{plant.avatarPhotoUrl ? <img src={plant.avatarPhotoUrl} alt="" /> : <span aria-hidden>🌿</span>}</Link>
+                    <Link className="today-avatar" to={`/plants/${plant.id}`}>{plant.avatarPhotoUrl ? <img src={plant.avatarPhotoUrl} alt="" /> : <span aria-hidden>{'\uD83C\uDF3F'}</span>}</Link>
                     <div>
                       <strong><Link className="text-link" to={`/plants/${plant.id}`}>{plant.name}</Link></strong>
-                      <small>{species?.commonNames[0] ?? plant.speciesSlug}{lastWater ? ` · last watered ${daysSince} day${daysSince === 1 ? "" : "s"} ago` : ""}</small>
+                      <small>{species?.commonNames[0] ?? plant.speciesSlug}{lastWater ? ` \u00B7 last watered ${daysSince} day${daysSince === 1 ? "" : "s"} ago` : ""}</small>
                     </div>
                   </div>
                   <div className="today-actions">
-                    <button className={`btn ${justWatered === plant.id ? "popped" : ""}`} disabled={waterNow.isPending} onClick={() => void waterNow.mutate(plant)}>{justWatered === plant.id ? "✓ Done!" : "💧 Watered"}</button>
+                    <button className={`btn ${justWatered === plant.id ? "popped" : ""}`} disabled={waterNow.isPending} onClick={() => void waterNow.mutate(plant)}>{justWatered === plant.id ? "\u2713 Done!" : "\uD83D\uDCA7 Watered"}</button>
                     <button className="btn secondary" disabled={stillMoist.isPending} onClick={() => void stillMoist.mutate(plant)}>Still moist</button>
                   </div>
                 </div>
@@ -172,7 +172,7 @@ export default function Home() {
       )}
       {tomorrow.length > 0 && (
         <div className="tomorrow-row">
-          {tomorrow.map((plant) => <Link key={plant.id} className="tomorrow-chip" to={`/plants/${plant.id}`}>{plant.avatarPhotoUrl ? <img src={plant.avatarPhotoUrl} alt="" /> : <span aria-hidden>🌿</span>} {plant.name}</Link>)}
+          {tomorrow.map((plant) => <Link key={plant.id} className="tomorrow-chip" to={`/plants/${plant.id}`}>{plant.avatarPhotoUrl ? <img src={plant.avatarPhotoUrl} alt="" /> : <span aria-hidden>{'\uD83C\uDF3F'}</span>} {plant.name}</Link>)}
         </div>
       )}
 
@@ -181,14 +181,14 @@ export default function Home() {
           <span className="eyebrow">My garden</span>
           <h2>{plants.length ? `${plants.length} happy plant${plants.length === 1 ? "" : "s"}` : "Your plants will live here"}</h2>
         </div>
-        {plants.length > 0 && <Link className="btn" to="/add"><span aria-hidden>＋</span> Add plant</Link>}
+        {plants.length > 0 && <Link className="btn" to="/add"><span aria-hidden>{'\uFF0B'}</span> Add plant</Link>}
       </section>
 
       {sorted.length === 0 ? (
         <div className="empty-garden">
-          <div className="empty-illustration" aria-hidden>🪴</div>
+          <div className="empty-illustration" aria-hidden>{'\uD83C\uDF3F'}</div>
           <h2>Ready when you are</h2>
-          <p>Give your plant a name, choose its type, and we’ll help with the rest.</p>
+          <p>Name your plant, pick its type, and we'll handle the rest.</p>
           <Link className="btn" to="/add">Add a plant</Link>
           <Link className="text-link" to="/discover">Or browse the plant library</Link>
         </div>
@@ -197,8 +197,8 @@ export default function Home() {
       )}
 
       <section className="helper-grid" aria-label="Quick actions">
-        <Link to="/doctor" className="helper-card peach"><span className="helper-icon">✚</span><div><strong>Plant looking sad?</strong><small>Let the Plant Doctor help</small></div><span>→</span></Link>
-        <Link to="/discover" className="helper-card sage"><span className="helper-icon">⌕</span><div><strong>Meet a new plant</strong><small>Explore 400 care guides</small></div><span>→</span></Link>
+        <Link to="/doctor" className="helper-card peach"><span className="helper-icon">{'\u271A'}</span><div><strong>Plant looking sad?</strong><small>Let the Plant Doctor help</small></div><span>{'\u2192'}</span></Link>
+        <Link to="/discover" className="helper-card sage"><span className="helper-icon">{'\u2281'}</span><div><strong>Meet a new plant</strong><small>Explore 400 care guides</small></div><span>{'\u2192'}</span></Link>
       </section>
     </div>
   );

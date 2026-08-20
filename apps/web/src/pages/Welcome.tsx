@@ -3,18 +3,19 @@ import { useAuth } from "../lib/auth";
 
 function friendlyAuthError(err: unknown): string {
   const code = err instanceof Error && "code" in err ? String((err as { code: unknown }).code) : "";
-  if (code === "auth/email-already-in-use") return "That email already has an account — try signing in instead.";
+  if (code === "auth/email-already-in-use") return "That email already has an account - try signing in instead.";
   if (code === "auth/invalid-credential" || code === "auth/wrong-password") return "That email and password don't match.";
   if (code === "auth/user-not-found") return "No account found for that email.";
   if (code === "auth/weak-password") return "Choose a password with at least 6 characters.";
   if (code === "auth/invalid-email") return "That doesn't look like a valid email address.";
+  if (code === "auth/popup-blocked") return "The sign-in popup was blocked. Please allow popups for this site.";
+  if (code === "auth/cancelled-popup-request") return "Sign-in was cancelled.";
   return err instanceof Error ? err.message : "Something went wrong. Please try again.";
 }
 
 /**
  * The mandatory registration/sign-in gate. Rendered full-screen, with no nav
- * chrome, whenever there's no signed-in account — Silvae ties every plant to
- * a real account so care history and photos are never lost.
+ * chrome, whenever there's no signed-in account.
  */
 export default function Welcome() {
   const { signUp, signIn, signInGoogle } = useAuth();
@@ -22,6 +23,7 @@ export default function Welcome() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [googleBusy, setGoogleBusy] = useState(false);
@@ -67,11 +69,11 @@ export default function Welcome() {
 
       <section className="card auth-card">
         <span className="eyebrow">{mode === "signup" ? "Create your account" : "Welcome back"}</span>
-        <h1>{mode === "signup" ? "Let's grow something lovely" : "Good to see you again"}</h1>
+        <h1>{mode === "signup" ? "Let's grow something" : "Good to see you"}</h1>
         <p className="muted">
           {mode === "signup"
-            ? "An account keeps your plants, photos, and care history safe and synced across devices."
-            : "Sign in to pick up right where you left off."}
+            ? "Your plants, photos, and care history stay safe and synced across all your devices."
+            : "Sign in to pick up where you left off."}
         </p>
 
         <form onSubmit={(e) => void submit(e)}>
@@ -87,25 +89,36 @@ export default function Welcome() {
           </label>
           <label>
             Password
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              minLength={6}
-              autoComplete={mode === "signup" ? "new-password" : "current-password"}
-              required
-            />
+            <div className="password-field">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                minLength={6}
+                autoComplete={mode === "signup" ? "new-password" : "current-password"}
+                required
+              />
+              <button
+                type="button"
+                className="password-toggle"
+                onClick={() => setShowPassword((v) => !v)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                tabIndex={-1}
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
           </label>
           {error && <p className="form-error" role="alert">{error}</p>}
           <button className="btn sun" disabled={busy} type="submit">
-            {busy ? "Please wait…" : mode === "signup" ? "Create account" : "Sign in"}
+            {busy ? "Please wait..." : mode === "signup" ? "Create account" : "Sign in"}
           </button>
         </form>
 
         <div className="auth-divider"><span>or</span></div>
 
         <button className="btn secondary" onClick={() => void withGoogle()} disabled={googleBusy}>
-          {googleBusy ? "Please wait…" : "Continue with Google"}
+          {googleBusy ? "Please wait..." : "Continue with Google"}
         </button>
 
         <p className="muted auth-switch">

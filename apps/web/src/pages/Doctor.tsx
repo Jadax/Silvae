@@ -125,7 +125,6 @@ function toSymptoms(form: Form): Symptoms {
   };
 }
 
-/** Write photo-inferred symptom flags into the checklist form for confirmation. */
 function applyInferred(form: Form, inferred: Symptoms): Form {
   const next = { ...form };
   (Object.keys(inferred) as (keyof Symptoms)[]).forEach((key) => {
@@ -170,7 +169,6 @@ export default function Doctor() {
     setIdMatches([]);
     setIdError(null);
     if (!file) return;
-    // Screenshot chrome auto-trim: the crop tool preselects the plant region.
     void detectTrimBounds(file).then(setPreset);
   };
 
@@ -226,25 +224,26 @@ export default function Doctor() {
       <h1>Plant Doctor</h1>
       <p className="muted">
         Identify a plant from a photo, or describe what looks wrong. Photo ID sends the image to
-        our plant service; the symptom check runs entirely on your device.
+        our plant service. The symptom check runs on your device.
       </p>
 
       <section className="card" aria-label="Identify by photo">
         <h2>What plant is this?</h2>
         <p className="muted">
-          Take a photo or upload a screenshot, crop it to the plant, and we'll match it against
+          Take a photo or upload one, crop it to the plant, and we'll try to match it to
           the Silvae catalog.
         </p>
         {!photo ? (
-          <label>
-            Photo
-            <input
-              type="file"
-              accept="image/*"
-              capture="environment"
-              onChange={(e) => pickPhoto(e.target.files?.[0] ?? null)}
-            />
-          </label>
+          <div className="photo-actions">
+            <label className="photo-button">
+              {"\uD83D\uDCF7 Take photo"}
+              <input type="file" accept="image/*" capture="environment" onChange={(e) => pickPhoto(e.target.files?.[0] ?? null)} />
+            </label>
+            <label className="photo-button photo-button-secondary">
+              {"\uD83D\uDCC1 Choose from album"}
+              <input type="file" accept="image/*" onChange={(e) => pickPhoto(e.target.files?.[0] ?? null)} />
+            </label>
+          </div>
         ) : (
           <>
             <CropTool
@@ -254,15 +253,16 @@ export default function Doctor() {
               onSubmit={(crop) => void runIdentify(crop ?? photo)}
               onCancel={() => pickPhoto(null)}
             />
-            <label className="muted" style={{ display: "block", marginTop: "0.5rem" }}>
-              <input
-                type="file"
-                accept="image/*"
-                capture="environment"
-                onChange={(e) => pickPhoto(e.target.files?.[0] ?? null)}
-              />{" "}
-              Choose a different file
-            </label>
+            <div className="photo-actions" style={{ marginTop: "0.5rem" }}>
+              <label className="photo-button photo-button-secondary">
+                {"\uD83D\uDCF7 Retake photo"}
+                <input type="file" accept="image/*" capture="environment" onChange={(e) => pickPhoto(e.target.files?.[0] ?? null)} />
+              </label>
+              <label className="photo-button photo-button-secondary">
+                {"\uD83D\uDCC1 Choose different"}
+                <input type="file" accept="image/*" onChange={(e) => pickPhoto(e.target.files?.[0] ?? null)} />
+              </label>
+            </div>
           </>
         )}
 
@@ -313,13 +313,13 @@ export default function Doctor() {
                       {m.inCatalog ? (
                         <>
                           {" "}
-                          · has a care guide ·{" "}
+                          \u00B7 has a care guide \u00B7{" "}
                           <Link to={`/species/${m.slug}`}>open it</Link>
                         </>
                       ) : (
                         <>
                           {" "}
-                          · not in the catalog yet ·{" "}
+                          \u00B7 not in the catalog yet \u00B7{" "}
                           <Link to={`/discover?q=${encodeURIComponent(m.scientificName)}`}>
                             search the catalog
                           </Link>
@@ -355,7 +355,7 @@ export default function Doctor() {
                     <strong>Detected: {pest.pest}</strong>
                     <span className={`badge ${pest.severity === "stubborn" ? "badge-low" : pest.severity === "moderate" ? "badge-warn" : "badge"}`}>{pest.severity}</span>
                   </div>
-                  <p className="muted">Photos can mislead — confirm what you see on the plant first.</p>
+                  <p className="muted">Photos can mislead. Confirm what you see on the plant first.</p>
                   <ol className="treatment">
                     {pest.treatments.map((step, i) => <li key={i}>{step}</li>)}
                   </ol>
@@ -364,12 +364,12 @@ export default function Doctor() {
             )}
             {showHealthBridge && (
               <div className="alert peach health-bridge" role="status">
-                <span aria-hidden>🩺</span>
+                <span aria-hidden>{'\uD83E\uDE7A'}</span>
                 <div>
                   <strong>This photo may show a problem.</strong>
                   <p className="muted">
                     {idResult.disease?.name
-                      ? <>The service flagged <strong>{idResult.disease.name}</strong>. Photos can mislead, so check what you actually see before acting.</>
+                      ? <>The service flagged <strong>{idResult.disease.name}</strong>. Photos can mislead, so check what you see before acting.</>
                       : "Something may be off, but the photo alone isn't clear enough. Check the symptoms below."}
                   </p>
                   {hasInferred && (
@@ -387,7 +387,7 @@ export default function Doctor() {
 
       <section className="card" aria-label="Symptom checklist">
         <h2>What does the plant look like?</h2>
-        <p className="muted">Tick everything you can see. Leave the rest as “normal”.</p>
+        <p className="muted">Tick everything you can see. Leave the rest as "normal".</p>
         <form onSubmit={(e) => { e.preventDefault(); submit(); }}>
           <fieldset>
             <legend>Leaves</legend>

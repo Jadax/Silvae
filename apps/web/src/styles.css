@@ -482,3 +482,18 @@ th { color: var(--muted); font-size: .75rem; letter-spacing: .05em; text-transfo
 .auth-divider::before, .auth-divider::after { content: ""; flex: 1; height: 1px; background: var(--border); }
 .auth-switch { text-align: center; margin: 0; }
 .auth-loading { min-height: 100dvh; display: grid; place-items: center; color: var(--muted); }
+
+.password-field { position: relative; display: flex; }
+.password-field input { flex: 1; padding-right: 4rem; }
+.password-toggle { position: absolute; right: 1px; top: 1px; bottom: 1px; padding: 0 .7rem; border: 0; border-radius: 0 12px 12px 0; background: var(--surface-soft); color: var(--brand); cursor: pointer; font-size: .78rem; font-weight: 700; }
+
+.photo-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.photo-button-secondary { background: var(--surface) !important; color: var(--brand) !important; }
+.photo-button-secondary input { position: absolute; inset: 0; width: 100%; min-height: 0; opacity: 0; cursor: pointer; }
+
+.care-date-row { display: flex; align-items: center; gap: .75rem; margin-bottom: .5rem; }
+.care-date-label { display: flex; align-items: center; gap: .5rem; font-size: .85rem; font-weight: 700; color: var(--muted); }
+.care-date-label input { min-height: 38px; padding: .4rem .65rem; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); color: var(--text); font-size: .85rem; }
+
+.timeline-delete { display: grid; place-items: center; width: 28px; height: 28px; border: 0; border-radius: 50%; background: transparent; color: var(--muted); cursor: pointer; font-size: .8rem; margin-left: auto; }
+.timeline-delete:hover { background: var(--peach); color: var(--danger); }

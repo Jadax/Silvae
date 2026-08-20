@@ -21,7 +21,7 @@ export default function SpeciesGuide() {
       <div className="setup-page">
         <h1>Species not found</h1>
         <p className="muted">
-          We don’t have a care guide for “{slug}” yet.{" "}
+          We don't have a care guide for "{slug}" yet.{" "}
           <Link to="/discover">Browse the 400-species catalog.</Link>
         </p>
       </div>
@@ -29,28 +29,28 @@ export default function SpeciesGuide() {
   }
 
   const facts = [
-    { icon: "💧", label: "Watering", value: `${species.ideal.waterAmountMl} ml every ${species.ideal.waterIntervalDays} days` },
-    { icon: "☀️", label: "Ideal light", value: `${species.ideal.luxMin}–${species.ideal.luxMax} lux` },
-    { icon: "🌡️", label: "Temperature", value: `${species.ideal.tempMinC}–${species.ideal.tempMaxC}°C` },
-    { icon: "💦", label: "Humidity", value: `${species.ideal.humidityMin}–${species.ideal.humidityMax}%` },
+    { icon: "\uD83D\uDCA7", label: "Watering", value: `${species.ideal.waterAmountMl} ml every ${species.ideal.waterIntervalDays} days` },
+    { icon: "\u2600\uFE0F", label: "Ideal light", value: `${species.ideal.luxMin}\u2013${species.ideal.luxMax} lux` },
+    { icon: "\uD83C\uDF21\uFE0F", label: "Temperature", value: `${species.ideal.tempMinC}\u2013${species.ideal.tempMaxC}{'\u00B0'}C` },
+    { icon: "\uD83D\uDCA6", label: "Humidity", value: `${species.ideal.humidityMin}\u2013${species.ideal.humidityMax}%` },
   ];
 
   const feed = feedingAdvice({ species, season: seasonForMonth(new Date().getMonth()), potSizeCm: 20 });
 
   return (
     <div className="plant-page">
-      <button className="back-link" onClick={() => navigate("/discover")}>← Discover</button>
+      <button className="back-link" onClick={() => navigate("/discover")}>{"\u2190"} Discover</button>
       <header className="plant-hero">
-        <div className="plant-avatar" aria-hidden>🌱</div>
+        <div className="plant-avatar" aria-hidden>{'\uD83C\uDF31'}</div>
         <div className="plant-title">
           <span className="eyebrow">Care guide</span>
           <h1>{species.commonNames[0]}</h1>
           <p>
-            <em>{species.scientificName}</em> · {species.family}
+            <em>{species.scientificName}</em> \u00B7 {species.family}
           </p>
           <p>
             <span className={`pet-flag ${species.toxicity.pets ? "toxic" : "safe"}`}>
-              {species.toxicity.pets ? "⚠ Likely toxic to pets" : "🐾 Pet friendly"}
+              {species.toxicity.pets ? "\u26A0 Likely toxic to pets" : "\uD83D\uDC3E Pet friendly"}
             </span>
           </p>
           {species.toxicity.note && <p className="muted">{species.toxicity.note}</p>}
@@ -82,15 +82,15 @@ export default function SpeciesGuide() {
           <li>Mist {species.ideal.mistIntervalDays === 0 ? "rarely" : `every ${species.ideal.mistIntervalDays} days`}</li>
           <li>Repot about every {species.ideal.repotIntervalMonths} months</li>
           <li>Rotate every {species.ideal.rotateIntervalDays} days</li>
-          <li>Soil pH {species.ideal.phMin}–{species.ideal.phMax}</li>
+          <li>Soil pH {species.ideal.phMin}\u2013{species.ideal.phMax}</li>
         </ul>
       </details>
 
       <details className="care-details">
         <summary>Feeding plan</summary>
         <ul className="modifier-list">
-          <li>Fertilise every {species.ideal.fertIntervalDays} days (NPK {species.ideal.npk.n}–{species.ideal.npk.p}–{species.ideal.npk.k})</li>
-          <li>Use about {feed.gramsPerLiter} g/L of a balanced feed — roughly {feed.doseMl} ml for a standard 20 cm pot</li>
+          <li>Fertilise every {species.ideal.fertIntervalDays} days (NPK {species.ideal.npk.n}\u2013{species.ideal.npk.p}\u2013{species.ideal.npk.k})</li>
+          <li>Use about {feed.gramsPerLiter} g/L of a balanced feed, roughly {feed.doseMl} ml for a standard 20 cm pot</li>
           <li>{feed.guidance}</li>
         </ul>
       </details>
@@ -101,7 +101,7 @@ export default function SpeciesGuide() {
           <li>Drought tolerance: {level(species.tolerance.drought)}</li>
           <li>Shade tolerance: {level(species.tolerance.shade)}</li>
           <li>Cold tolerance: {level(species.tolerance.cold)}</li>
-          <li>Growth rate: {growthRate(species.growth.rate)} · max {species.growth.maxHeightCm} cm</li>
+          <li>Growth rate: {growthRate(species.growth.rate)} \u00B7 max {species.growth.maxHeightCm} cm</li>
         </ul>
       </details>
 
