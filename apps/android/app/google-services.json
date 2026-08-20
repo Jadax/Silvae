@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "370944805139",
+    "project_id": "silvae",
+    "storage_bucket": "silvae.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370944805139:android:9a928a9d7627602fc932e6",
+        "android_client_info": {
+          "package_name": "org.silvae"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "370944805139-8lgf4ik63ukp37gd0dkmd6ejrngqsalf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.silvae",
+            "certificate_hash": "2e864e82d845572a119b43a6051fbf19c1a1c9c5"
+          }
+        },
+        {
+          "client_id": "370944805139-jd575jdpo1rdmorgfclmntitja9o6141.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.silvae",
+            "certificate_hash": "8f71a8367717cf529e312c07b88c875362bd89bc"
+          }
+        },
+        {
+          "client_id": "370944805139-0611k316terfkebeu3qlbafg803naj85.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBip5O08bYZZmqO7AQCWtcKLog_UdeZJvs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "370944805139-0611k316terfkebeu3qlbafg803naj85.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
