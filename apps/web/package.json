@@ -15,7 +15,7 @@
     "@silvae/core": "workspace:*",
     "@tanstack/react-query": "^5.101.4",
     "dexie": "^4.4.4",
-    "firebase": "^12.17.0",
+    "firebase": "^12.17.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.2"
