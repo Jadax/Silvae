@@ -2,14 +2,11 @@ import type { Species } from "../dto/species.js";
 import type { Env, Irrigation } from "../dto/weather.js";
 import { clamp } from "../constants.js";
 import { round2 } from "./schedule.js";
+import { potVolumeL, potWaterMl } from "./pot.js";
 
 /**
- * Quantitative irrigation recommendation (S-10, harvested from yingxin-jia's
- * evapotranspiration approach). Returns an actionable "≈ X ml today".
- *
- * Simplified Hargreaves-style proxy built from current weather:
- *   reference ET ~ 3.5 mm/day scaled by daylight, heat and solar intensity,
- *   minus today's rainfall, then mapped onto the species baseline watering.
+ * Reference evapotranspiration proxy built from current weather (simplified
+ * Hargreaves-style): ~3.5 mm/day scaled by daylight, heat and sun strength.
  */
 export function evapotranspirationMm(env: Env): number {
   const solar = clamp(env.daylightH / 12, 0.2, 1);
@@ -18,22 +15,40 @@ export function evapotranspirationMm(env: Env): number {
   return round2(3.5 * solar * heat * (1 + 0.25 * uv));
 }
 
-export function irrigation(species: Species, env: Env, cropAgeDays?: number): Irrigation {
+export interface IrrigationOptions {
+  /** Pot diameter in cm. When known, the amount is sized to the pot. */
+  potSizeCm?: number;
+  /** Outdoor plants have the amount scaled by today's evaporation and rain. */
+  outdoor?: boolean;
+}
+
+/**
+ * How much to give at the next watering. The pot sets the baseline (a
+ * fifth of its volume); without a pot size the species' typical amount is
+ * used. Outdoor plants are then scaled by evaporation and rainfall, since
+ * sun, heat and rain change what they need far more than indoor plants.
+ */
+export function irrigation(species: Species, env: Env, opts: IrrigationOptions = {}): Irrigation {
   const et = evapotranspirationMm(env);
   const rainfall = env.precipitationMm ?? 0;
-  const net = Math.max(0, et - rainfall);
+  const base = opts.potSizeCm ? potWaterMl(opts.potSizeCm) : species.ideal.waterAmountMl;
+  const explanation: string[] = opts.potSizeCm
+    ? [`About a fifth of a ${round2(potVolumeL(opts.potSizeCm))} L pot, enough to soak the roots until a little drains out`]
+    : [`The typical amount for ${species.commonNames[0] ?? species.scientificName}`];
 
-  const growthFactor = clamp(1 + (cropAgeDays ?? 0) / 365, 0.8, 1.2);
-  const amountMl = Math.round(
-    clamp((species.ideal.waterAmountMl * net) / 3.5, species.ideal.waterAmountMl * 0.5, species.ideal.waterAmountMl * 1.5),
-  );
+  let factor = 1;
+  if (opts.outdoor) {
+    const net = Math.max(0, et - rainfall);
+    factor = clamp(net / 3.5, 0.5, 1.5);
+    explanation.push(`About ${et} mm evaporates today (${env.tempC}°C, ${env.daylightH}h daylight)`);
+    if (rainfall > 0) explanation.push(`Minus ${rainfall} mm of rain`);
+  }
 
-  const explanation: string[] = [
-    `≈ ${et} mm evaporates today (temp ${env.tempC}°C, ${env.daylightH}h daylight)`,
-  ];
-  if (rainfall > 0) explanation.push(`− ${rainfall} mm from rain`);
-  if (growthFactor !== 1)
-    explanation.push(`× ${growthFactor.toFixed(2)} growth/crop-age factor`);
-
-  return { amountMl, evapotranspirationMm: et, rainfallMm: rainfall, factor: growthFactor, explanation };
+  return {
+    amountMl: Math.round((base * factor) / 10) * 10,
+    evapotranspirationMm: et,
+    rainfallMm: rainfall,
+    factor: round2(factor),
+    explanation,
+  };
 }

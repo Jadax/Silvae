@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getSettings, saveSettings, type Settings } from "./db";
 import type { Place } from "./location";
+import { pushPrefs } from "./repo";
 
 export const DEFAULT_SETTINGS: Settings = {
   pets: { cat: false, dog: false },
@@ -23,6 +24,9 @@ export function useSaveSettings() {
       const current = (await getSettings()) ?? DEFAULT_SETTINGS;
       const next: Settings = { ...DEFAULT_SETTINGS, ...current, ...patch };
       await saveSettings(next);
+      if ("pets" in patch || "fertilizer" in patch) {
+        void pushPrefs({ pets: next.pets, fertilizer: next.fertilizer });
+      }
       return next;
     },
     onSuccess: (next) => queryClient.setQueryData(["settings"], next),

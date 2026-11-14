@@ -28,12 +28,14 @@ class SettingsRepository @Inject constructor(
     private val settingsDao: SettingsDao,
     private val locationApi: LocationApi,
     @ApplicationContext private val context: Context,
+    private val sync: org.silvae.data.sync.CloudSync,
 ) {
     fun observe(): Flow<SettingsEntity?> = settingsDao.observe()
     suspend fun get(): SettingsEntity = settingsDao.get() ?: SettingsEntity()
 
     suspend fun setPets(cat: Boolean, dog: Boolean) {
         settingsDao.upsert(get().copy(petCat = cat, petDog = dog))
+        sync.petsChanged(cat, dog)
     }
 
     suspend fun setLocation(place: Place) {

@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { listPlants } from "../lib/repo";
+import { saveJournalPhoto } from "../lib/photos";
 import { diagnose, type Diagnosis, type Symptoms } from "@silvae/core";
 import { describeIdentifyError, type IdentifyResponse } from "../lib/api";
 import { identifyFromFile, photoSymptoms, pestFromDisease, type MatchedSpecies } from "../lib/identify";
@@ -157,6 +160,10 @@ export default function Doctor() {
   const [idResult, setIdResult] = useState<IdentifyResponse | null>(null);
   const [idMatches, setIdMatches] = useState<MatchedSpecies[]>([]);
   const [idError, setIdError] = useState<string | null>(null);
+  const [checkedImage, setCheckedImage] = useState<File | Blob | null>(null);
+  const [journalPlant, setJournalPlant] = useState("");
+  const [journalState, setJournalState] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const { data: plants = [] } = useQuery({ queryKey: ["plants"], queryFn: listPlants });
 
   const set = (key: keyof Form, value: string | boolean) =>
     setForm((f) => ({ ...f, [key]: value }));
@@ -177,6 +184,8 @@ export default function Doctor() {
     setIdError(null);
     setIdResult(null);
     setIdMatches([]);
+    setJournalState("idle");
+    setCheckedImage(source);
     try {
       const { result, matches } = await identifyFromFile(source);
       setIdResult(result);
@@ -213,6 +222,24 @@ export default function Doctor() {
     });
   };
 
+  /** Keep the checked photo and the verdict in a plant's growth journal. */
+  const saveToJournal = async () => {
+    if (!checkedImage || !journalPlant || !idResult) return;
+    setJournalState("saving");
+    const health = idResult.isHealthy;
+    const verdict = !health
+      ? "Plant Doctor photo."
+      : health.binary
+        ? `Plant Doctor: looks healthy (${Math.round((health.probability ?? 0) * 100)}% sure).`
+        : `Plant Doctor: possible problem${idResult.disease?.name ? `, ${idResult.disease.name}` : ""}.${pest ? ` ${pest.pest}: ${pest.treatments.join("; ")}.` : ""}`;
+    try {
+      await saveJournalPhoto(journalPlant, checkedImage, { note: verdict });
+      setJournalState("saved");
+    } catch {
+      setJournalState("error");
+    }
+  };
+
   const reset = () => {
     setForm({});
     setResults(null);
@@ -236,11 +263,11 @@ export default function Doctor() {
         {!photo ? (
           <div className="photo-actions">
             <label className="photo-button">
-              {"\uD83D\uDCF7 Take photo"}
+              {"📷 Take photo"}
               <input type="file" accept="image/*" capture="environment" onChange={(e) => pickPhoto(e.target.files?.[0] ?? null)} />
             </label>
             <label className="photo-button photo-button-secondary">
-              {"\uD83D\uDCC1 Choose from album"}
+              {"📁 Choose from album"}
               <input type="file" accept="image/*" onChange={(e) => pickPhoto(e.target.files?.[0] ?? null)} />
             </label>
           </div>
@@ -255,11 +282,11 @@ export default function Doctor() {
             />
             <div className="photo-actions" style={{ marginTop: "0.5rem" }}>
               <label className="photo-button photo-button-secondary">
-                {"\uD83D\uDCF7 Retake photo"}
+                {"📷 Retake photo"}
                 <input type="file" accept="image/*" capture="environment" onChange={(e) => pickPhoto(e.target.files?.[0] ?? null)} />
               </label>
               <label className="photo-button photo-button-secondary">
-                {"\uD83D\uDCC1 Choose different"}
+                {"📁 Choose different"}
                 <input type="file" accept="image/*" onChange={(e) => pickPhoto(e.target.files?.[0] ?? null)} />
               </label>
             </div>
@@ -313,13 +340,13 @@ export default function Doctor() {
                       {m.inCatalog ? (
                         <>
                           {" "}
-                          \u00B7 has a care guide \u00B7{" "}
+                          · has a care guide ·{" "}
                           <Link to={`/species/${m.slug}`}>open it</Link>
                         </>
                       ) : (
                         <>
                           {" "}
-                          \u00B7 not in the catalog yet \u00B7{" "}
+                          · not in the catalog yet ·{" "}
                           <Link to={`/discover?q=${encodeURIComponent(m.scientificName)}`}>
                             search the catalog
                           </Link>
@@ -364,7 +391,7 @@ export default function Doctor() {
             )}
             {showHealthBridge && (
               <div className="alert peach health-bridge" role="status">
-                <span aria-hidden>{'\uD83E\uDE7A'}</span>
+                <span aria-hidden>{'🩺'}</span>
                 <div>
                   <strong>This photo may show a problem.</strong>
                   <p className="muted">
@@ -381,6 +408,22 @@ export default function Doctor() {
               </div>
             )}
             {idResult.cached && <p className="muted">Reused a cached result for this photo.</p>}
+            {plants.length > 0 && (
+              <div className="journal-save">
+                <label>
+                  Keep this photo in a plant's journal
+                  <select value={journalPlant} onChange={(e) => { setJournalPlant(e.target.value); setJournalState("idle"); }}>
+                    <option value="">Choose a plant...</option>
+                    {plants.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
+                  </select>
+                </label>
+                <button className="btn secondary" disabled={!journalPlant || journalState === "saving" || journalState === "saved"} onClick={() => void saveToJournal()}>
+                  {journalState === "saving" ? "Saving..." : journalState === "saved" ? "✓ Saved" : "Save to journal"}
+                </button>
+                {journalState === "saved" && <Link className="text-link" to={`/plants/${journalPlant}`}>Open plant</Link>}
+                {journalState === "error" && <span className="form-error">Couldn't save the photo.</span>}
+              </div>
+            )}
           </div>
         )}
       </section>

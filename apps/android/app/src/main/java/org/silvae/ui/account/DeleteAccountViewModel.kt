@@ -9,8 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.silvae.auth.AuthRepository
-import org.silvae.data.PlantRepository
-import org.silvae.data.SettingsRepository
+import org.silvae.data.sync.CloudSync
 import javax.inject.Inject
 
 data class DeleteAccountState(val busy: Boolean = false, val error: String? = null, val done: Boolean = false)
@@ -18,14 +17,13 @@ data class DeleteAccountState(val busy: Boolean = false, val error: String? = nu
 /**
  * Account + data deletion — Google Play policy requires apps that support
  * account creation to support deleting the account and its data in-app, not
- * just signing out. Deletes local + Firestore plant data first, then the
- * Firebase Auth account itself.
+ * just signing out. Deletes every cloud document the account owns and all
+ * local data first, then the Firebase Auth account itself.
  */
 @HiltViewModel
 class DeleteAccountViewModel @Inject constructor(
     private val authRepository: AuthRepository,
-    private val plantRepository: PlantRepository,
-    private val settingsRepository: SettingsRepository,
+    private val cloudSync: CloudSync,
 ) : ViewModel() {
     private val _state = MutableStateFlow(DeleteAccountState())
     val state: StateFlow<DeleteAccountState> = _state
@@ -34,14 +32,15 @@ class DeleteAccountViewModel @Inject constructor(
         _state.update { it.copy(busy = true, error = null) }
         viewModelScope.launch {
             try {
-                plantRepository.deleteAllMyPlants()
-                settingsRepository.clear()
+                cloudSync.deleteAllCloudData()
                 authRepository.deleteAccount()
                 _state.update { it.copy(busy = false, done = true) }
             } catch (e: FirebaseAuthRecentLoginRequiredException) {
-                _state.update { it.copy(busy = false, error = "For your security, sign out and sign back in, then try deleting your account again.") }
+                cloudSync.resume()
+                _state.update { it.copy(busy = false, error = "Your plant data is deleted. For your security, sign out and back in, then tap Delete account again to remove the account itself.") }
             } catch (e: Exception) {
-                _state.update { it.copy(busy = false, error = e.localizedMessage ?: "Couldn't delete your account. Try again.") }
+                cloudSync.resume()
+                _state.update { it.copy(busy = false, error = "Couldn't delete everything. Check your connection and try again.") }
             }
         }
     }

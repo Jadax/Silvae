@@ -2,7 +2,9 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { nextWaterAt, type ScheduleInput } from "./care/schedule.js";
 import { irrigation, evapotranspirationMm } from "./care/irrigation.js";
-import { feedingAdvice, nextFertilizeAt, potVolumeL, feedingStrength } from "./care/feeding.js";
+import { feedingAdvice, nextFertilizeAt, feedingStrength } from "./care/feeding.js";
+import { potVolumeL, potWaterMl } from "./care/pot.js";
+import { seasonAt } from "./constants.js";
 import { regionFit, climateBand, recommendForRegion } from "./care/region.js";
 import { diagnose } from "./doctor/rules.js";
 import { assessSpot, suitability } from "./placement/advisor.js";
@@ -111,6 +113,42 @@ describe("care/schedule", () => {
   });
 });
 
+describe("care/pot and seasons", () => {
+  it("flips seasons in the southern hemisphere", () => {
+    const nov = new Date(2026, 10, 14);
+    assert.equal(seasonAt(nov), "autumn");
+    assert.equal(seasonAt(nov, 51.5), "autumn");
+    assert.equal(seasonAt(nov, -33.9), "spring");
+    assert.equal(seasonAt(new Date(2026, 6, 1), -26.2), "winter");
+  });
+
+  it("small pots dry faster and big pots slower", () => {
+    const at = (potSizeCm: number) =>
+      nextWaterAt({ species, plant: { ...plant, potSizeCm }, env: baseEnv, last: new Date("2026-08-01") }).intervalDays;
+    assert.ok(at(8) < at(20));
+    assert.ok(at(40) > at(20));
+    assert.ok(at(30) > at(20) && at(30) < at(40));
+  });
+
+  it("self-watering pots stretch the interval, terracotta shortens it", () => {
+    const at = (potType: ScheduleInput["plant"]["potType"]) =>
+      nextWaterAt({ species, plant: { ...plant, potType }, env: baseEnv, last: new Date("2026-08-01") }).intervalDays;
+    assert.ok(at("self-watering") > at("plastic"));
+    assert.ok(at("terracotta") < at("plastic"));
+  });
+
+  it("plants growing in water get a weekly water refresh regardless of weather", () => {
+    const res = nextWaterAt({
+      species,
+      plant: { ...plant, potType: "glass" },
+      env: { ...baseEnv, tempC: 35, rh: 20 },
+      last: new Date("2026-08-01"),
+    });
+    assert.equal(res.intervalDays, 7);
+    assert.equal(res.modifiers.length, 0);
+  });
+});
+
 describe("care/irrigation (S-10)", () => {
   it("computes positive amount with explanation", () => {
     const res = irrigation(species, baseEnv);
@@ -118,10 +156,22 @@ describe("care/irrigation (S-10)", () => {
     assert.ok(res.explanation.length >= 1);
   });
 
-  it("reduces amount when it rains", () => {
-    const dry = irrigation(species, baseEnv);
-    const wet = irrigation(species, { ...baseEnv, precipitationMm: 5 });
+  it("reduces outdoor amount when it rains", () => {
+    const dry = irrigation(species, baseEnv, { outdoor: true });
+    const wet = irrigation(species, { ...baseEnv, precipitationMm: 5 }, { outdoor: true });
     assert.ok(wet.amountMl < dry.amountMl);
+  });
+
+  it("sizes the amount to the pot", () => {
+    const small = irrigation(species, baseEnv, { potSizeCm: 10 });
+    const big = irrigation(species, baseEnv, { potSizeCm: 30 });
+    assert.equal(small.amountMl, potWaterMl(10));
+    assert.ok(big.amountMl > small.amountMl * 10);
+  });
+
+  it("ignores rain for indoor plants", () => {
+    const a = irrigation(species, { ...baseEnv, precipitationMm: 20 }, { potSizeCm: 20 });
+    assert.equal(a.amountMl, potWaterMl(20));
   });
 
   it("evapotranspiration is 0 in cold dark weather", () => {
@@ -152,7 +202,7 @@ describe("care/feeding", () => {
     const large = feedingAdvice({ species, potSizeCm: 40 });
     assert.ok(potVolumeL(40) > potVolumeL(12));
     assert.ok(large.doseMl > small.doseMl);
-    assert.ok(large.doseMl <= 1200);
+    assert.equal(large.doseMl, potWaterMl(40));
   });
 
   it("tells us to skip feeding in the resting season", () => {

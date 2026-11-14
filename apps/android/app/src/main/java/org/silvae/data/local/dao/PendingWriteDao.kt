@@ -19,4 +19,10 @@ interface PendingWriteDao {
 
     @Delete
     suspend fun delete(write: PendingWriteEntity)
+
+    @Query("SELECT * FROM pending_writes WHERE id = :id")
+    suspend fun get(id: String): PendingWriteEntity?
+
+    @Query("SELECT COUNT(*) FROM pending_writes")
+    suspend fun count(): Int
 }

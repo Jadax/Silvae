@@ -31,6 +31,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import org.silvae.data.local.entity.CareEventEntity
 import org.silvae.domain.care.waterStatusLabel
+import org.silvae.domain.care.waterVerb
+import org.silvae.domain.care.potWaterMl
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -53,7 +55,7 @@ fun PlantDetailScreen(
     }
 
     val plant = ui.plant ?: return
-    val status = waterStatusLabel(plant.nextWaterAt?.let { runCatching { Instant.parse(it) }.getOrNull() })
+    val status = waterStatusLabel(plant.nextWaterAt?.let { runCatching { Instant.parse(it) }.getOrNull() }, waterVerb(plant.potType))
 
     LazyColumn(modifier = Modifier.fillMaxSize().padding(padding).padding(18.dp).imePadding()) {
         item {
@@ -74,6 +76,12 @@ fun PlantDetailScreen(
                 Column(Modifier.padding(18.dp)) {
                     Text("NEXT LITTLE TASK", fontSize = 11.sp, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.primary)
                     Text(status.label, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.ExtraBold)
+                    val amount = when {
+                        plant.potType == "glass" -> "Growing in water: top it up and replace all the water weekly."
+                        plant.potSizeCm != null -> "Give about ${potWaterMl(plant.potSizeCm)} ml, enough to soak a ${plant.potSizeCm.toInt()} cm pot until a little drains out."
+                        else -> null
+                    }
+                    amount?.let { Text(it, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 4.dp)) }
                 }
             }
 

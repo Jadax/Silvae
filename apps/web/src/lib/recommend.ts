@@ -9,7 +9,7 @@ import {
 } from "@silvae/core";
 import { SPECIES } from "./seed";
 import type { Place } from "./location";
-import { seasonForMonth } from "./weather";
+import { currentSeason } from "./weather";
 
 export type { RegionFit };
 
@@ -27,7 +27,7 @@ export function fitForPlace(
 ): RegionFit {
   const input: RegionFitInput = {
     species,
-    season: seasonForMonth(new Date().getMonth()),
+    season: currentSeason(place?.lat),
     locationType,
   };
   const ref = placeRef(place);
@@ -41,7 +41,7 @@ export function recommendationsForPlace(
   opts: { locationType?: "indoor" | "outdoor"; petSafe?: boolean; limit?: number } = {},
 ) {
   return recommendForRegion(SPECIES, placeRef(place), {
-    season: seasonForMonth(new Date().getMonth()),
+    season: currentSeason(place?.lat),
     locationType: opts.locationType ?? "indoor",
     petSafe: opts.petSafe,
     limit: opts.limit ?? 8,

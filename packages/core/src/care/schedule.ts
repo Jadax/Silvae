@@ -26,11 +26,20 @@ export interface ScheduleInput {
 
 const GROWING_SEASONS = new Set(["spring", "summer"]);
 
+/** Plants living in water (glass pots) get their water refreshed this often. */
+export const WATER_CULTURE_REFRESH_DAYS = 7;
+
 /**
  * Dynamic per-plant watering interval (§10.2).
  * Every modifier is named and exposed in the UI so users trust the number.
  */
 export function nextWaterAt(input: ScheduleInput): ScheduleResult {
+  // A plant growing in water (a glass vase) isn't watered; its water is
+  // refreshed weekly so it stays oxygenated and clean, whatever the weather.
+  if (input.plant.potType === "glass") {
+    return { intervalDays: WATER_CULTURE_REFRESH_DAYS, nextAt: addDays(input.last, WATER_CULTURE_REFRESH_DAYS), modifiers: [] };
+  }
+
   let d = input.species.ideal.waterIntervalDays;
   const modifiers: Modifier[] = [];
   const push = (name: string, delta: number): void => {
@@ -42,9 +51,27 @@ export function nextWaterAt(input: ScheduleInput): ScheduleResult {
   if (lux > 5000) push("highLight", -0.25);
   else if (lux < 500) push("lowLight", +0.35);
 
-  if (input.plant.potType === "terracotta") push("terracottaPot", -0.15);
+  switch (input.plant.potType) {
+    case "terracotta":
+      push("terracottaPot", -0.15);
+      break;
+    case "self-watering":
+      push("selfWateringPot", +0.5);
+      break;
+    default:
+      break;
+  }
   if (input.plant.soilType === "well-draining") push("wellDrainingSoil", -0.1);
-  if ((input.plant.potSizeCm ?? 0) > 25) push("largePot", +0.15);
+  else if (input.plant.soilType === "retentive") push("retentiveSoil", +0.1);
+
+  // Small pots hold little water and dry out fast; big ones stay damp longer.
+  const pot = input.plant.potSizeCm;
+  if (pot !== undefined && pot > 0) {
+    if (pot < 10) push("smallPot", -0.2);
+    else if (pot < 14) push("smallishPot", -0.1);
+    else if (pot > 35) push("veryLargePot", +0.25);
+    else if (pot > 25) push("largePot", +0.15);
+  }
 
   const { tempC, rh, uvIndex } = input.env;
   if (tempC >= 30) push("heat", -0.25);

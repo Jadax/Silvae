@@ -1,5 +1,47 @@
 # Changelog
 
+## 0.5.0 — 2026-11-14
+
+Built for day-to-day use across a phone and a PC.
+
+- **Everything now syncs between devices.** Care history (waterings, feeds,
+  repots...), growth-journal photos, notes and comments, and your pets and
+  fertiliser settings now sync both ways on web and Android. Before, only the
+  plant list synced from the web, and the Android app never downloaded
+  anything. Journal images are stored apart from entries so a journal list
+  never downloads every photo. Offline edits queue and send when you're back.
+- **Seasons follow your hemisphere.** Seasons were computed for the northern
+  hemisphere only, so a Cape Town spring was treated as autumn (wrong feeding
+  advice, wrong outdoor dormancy). Now derived from your saved location.
+- **Pot size and type shape the plan.** Small pots dry faster, large and
+  self-watering pots slower, moisture-holding soil slower. The "how much"
+  amount is sized to the pot (about a fifth of its volume) instead of a fixed
+  species number. Plants growing in a glass of water get a weekly
+  "refresh water" reminder instead of a watering schedule.
+- **Repot logs the new pot size** and re-plans watering.
+- **Your fertiliser:** set the product and label dose once (You → Your
+  fertiliser) and every plant's feeding plan says exactly how much to mix,
+  at half strength for light feeders.
+- **Feeding due list on Home** during the growing season, next to watering.
+- **Check health** on any journal photo, and the Plant Doctor can save a
+  checked photo with its verdict into a plant's journal.
+- **Web Add Plant asks when it was last watered and fed** (Android already
+  did), reuses the first photo for identification instead of asking for a
+  second one, and starts the journal with that photo.
+- Fixed: care history was ordered by random id instead of date, so "last
+  watered" could be wrong; logging a prune or rotate reset the watering
+  schedule; deleting a watering didn't re-plan; backdated waterings used the
+  UTC date; text like `·` and `{'°'}C` showed up literally on several
+  screens; deleting a plant left its journal behind; plant deletion had no
+  confirmation; "Add your first plant" showed when you already had plants.
+- Fixed: care events never reached the cloud (an undefined field was
+  rejected by Firestore), and Android never flushed its offline queue.
+- Signing out now clears the device (after warning about unsynced edits), and
+  a different account signing in on the same device starts clean instead of
+  inheriting the previous person's plants.
+- Web: added "Delete account and data" (Android already had it). Both now
+  delete every cloud document the account owns, not just plants.
+
 ## 0.4.1 — 2026-08-20
 
 - Fixed a gap in the mandatory-registration gate shipped in 0.4.0: browsers/

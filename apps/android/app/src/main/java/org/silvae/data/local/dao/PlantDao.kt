@@ -26,4 +26,7 @@ interface PlantDao {
 
     @Delete
     suspend fun delete(plant: PlantEntity)
+
+    @Query("SELECT * FROM plants")
+    suspend fun all(): List<PlantEntity>
 }

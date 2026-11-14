@@ -1,6 +1,27 @@
 export const SEASONS = ["winter", "spring", "summer", "autumn"] as const;
 export type Season = (typeof SEASONS)[number];
 
+const NORTHERN_BY_MONTH: readonly Season[] = [
+  "winter", "winter", "spring", "spring", "spring", "summer",
+  "summer", "summer", "autumn", "autumn", "autumn", "winter",
+];
+const OPPOSITE: Record<Season, Season> = {
+  winter: "summer",
+  spring: "autumn",
+  summer: "winter",
+  autumn: "spring",
+};
+
+/**
+ * Meteorological season for a date at a latitude. Southern-hemisphere
+ * locations (lat < 0) get the opposite season, so a November in Cape Town
+ * is spring, not autumn. Without a latitude, assumes the northern hemisphere.
+ */
+export function seasonAt(date: Date, lat?: number): Season {
+  const northern = NORTHERN_BY_MONTH[date.getMonth()]!;
+  return lat !== undefined && lat < 0 ? OPPOSITE[northern] : northern;
+}
+
 export const LIGHT_LEVELS = ["low", "medium", "high"] as const;
 export type LightLevel = (typeof LIGHT_LEVELS)[number];
 

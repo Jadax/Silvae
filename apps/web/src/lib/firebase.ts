@@ -1,6 +1,6 @@
 import { initializeApp, type FirebaseOptions, type FirebaseApp } from "firebase/app";
 import { getAuth, type Auth } from "firebase/auth";
-import { getFirestore, type Firestore } from "firebase/firestore";
+import { initializeFirestore, type Firestore } from "firebase/firestore";
 
 /**
  * Firebase is OPTIONAL. When VITE_FIREBASE_CONFIG is set at build time the app
@@ -20,5 +20,6 @@ function parseConfig(): FirebaseOptions | null {
 const options = parseConfig();
 export const app: FirebaseApp | null = options ? initializeApp(options) : null;
 export const auth: Auth | null = app ? getAuth(app) : null;
-export const db: Firestore | null = app ? getFirestore(app) : null;
+// Optional fields are left out rather than rejected, so a missing note never fails a sync.
+export const db: Firestore | null = app ? initializeFirestore(app, { ignoreUndefinedProperties: true }) : null;
 export const isFirebaseConfigured = Boolean(app);

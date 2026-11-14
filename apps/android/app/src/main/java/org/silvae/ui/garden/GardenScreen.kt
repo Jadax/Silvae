@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import org.silvae.data.local.entity.PlantEntity
 import org.silvae.domain.care.waterStatusLabel
+import org.silvae.domain.care.waterVerb
 import java.time.Instant
 
 @Composable
@@ -61,7 +62,7 @@ fun GardenScreen(
                 Text("Simple, cheerful plant care — one tiny step at a time.", color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Spacer(Modifier.height(18.dp))
                 Button(onClick = onAddPlant, colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)) {
-                    Text("Add your first plant  →", fontWeight = FontWeight.Bold)
+                    Text(if (plants.isEmpty()) "Add your first plant  →" else "Add a plant  →", fontWeight = FontWeight.Bold)
                 }
             }
         }
@@ -93,7 +94,7 @@ fun GardenScreen(
 
 @Composable
 private fun PlantRow(plant: PlantEntity, onOpen: (String) -> Unit, onWaterNow: () -> Unit) {
-    val status = waterStatusLabel(plant.nextWaterAt?.let { runCatching { Instant.parse(it) }.getOrNull() })
+    val status = waterStatusLabel(plant.nextWaterAt?.let { runCatching { Instant.parse(it) }.getOrNull() }, waterVerb(plant.potType))
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),

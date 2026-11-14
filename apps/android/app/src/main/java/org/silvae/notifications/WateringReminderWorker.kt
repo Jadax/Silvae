@@ -20,6 +20,7 @@ import org.silvae.MainActivity
 import org.silvae.R
 import org.silvae.data.PlantRepository
 import org.silvae.domain.care.waterStatusLabel
+import org.silvae.domain.care.waterVerb
 import java.time.Instant
 
 private const val CHANNEL_ID = "watering_reminders"
@@ -40,7 +41,7 @@ class WateringReminderWorker @AssistedInject constructor(
     override suspend fun doWork(): Result = runCatching {
         val plants = plantRepository.observePlants().first()
         val due = plants.filter { plant ->
-            val status = waterStatusLabel(plant.nextWaterAt?.let { runCatching { Instant.parse(it) }.getOrNull() })
+            val status = waterStatusLabel(plant.nextWaterAt?.let { runCatching { Instant.parse(it) }.getOrNull() }, waterVerb(plant.potType))
             (status.days ?: 1) <= 0
         }.map { it.name }
         if (due.isNotEmpty()) notify(due)

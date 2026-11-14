@@ -11,6 +11,11 @@ service cloud.firestore {
     function isCreator(uidField) {
       return signedIn() && request.resource.data[uidField] == request.auth.uid;
     }
+    // Deleting something already gone is a no-op, so a retried offline
+    // delete can't get stuck on a permission error.
+    function alreadyGone() {
+      return signedIn() && resource == null;
+    }
 
     // Canonical species catalog: public read (guest Discover, C-7). Seeded via
     // admin tooling only — no app-path writes.
@@ -34,7 +39,8 @@ service cloud.firestore {
     match /plants/{plantId} {
       allow read: if isOwner('uid') || request.auth.uid in resource.data.sharedWith.uid;
       allow create: if isCreator('uid');
-      allow update, delete: if isOwner('uid');
+      allow update: if isOwner('uid') && isCreator('uid');
+      allow delete: if isOwner('uid') || alreadyGone();
     }
 
     // Rooms: owner-scoped.
@@ -48,13 +54,27 @@ service cloud.firestore {
     match /care_events/{eventId} {
       allow read: if isOwner('uid');
       allow create: if isCreator('uid');
-      allow update, delete: if isOwner('uid');
+      allow update: if isOwner('uid') && isCreator('uid');
+      allow delete: if isOwner('uid') || alreadyGone();
     }
 
-    // Photos (R2 URL metadata only): owner-scoped.
+    // Journal entries (date, caption, comments, hasImage): owner-scoped.
     match /photos/{photoId} {
-      allow read, update, delete: if isOwner('uid');
+      allow read: if isOwner('uid');
       allow create: if isCreator('uid');
+      allow update: if isOwner('uid') && isCreator('uid');
+      allow delete: if isOwner('uid') || alreadyGone();
+    }
+
+    // Journal images, kept apart from the entries so listing a journal never
+    // downloads every image. Compressed client-side to stay well under 1 MiB.
+    match /photo_blobs/{photoId} {
+      allow read: if isOwner('uid');
+      allow delete: if isOwner('uid') || alreadyGone();
+      allow create, update: if isCreator('uid')
+        && (resource == null || isOwner('uid'))
+        && request.resource.data.dataUrl is string
+        && request.resource.data.dataUrl.size() < 900000;
     }
 
     // Health checks (9.x): owner-scoped.

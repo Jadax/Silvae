@@ -11,7 +11,8 @@ what data is collected or where it goes.
 | Email address | Yes (account holders) | Firebase Auth | Sign-in, account recovery |
 | Display name | Optional | Firebase Auth | Personalization |
 | Plant names, species, care notes, care history | Yes | Local (Room) + Firestore, tied to your account | Core app function |
-| Journal photos & notes | Yes | Local device storage only (not currently uploaded) | Growth journal |
+| Journal photos & notes | Yes | Local + Firestore (compressed, tied to your account) | Growth journal, synced across devices |
+| Preferences (pets, fertiliser name and label dose) | Yes | Local + Firestore user profile | Pet-toxicity flags, feeding amounts |
 | Precise/approximate location | Optional, opt-in only | Local (Room) only — never sent to Firestore | Weather-based care recommendations |
 | Photos submitted to Plant Doctor's photo ID | Only when you use that feature | Sent to Plant.id/PlantNet via our server proxy; the image itself is not retained after the request, only the identification result is cached (90 days, keyed by an image fingerprint, not linked to your account) | Species/health identification |
 
@@ -37,7 +38,7 @@ account and data**.
   - *Personal info → Email address*: Collected, required for account creation, not shared, used for App functionality & Account management.
   - *Personal info → Name*: Collected, optional, not shared, used for App functionality.
   - *Location → Approximate/Precise location*: Collected, optional, not shared with third parties for their own purposes (sent only to weather/geocoding APIs to fulfill the request), used for App functionality.
-  - *Photos*: Collected (journal photos, stays on-device; photo-ID photos sent to identification providers), not shared for advertising, used for App functionality.
+  - *Photos*: Collected (journal photos synced to your account; photo-ID photos sent to identification providers and not kept), not shared for advertising, used for App functionality.
   - *App activity → App interactions*: Collected (plant care records), not shared, used for App functionality.
 
 ## Content rating (IARC questionnaire)

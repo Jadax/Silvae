@@ -31,6 +31,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import org.silvae.auth.AuthStatus
 import org.silvae.auth.AuthViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun AccountScreen(
@@ -54,6 +56,18 @@ fun AccountScreen(
     val deleteState by deleteAccountViewModel.state.collectAsState()
     val context = LocalContext.current
     var confirmingDelete by remember { mutableStateOf(false) }
+    var pendingSignOut by remember { mutableStateOf(0) }
+    val scope = rememberCoroutineScope()
+
+    if (pendingSignOut > 0) {
+        AlertDialog(
+            onDismissRequest = { pendingSignOut = 0 },
+            title = { Text("Some changes haven't synced") },
+            text = { Text("$pendingSignOut change${if (pendingSignOut == 1) "" else "s"} made on this phone haven't reached the cloud yet (you may be offline). Signing out now removes them from this phone.") },
+            confirmButton = { TextButton(onClick = { pendingSignOut = 0; authViewModel.signOut() }) { Text("Sign out anyway") } },
+            dismissButton = { TextButton(onClick = { pendingSignOut = 0 }) { Text("Stay signed in") } },
+        )
+    }
 
     LaunchedEffect(deleteState.done) {
         if (deleteState.done) authViewModel.signOut()
@@ -74,9 +88,17 @@ fun AccountScreen(
             Column(Modifier.padding(18.dp)) {
                 val signedIn = status as? AuthStatus.SignedIn
                 Text(signedIn?.user?.displayName ?: signedIn?.user?.email ?: "", fontWeight = FontWeight.Bold)
-                Text("Signed in and syncing with Firestore.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(
+                    "Your plants, care history, journal photos and pets setting sync to every device you sign in on. Your location stays on this phone.",
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
                 Button(
-                    onClick = authViewModel::signOut,
+                    onClick = {
+                        scope.launch {
+                            val unsynced = authViewModel.unsyncedChanges()
+                            if (unsynced > 0) pendingSignOut = unsynced else authViewModel.signOut()
+                        }
+                    },
                     colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary),
                     modifier = Modifier.padding(top = 12.dp),
                 ) { Text("Sign out") }

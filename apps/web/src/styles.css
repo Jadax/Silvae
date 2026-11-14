@@ -172,7 +172,7 @@ th { color: var(--muted); font-size: .75rem; letter-spacing: .05em; text-transfo
 .page-intro h1 { margin-bottom: .35rem; }
 .page-intro p { color: var(--muted); }
 .setup-page { max-width: 720px; margin: 0 auto; }
-.stepper { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; margin: 0 0 1rem; padding: 0; list-style: none; }
+.stepper { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: .5rem; margin: 0 0 1rem; padding: 0; list-style: none; }
 .stepper li { display: flex; align-items: center; gap: .48rem; color: var(--muted); font-size: .78rem; font-weight: 700; }
 .stepper span { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--surface-soft); font-size: .75rem; }
 .stepper .active { color: var(--brand-strong); }
@@ -497,3 +497,17 @@ th { color: var(--muted); font-size: .75rem; letter-spacing: .05em; text-transfo
 
 .timeline-delete { display: grid; place-items: center; width: 28px; height: 28px; border: 0; border-radius: 50%; background: transparent; color: var(--muted); cursor: pointer; font-size: .8rem; margin-left: auto; }
 .timeline-delete:hover { background: var(--peach); color: var(--danger); }
+
+/* Journal health check */
+.journal-health { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; margin: .5rem 0; }
+.journal-health .btn { min-height: 36px; padding: .35rem .85rem; font-size: .85rem; }
+
+/* Quick-pick chips (Add Plant "last care") */
+.chip-row { display: flex; flex-wrap: wrap; gap: .5rem; margin: .5rem 0 .25rem; }
+.chip { min-height: 40px; padding: .45rem .95rem; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--text); font: inherit; font-weight: 700; cursor: pointer; }
+.chip:hover { border-color: var(--brand); }
+.chip.selected { border-color: var(--brand); background: var(--brand-soft); color: var(--brand); }
+.identify-thumb { width: 64px; height: 64px; flex: 0 0 auto; border-radius: 14px; object-fit: cover; }
+.identify-row .btn { margin-top: .5rem; }
+.journal-save { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .65rem; margin-top: 1rem; padding-top: .85rem; border-top: 1px solid var(--border); }
+.journal-save label { flex: 1 1 220px; }

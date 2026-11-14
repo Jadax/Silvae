@@ -1,6 +1,7 @@
 import type { Species } from "../dto/species.js";
 import { clamp, type Season } from "../constants.js";
 import { addDays, round2 } from "./schedule.js";
+import { potWaterMl } from "./pot.js";
 
 /** Seasons when most houseplants actually want food. */
 export const GROWING_SEASONS: readonly Season[] = ["spring", "summer"];
@@ -16,7 +17,7 @@ export interface FeedingAdvice {
   strength: FeedStrength;
   /** Grams of balanced fertiliser per litre of water. */
   gramsPerLiter: number;
-  /** Rough millilitres of diluted feed for this pot size. */
+  /** Millilitres of diluted feed: one normal watering for this pot. */
   doseMl: number;
   /** The species' preferred NPK ratio, for choosing a feed. */
   npk: { n: number; p: number; k: number };
@@ -36,11 +37,6 @@ const STRENGTH_G_PER_L: Record<FeedStrength, number> = {
   standard: 0.85,
   hungry: 1.2,
 };
-
-/** Pot volume in litres (tapered-cylinder approximation). */
-export function potVolumeL(potSizeCm: number): number {
-  return Math.max(0.2, clamp((Math.PI * potSizeCm ** 3) / 12000, 0.2, 30));
-}
 
 export function feedingStrength(npk: { n: number; p: number; k: number }): FeedStrength {
   const total = npk.n + npk.p + npk.k;
@@ -62,12 +58,12 @@ export function feedingAdvice(input: FeedingInput): FeedingAdvice {
   const strength = feedingStrength(species.ideal.npk);
   const intervalDays = species.ideal.fertIntervalDays;
   const gramsPerLiter = STRENGTH_G_PER_L[strength];
-  const doseMl = Math.round(clamp(potVolumeL(input.potSizeCm ?? 20) * 250, 150, 1200));
+  const doseMl = input.potSizeCm ? potWaterMl(input.potSizeCm) : species.ideal.waterAmountMl;
 
   const npk = species.ideal.npk;
   const ratio = `${npk.n}-${npk.p}-${npk.k}`;
   const guidance = growingSeason
-    ? `Feed every ${intervalDays} days with ${gramsPerLiter} g/L of a balanced ${ratio} mix — about ${doseMl} ml per watering.`
+    ? `Feed every ${intervalDays} days with ${gramsPerLiter} g/L of a ${ratio}-style feed, mixed into a normal watering (about ${doseMl} ml).`
     : `It's the resting season for most houseplants. Skip feeding, or go half-strength (${round2(gramsPerLiter / 2)} g/L) only if growth is clearly active.`;
 
   return { intervalDays, growingSeason, strength, gramsPerLiter, doseMl, npk, guidance };

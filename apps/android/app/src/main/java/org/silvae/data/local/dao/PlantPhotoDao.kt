@@ -38,4 +38,16 @@ interface PlantPhotoDao {
 
     @Delete
     suspend fun deletePhoto(photo: PlantPhotoEntity)
+
+    @Query("SELECT * FROM plant_photos WHERE id = :id")
+    suspend fun getById(id: String): PlantPhotoEntity?
+
+    @Query("SELECT * FROM plant_photos")
+    suspend fun all(): List<PlantPhotoEntity>
+
+    @Query("SELECT * FROM journal_comments WHERE entryId = :entryId ORDER BY at ASC")
+    suspend fun commentsFor(entryId: String): List<JournalCommentEntity>
+
+    @Query("DELETE FROM journal_comments WHERE entryId = :entryId")
+    suspend fun deleteCommentsFor(entryId: String)
 }

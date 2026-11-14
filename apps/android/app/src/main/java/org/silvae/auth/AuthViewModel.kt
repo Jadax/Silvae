@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.silvae.data.sync.CloudSync
 import javax.inject.Inject
 
 sealed interface AuthStatus {
@@ -39,6 +40,7 @@ data class AuthFormState(
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val repo: AuthRepository,
+    private val cloudSync: CloudSync,
 ) : ViewModel() {
 
     val status: StateFlow<AuthStatus> = repo.authState()
@@ -84,7 +86,13 @@ class AuthViewModel @Inject constructor(
 
     fun onGoogleError(message: String) = _form.update { it.copy(busy = false, error = message) }
 
-    fun signOut() = repo.signOut()
+    /** Edits made on this device that haven't reached the cloud yet (tries to send them first). */
+    suspend fun unsyncedChanges(): Int = cloudSync.unsyncedCount()
+
+    /** Signs out and clears this device, so the next person to sign in starts clean. */
+    fun signOut() {
+        viewModelScope.launch { cloudSync.signOutAndWipe() }
+    }
 
     private fun friendlyError(e: Exception): String = when (e) {
         is FirebaseAuthUserCollisionException -> "That email already has an account — try signing in instead."

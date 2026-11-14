@@ -1,19 +1,11 @@
-import type { Env, Weather } from "@silvae/core";
+import { seasonAt, type Season, type Weather } from "@silvae/core";
 
-export const DEFAULT_ENV: Env = {
-  tempC: 22,
-  rh: 55,
-  uvIndex: 4,
-  season: "summer",
-  daylightH: 14,
-};
+/** Neutral indoor conditions used when there's no location or we're offline. */
+const DEFAULT_WEATHER = { tempC: 22, rh: 55, uvIndex: 4, daylightHours: 12 };
 
-/** Reads the current season from month (northern hemisphere). */
-export function seasonForMonth(month: number): Env["season"] {
-  if (month >= 3 && month <= 5) return "spring";
-  if (month >= 6 && month <= 8) return "summer";
-  if (month >= 9 && month <= 11) return "autumn";
-  return "winter";
+/** Today's season where the plants are (southern hemisphere aware). */
+export function currentSeason(lat?: number): Season {
+  return seasonAt(new Date(), lat);
 }
 
 /** Fetch weather: server proxy (cached) → direct Open-Meteo → default env (offline). */
@@ -50,23 +42,5 @@ export async function fetchWeather(lat?: number, lon?: number): Promise<Weather>
       // offline
     }
   }
-  return {
-    tempC: DEFAULT_ENV.tempC,
-    rh: DEFAULT_ENV.rh,
-    uvIndex: DEFAULT_ENV.uvIndex,
-    cloudCover: 0,
-    precipitationMm: 0,
-    daylightHours: DEFAULT_ENV.daylightH,
-    fetchedAt: new Date().toISOString(),
-  };
-}
-
-export function toEnv(w: Weather): Env {
-  return {
-    tempC: w.tempC,
-    rh: w.rh,
-    uvIndex: w.uvIndex,
-    season: seasonForMonth(new Date().getMonth()),
-    daylightH: w.daylightHours,
-  };
+  return { ...DEFAULT_WEATHER, cloudCover: 0, precipitationMm: 0, fetchedAt: new Date().toISOString() };
 }

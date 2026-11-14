@@ -16,12 +16,35 @@ data class Env(
     val daylightH: Double = 12.0,
 )
 
-fun currentSeason(month: Int = java.time.LocalDate.now().monthValue): String = when (month) {
-    12, 1, 2 -> "winter"
-    3, 4, 5 -> "spring"
-    6, 7, 8 -> "summer"
-    else -> "autumn"
+/**
+ * Meteorological season — mirrors seasonAt (packages/core/src/constants.ts).
+ * Southern-hemisphere latitudes get the opposite season (November in Cape
+ * Town is spring). Without a latitude, assumes the northern hemisphere.
+ */
+fun currentSeason(month: Int = java.time.LocalDate.now().monthValue, lat: Double? = null): String {
+    val northern = when (month) {
+        12, 1, 2 -> "winter"
+        3, 4, 5 -> "spring"
+        6, 7, 8 -> "summer"
+        else -> "autumn"
+    }
+    if (lat == null || lat >= 0) return northern
+    return when (northern) {
+        "winter" -> "summer"
+        "spring" -> "autumn"
+        "summer" -> "winter"
+        else -> "spring"
+    }
 }
+
+/** Plants living in water (glass pots) get their water refreshed this often. */
+const val WATER_CULTURE_REFRESH_DAYS = 7.0
+
+/** Pot volume in litres from its top diameter — mirrors potVolumeL (core/care/pot.ts). */
+fun potVolumeL(potSizeCm: Double): Double = clamp(Math.PI * potSizeCm * potSizeCm * potSizeCm / 12000.0, 0.2, 30.0)
+
+/** A thorough watering for a pot: about a fifth of its volume — mirrors potWaterMl. */
+fun potWaterMl(potSizeCm: Double): Int = (Math.round(clamp(potVolumeL(potSizeCm) * 1000 * 0.2, 40.0, 5000.0) / 10.0) * 10).toInt()
 
 data class Modifier(val name: String, val delta: Double)
 
@@ -44,6 +67,9 @@ fun nextWaterAt(
     last: Instant,
     luxEstimate: Double = 1000.0,
 ): ScheduleResult {
+    if (potType == "glass") {
+        return ScheduleResult(last.plus(WATER_CULTURE_REFRESH_DAYS.toLong(), java.time.temporal.ChronoUnit.DAYS), WATER_CULTURE_REFRESH_DAYS, emptyList())
+    }
     var d = species.ideal.waterIntervalDays
     val modifiers = mutableListOf<Modifier>()
     fun push(name: String, delta: Double) {
@@ -52,9 +78,21 @@ fun nextWaterAt(
     }
 
     if (luxEstimate > 5000) push("highLight", -0.25) else if (luxEstimate < 500) push("lowLight", 0.35)
-    if (potType == "terracotta") push("terracottaPot", -0.15)
+    when (potType) {
+        "terracotta" -> push("terracottaPot", -0.15)
+        "self-watering" -> push("selfWateringPot", 0.5)
+    }
     if (soilType == "well-draining") push("wellDrainingSoil", -0.1)
-    if ((potSizeCm ?: 0.0) > 25) push("largePot", 0.15)
+    else if (soilType == "retentive") push("retentiveSoil", 0.1)
+    // Small pots hold little water and dry out fast; big ones stay damp longer.
+    if (potSizeCm != null && potSizeCm > 0) {
+        when {
+            potSizeCm < 10 -> push("smallPot", -0.2)
+            potSizeCm < 14 -> push("smallishPot", -0.1)
+            potSizeCm > 35 -> push("veryLargePot", 0.25)
+            potSizeCm > 25 -> push("largePot", 0.15)
+        }
+    }
 
     if (env.tempC >= 30) push("heat", -0.25)
     else if (env.tempC >= 25) push("warm", -0.1)
@@ -85,12 +123,17 @@ fun nextWaterAt(
 sealed interface WaterTone { data object Due : WaterTone; data object Soon : WaterTone; data object Happy : WaterTone; data object Neutral : WaterTone }
 data class WaterStatus(val label: String, val tone: WaterTone, val days: Long? = null)
 
-fun waterStatusLabel(nextWaterAt: Instant?): WaterStatus {
+fun waterStatusLabel(nextWaterAt: Instant?, verb: String = "Water"): WaterStatus {
     if (nextWaterAt == null) return WaterStatus("Schedule pending", WaterTone.Neutral)
-    val days = java.time.temporal.ChronoUnit.DAYS.between(Instant.now().atZone(ZoneOffset.UTC).toLocalDate(), nextWaterAt.atZone(ZoneOffset.UTC).toLocalDate())
+    val zone = java.time.ZoneId.systemDefault()
+    val days = java.time.temporal.ChronoUnit.DAYS.between(Instant.now().atZone(zone).toLocalDate(), nextWaterAt.atZone(zone).toLocalDate())
     return when {
-        days <= 0 -> WaterStatus("Water today", WaterTone.Due, 0)
-        days == 1L -> WaterStatus("Water tomorrow", WaterTone.Soon, 1)
-        else -> WaterStatus("Water in $days days", WaterTone.Happy, days)
+        days < 0 -> WaterStatus("$verb today (${-days} day${if (days == -1L) "" else "s"} late)", WaterTone.Due, days)
+        days == 0L -> WaterStatus("$verb today", WaterTone.Due, 0)
+        days == 1L -> WaterStatus("$verb tomorrow", WaterTone.Soon, 1)
+        else -> WaterStatus("$verb in $days days", WaterTone.Happy, days)
     }
 }
+
+/** "Water" for potted plants, "Refresh water" for plants growing in a glass of water. */
+fun waterVerb(potType: String): String = if (potType == "glass") "Refresh water" else "Water"

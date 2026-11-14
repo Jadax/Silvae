@@ -12,6 +12,7 @@ import kotlinx.coroutines.withContext
 import org.silvae.data.local.dao.PlantPhotoDao
 import org.silvae.data.local.entity.JournalCommentEntity
 import org.silvae.data.local.entity.PlantPhotoEntity
+import org.silvae.data.sync.CloudSync
 import java.io.File
 import java.io.FileOutputStream
 import java.time.Instant
@@ -26,35 +27,47 @@ import kotlin.math.min
 class JournalRepository @Inject constructor(
     private val dao: PlantPhotoDao,
     @ApplicationContext private val context: Context,
+    private val sync: CloudSync,
 ) {
     fun observeEntries(plantId: String): Flow<List<PlantPhotoEntity>> = dao.observeForPlant(plantId)
     fun observeComments(entryId: String): Flow<List<JournalCommentEntity>> = dao.observeComments(entryId)
 
     suspend fun addPhoto(plantId: String, uri: Uri) = withContext(Dispatchers.IO) {
         val path = copyIntoJournalStorage(plantId, uri) ?: return@withContext
-        dao.upsert(PlantPhotoEntity(id = UUID.randomUUID().toString(), plantId = plantId, at = Instant.now().toString(), localPath = path, kind = "photo"))
+        val entry = PlantPhotoEntity(id = UUID.randomUUID().toString(), plantId = plantId, at = Instant.now().toString(), localPath = path, kind = "photo")
+        dao.upsert(entry)
+        sync.journalChanged(entry.id, imageChanged = true)
     }
 
     suspend fun addNote(plantId: String, text: String) {
-        dao.upsert(PlantPhotoEntity(id = UUID.randomUUID().toString(), plantId = plantId, at = Instant.now().toString(), kind = "note", note = text))
+        val entry = PlantPhotoEntity(id = UUID.randomUUID().toString(), plantId = plantId, at = Instant.now().toString(), kind = "note", note = text)
+        dao.upsert(entry)
+        sync.journalChanged(entry.id)
     }
 
     suspend fun setNote(entry: PlantPhotoEntity, text: String) {
         dao.upsert(entry.copy(note = text))
+        sync.journalChanged(entry.id)
     }
 
     suspend fun addComment(entryId: String, text: String) {
         dao.insertComment(JournalCommentEntity(id = UUID.randomUUID().toString(), entryId = entryId, at = Instant.now().toString(), text = text))
+        sync.journalChanged(entryId)
     }
 
     suspend fun deleteEntry(entry: PlantPhotoEntity) {
         entry.localPath?.let { runCatching { File(it).delete() } }
+        dao.deleteCommentsFor(entry.id)
         dao.deletePhoto(entry)
+        sync.journalDeleted(entry.id)
     }
 
     /** Removes every journal entry (and their files/comments) for a deleted plant. */
     suspend fun deleteAllForPlant(plantId: String) = withContext(Dispatchers.IO) {
-        for (entry in dao.getForPlant(plantId)) entry.localPath?.let { runCatching { File(it).delete() } }
+        for (entry in dao.getForPlant(plantId)) {
+            entry.localPath?.let { runCatching { File(it).delete() } }
+            sync.journalDeleted(entry.id)
+        }
         dao.deleteCommentsForPlant(plantId)
         dao.deleteForPlant(plantId)
         runCatching { File(context.filesDir, "journal/$plantId").deleteRecursively() }

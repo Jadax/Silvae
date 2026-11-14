@@ -23,4 +23,19 @@ interface CareEventDao {
 
     @Query("DELETE FROM care_events WHERE plantId = :plantId")
     suspend fun deleteForPlant(plantId: String)
+
+    @Query("SELECT * FROM care_events WHERE id = :id")
+    suspend fun getById(id: String): CareEventEntity?
+
+    @Query("DELETE FROM care_events WHERE id = :id")
+    suspend fun deleteById(id: String)
+
+    @Query("SELECT id FROM care_events WHERE plantId = :plantId")
+    suspend fun idsForPlant(plantId: String): List<String>
+
+    @Query("SELECT * FROM care_events")
+    suspend fun all(): List<CareEventEntity>
+
+    @Query("SELECT * FROM care_events WHERE plantId = :plantId AND type = :type ORDER BY at DESC LIMIT 1")
+    suspend fun latest(plantId: String, type: String): CareEventEntity?
 }

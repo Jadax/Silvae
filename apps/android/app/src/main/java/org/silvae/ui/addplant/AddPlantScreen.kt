@@ -218,7 +218,7 @@ private fun ChoiceRow(label: String, selected: Boolean, onClick: () -> Unit) {
     }
 }
 
-private val POT_TYPES = listOf("plastic", "terracotta", "ceramic", "self-watering")
+private val POT_TYPES = listOf("plastic", "terracotta", "ceramic", "self-watering", "glass")
 private val SOIL_TYPES = listOf("well-draining", "standard", "retentive")
 
 @OptIn(ExperimentalLayoutApi::class)

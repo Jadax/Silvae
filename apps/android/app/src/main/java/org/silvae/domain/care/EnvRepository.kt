@@ -20,7 +20,7 @@ class EnvRepository @Inject constructor(
         val settings = settingsRepository.get()
         val lat = settings.locationLat
         val lon = settings.locationLon
-        if (lat == null || lon == null) return Env()
+        if (lat == null || lon == null) return Env(season = currentSeason(lat = lat))
 
         val weather = runCatching { weatherApi.fetch(lat, lon) }.getOrNull() ?: return Env()
         val outdoor = locationType == "outdoor"
@@ -28,7 +28,7 @@ class EnvRepository @Inject constructor(
             tempC = if (outdoor) weather.tempC else weather.tempC.coerceIn(15.0, 28.0),
             rh = if (outdoor) weather.rh else weather.rh.coerceIn(30.0, 70.0),
             uvIndex = if (outdoor) weather.uvIndex else weather.uvIndex.coerceAtMost(3.0),
-            season = currentSeason(),
+            season = currentSeason(lat = lat),
             daylightH = weather.daylightHours,
         )
     }
