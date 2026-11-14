@@ -1,6 +1,6 @@
 import { initializeApp, cert, getApps, getApp, type App } from "firebase-admin/app";
 import { getFirestore, type Firestore } from "firebase-admin/firestore";
-import { getAuth } from "firebase-admin/auth";
+import { createRemoteJWKSet, jwtVerify } from "jose";
 
 let app: App;
 
@@ -32,11 +32,34 @@ export async function requireUid(req: Request): Promise<string> {
   const token = header.startsWith("Bearer ") ? header.slice(7) : "";
   if (!token) throw new AuthError("missing_token");
   try {
-    const decoded = await getAuth(ensureApp()).verifyIdToken(token);
-    return decoded.uid;
+    const { payload } = await jwtVerify(token, firebaseKeys, {
+      issuer: `https://securetoken.google.com/${projectId()}`,
+      audience: projectId(),
+      algorithms: ["RS256"],
+    });
+    if (typeof payload.sub !== "string" || !payload.sub) throw new Error("no_subject");
+    return payload.sub;
   } catch {
     throw new AuthError("invalid_token");
   }
+}
+
+/**
+ * Firebase ID tokens are verified directly against Google's published keys,
+ * as Firebase documents for third-party JWT libraries. (firebase-admin/auth
+ * pulls in a CommonJS dependency that can't load on Vercel's runtime.)
+ */
+const firebaseKeys = createRemoteJWKSet(
+  new URL("https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com"),
+);
+
+function projectId(): string {
+  const fromEnv = process.env.FIREBASE_PROJECT_ID;
+  if (fromEnv) return fromEnv;
+  const raw = process.env.FIREBASE_SERVICE_ACCOUNT;
+  const id = raw ? (JSON.parse(raw) as { project_id?: string }).project_id : undefined;
+  if (!id) throw new Error("FIREBASE_SERVICE_ACCOUNT env var is required");
+  return id;
 }
 
 export class AuthError extends Error {}

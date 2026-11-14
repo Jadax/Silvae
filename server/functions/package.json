@@ -13,6 +13,7 @@
   "dependencies": {
     "@silvae/core": "workspace:*",
     "firebase-admin": "^14.2.0",
+    "jose": "6.2.6",
     "zod": "^4.4.3"
   },
   "devDependencies": {

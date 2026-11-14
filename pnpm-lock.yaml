@@ -91,6 +91,9 @@ importers:
       firebase-admin:
         specifier: ^14.2.0
         version: 14.2.0(@firebase/app-compat@0.5.16)(@firebase/app@0.16.0)
+      jose:
+        specifier: 6.2.6
+        version: 6.2.6
       zod:
         specifier: ^4.4.3
         version: 4.4.3
