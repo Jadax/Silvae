@@ -16,5 +16,8 @@
     "api/*.ts": {
       "includeFiles": "server/functions/dist/**"
     }
-  }
+  },
+  "regions": [
+    "cpt1"
+  ]
 }
