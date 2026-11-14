@@ -22,14 +22,24 @@ export default async function handler(req: Request): Promise<Response> {
   }
   const { lat, lon } = parsed.data;
   const key = `${CACHE_DOC_PREFIX}${lat.toFixed(2)},${lon.toFixed(2)}`;
-  const { db } = admin();
+  // The cache is an optimisation: if Firestore is unreachable, still answer from Open-Meteo.
+  const db = (() => {
+    try {
+      return admin().db;
+    } catch (err) {
+      console.warn("weather: cache unavailable", err);
+      return undefined;
+    }
+  })();
 
-  const doc = await db.collection(CACHE_COLLECTION).doc(key).get();
-  if (doc.exists) {
-    const cached = doc.data();
+  try {
+    const doc = db ? await db.collection(CACHE_COLLECTION).doc(key).get() : undefined;
+    const cached = doc?.exists ? doc.data() : undefined;
     if (cached && cached.expiresAt && new Date(cached.expiresAt).getTime() > Date.now()) {
       return Response.json({ cached: true, ...cached.payload });
     }
+  } catch (err) {
+    console.warn("weather: cache read failed", err);
   }
 
   const upstream = await fetch(
@@ -55,10 +65,14 @@ export default async function handler(req: Request): Promise<Response> {
     fetchedAt: new Date().toISOString(),
   };
 
-  await db
-    .collection(CACHE_COLLECTION)
-    .doc(key)
-    .set({ payload, createdAt: new Date().toISOString(), expiresAt: new Date(Date.now() + TTL_MS).toISOString() });
+  try {
+    await db
+      ?.collection(CACHE_COLLECTION)
+      .doc(key)
+      .set({ payload, createdAt: new Date().toISOString(), expiresAt: new Date(Date.now() + TTL_MS).toISOString() });
+  } catch (err) {
+    console.warn("weather: cache write failed", err);
+  }
 
   return Response.json({ cached: false, ...payload });
 }
